@@ -4,11 +4,15 @@ package com.partos.flashback.fragments
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.LinearLayout
 import com.partos.flashback.R
 
 
@@ -32,8 +36,10 @@ class MainMenuFragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
 
     private lateinit var rootView: View
+    private lateinit var image: ImageView
+    private lateinit var linearLayout: LinearLayout
+    private lateinit var loginButton: Button
     private lateinit var creditsButton: Button
-    private lateinit var startButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,6 +92,22 @@ class MainMenuFragment : Fragment() {
     }
 
     private fun initFragment() {
+        image = rootView.findViewById(R.id.menu_image_view)
+        linearLayout = rootView.findViewById(R.id.main_linear_layout)
+        loginButton = rootView.findViewById(R.id.menu_button_log_in)
+        creditsButton = rootView.findViewById(R.id.menu_button_credits)
 
+        image.setOnClickListener {
+            val animation = AnimationUtils.loadAnimation(rootView.context, R.anim.disapear_front)
+            image.startAnimation(animation)
+            Handler().postDelayed({
+                image.visibility = View.GONE
+                linearLayout.visibility = View.VISIBLE
+                val anim1 = AnimationUtils.loadAnimation(rootView.context, R.anim.enter_left_to_right)
+                val anim2 = AnimationUtils.loadAnimation(rootView.context, R.anim.enter_right_to_left)
+                loginButton.startAnimation(anim1)
+                creditsButton.startAnimation(anim2)
+            }, 500)
+        }
     }
 }
