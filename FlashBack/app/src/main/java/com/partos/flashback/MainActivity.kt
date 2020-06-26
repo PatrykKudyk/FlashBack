@@ -3,10 +3,12 @@ package com.partos.flashback
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.partos.flashback.fragments.CreditsFragment
 import com.partos.flashback.fragments.MainMenuFragment
 
 class MainActivity : AppCompatActivity(),
-    MainMenuFragment.OnFragmentInteractionListener {
+    MainMenuFragment.OnFragmentInteractionListener,
+    CreditsFragment.OnFragmentInteractionListener {
     private lateinit var mainMenuFragment: MainMenuFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
