@@ -2,4 +2,7 @@
     <string name="app_name">Flash Back</string>
     <string name="menu_log_in">Log in</string>
     <string name="menu_credits">Credits</string>
+    <string name="credits_made_by">The app was made by</string>
+    <string name="credits_authors">Marcin Fassa\n&amp;\nPatryk Kudyk</string>
+    <string name="credits_icons">Icon made by\nEucalyp</string>
 </resources>
