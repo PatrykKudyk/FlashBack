@@ -13,10 +13,10 @@
         android:toAlpha="0" />
 
     <translate
-        android:fromXDelta="0"
-        android:toXDelta="-700"
-        android:fromYDelta="0"
-        android:toYDelta="-600"/>
+        android:fromXDelta="0%"
+        android:toXDelta="-100%"
+        android:fromYDelta="0%"
+        android:toYDelta="-100%"/>
 
 
 </set>
