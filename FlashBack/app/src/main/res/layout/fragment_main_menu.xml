@@ -27,6 +27,7 @@
             android:fontFamily="@font/dustismo_bold"
             android:gravity="center"
             android:text="@string/app_name"
+            android:textColor="@color/colorMainDark"
             android:textSize="55dip"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.2"
@@ -51,7 +52,55 @@
             app:layout_constraintHeight_percent="0.4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view2"
-            app:layout_constraintWidth_percent="0.7" />
+            app:layout_constraintWidth_percent="0.7"
+            tools:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/main_linear_layout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:weightSum="100"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view2"
+            app:layout_constraintWidth_percent="0.7"
+            tools:visibility="visible">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="20" />
+
+            <Button
+                android:id="@+id/menu_button_log_in"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="20"
+                android:background="@drawable/button_background_dark"
+                android:fontFamily="@font/dustismo_bold"
+                android:text="@string/menu_log_in"
+                android:textColor="@color/colorBackground"
+                android:textSize="35dip" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10" />
+
+            <Button
+                android:id="@+id/menu_button_credits"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="20"
+                android:background="@drawable/button_background_medium"
+                android:fontFamily="@font/dustismo_bold"
+                android:text="@string/menu_credits"
+                android:textColor="@color/colorBackground"
+                android:textSize="35dip" />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
