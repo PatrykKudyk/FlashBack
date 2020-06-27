@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import com.partos.flashback.R
+import kotlinx.android.synthetic.main.fragment_log_in.view.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -24,7 +26,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [AccountFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class CreditsFragment : Fragment() {
+class LogInFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -45,7 +47,7 @@ class CreditsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootView = inflater.inflate(R.layout.fragment_credits, container, false);
+        rootView = inflater.inflate(R.layout.fragment_log_in, container, false);
         initFragment()
         return rootView
     }
@@ -76,13 +78,18 @@ class CreditsFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            CreditsFragment().apply {
+            LogInFragment().apply {
                 arguments = Bundle().apply {
                 }
             }
     }
 
     private fun initFragment() {
+        initFonts()
+    }
 
+    private fun initFonts() {
+        val typeface = ResourcesCompat.getFont(rootView.context, R.font.dustismo_bold)
+        rootView.login_text_layout_password.typeface = typeface
     }
 }

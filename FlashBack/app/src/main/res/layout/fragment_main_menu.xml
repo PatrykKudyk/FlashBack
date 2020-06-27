@@ -6,102 +6,122 @@
     android:layout_height="match_parent"
     tools:context=".fragments.MainMenuFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorBackground">
-
-        <View
-            android:id="@+id/view"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.07"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:fontFamily="@font/dustismo_bold"
-            android:gravity="center"
-            android:text="@string/app_name"
-            android:textColor="@color/colorMainDark"
-            android:textSize="55dip"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
-
-        <View
-            android:id="@+id/view2"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.05"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-        <ImageView
-            android:id="@+id/menu_image_view"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:src="@drawable/dictionary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view2"
-            app:layout_constraintWidth_percent="0.7"
-            tools:visibility="gone" />
+        android:background="@color/colorBackground"
+        android:fillViewport="true">
 
         <LinearLayout
-            android:id="@+id/main_linear_layout"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:gravity="center|top"
             android:orientation="vertical"
-            android:visibility="gone"
-            android:weightSum="100"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view2"
-            app:layout_constraintWidth_percent="0.7"
-            tools:visibility="visible">
+            android:weightSum="100">
 
-            <View
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="20" />
+                android:layout_height="match_parent"
+                android:background="@color/colorBackground">
 
-            <Button
-                android:id="@+id/menu_button_log_in"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="20"
-                android:background="@drawable/button_background_dark"
-                android:fontFamily="@font/dustismo_bold"
-                android:text="@string/menu_log_in"
-                android:textColor="@color/colorBackground"
-                android:textSize="35dip" />
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent="0.07"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="10" />
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:fontFamily="@font/dustismo_bold"
+                    android:gravity="center"
+                    android:text="@string/app_name"
+                    android:textColor="@color/colorMainDark"
+                    android:textSize="55dip"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent="0.2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view" />
 
-            <Button
-                android:id="@+id/menu_button_credits"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="20"
-                android:background="@drawable/button_background_medium"
-                android:fontFamily="@font/dustismo_bold"
-                android:text="@string/menu_credits"
-                android:textColor="@color/colorBackground"
-                android:textSize="35dip" />
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent="0.05"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+                <ImageView
+                    android:id="@+id/menu_image_view"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:src="@drawable/dictionary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent="0.4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view2"
+                    app:layout_constraintWidth_percent="0.7"
+                    tools:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/main_linear_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:weightSum="100"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view2"
+                    app:layout_constraintWidth_percent="0.7"
+                    tools:visibility="visible">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="20" />
+
+                    <Button
+                        android:id="@+id/menu_button_log_in"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="20"
+                        android:background="@drawable/button_background_dark"
+                        android:fontFamily="@font/dustismo_bold"
+                        android:text="@string/menu_log_in"
+                        android:textColor="@color/colorBackground"
+                        android:textSize="30dip" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="10" />
+
+                    <Button
+                        android:id="@+id/menu_button_credits"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="20"
+                        android:background="@drawable/button_background_medium"
+                        android:fontFamily="@font/dustismo_bold"
+                        android:text="@string/menu_credits"
+                        android:textColor="@color/colorBackground"
+                        android:textSize="30dip" />
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 
 </FrameLayout>

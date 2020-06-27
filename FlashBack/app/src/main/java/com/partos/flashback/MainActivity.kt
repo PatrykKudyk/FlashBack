@@ -4,11 +4,14 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.partos.flashback.fragments.CreditsFragment
+import com.partos.flashback.fragments.LogInFragment
 import com.partos.flashback.fragments.MainMenuFragment
 
 class MainActivity : AppCompatActivity(),
     MainMenuFragment.OnFragmentInteractionListener,
-    CreditsFragment.OnFragmentInteractionListener {
+    CreditsFragment.OnFragmentInteractionListener,
+    LogInFragment.OnFragmentInteractionListener {
+
     private lateinit var mainMenuFragment: MainMenuFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
