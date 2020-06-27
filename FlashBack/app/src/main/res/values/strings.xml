@@ -5,4 +5,9 @@
     <string name="credits_made_by">The app was made by</string>
     <string name="credits_authors">Marcin Fassa\n&amp;\nPatryk Kudyk</string>
     <string name="credits_icons">Icon made by\nEucalyp</string>
+    <string name="hint_login">Login</string>
+    <string name="hint_password">Password</string>
+    <string name="login_login">Log In</string>
+    <string name="login_register_question">Don\'t have an account yet?</string>
+    <string name="login_register">Sign up</string>
 </resources>
