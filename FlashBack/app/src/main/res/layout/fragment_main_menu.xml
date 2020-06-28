@@ -80,7 +80,7 @@
                     app:layout_constraintHeight_percent="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view2"
-                    app:layout_constraintWidth_percent="0.7"
+                    app:layout_constraintWidth_percent="0.6"
                     tools:visibility="visible">
 
                     <View
@@ -92,7 +92,7 @@
                         android:id="@+id/menu_button_log_in"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="20"
+                        android:layout_weight="15"
                         android:background="@drawable/button_background_dark"
                         android:fontFamily="@font/dustismo_bold"
                         android:text="@string/menu_log_in"
@@ -108,7 +108,7 @@
                         android:id="@+id/menu_button_credits"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="20"
+                        android:layout_weight="15"
                         android:background="@drawable/button_background_medium"
                         android:fontFamily="@font/dustismo_bold"
                         android:text="@string/menu_credits"
