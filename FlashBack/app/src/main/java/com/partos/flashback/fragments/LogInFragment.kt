@@ -94,7 +94,15 @@ class LogInFragment : Fragment() {
         loginButton = rootView.findViewById(R.id.login_button_login)
 
         loginButton.setOnClickListener {
-
+            val loggedMenuFragment = LoggedMenuFragment.newInstance()
+            fragmentManager
+                ?.beginTransaction()
+                ?.setCustomAnimations(
+                    R.anim.enter_right_to_left, R.anim.exit_left_to_right,
+                    R.anim.enter_left_to_right, R.anim.exit_right_to_left
+                )
+                ?.replace(R.id.main_frame_layout, loggedMenuFragment)
+                ?.commit()
         }
 
         signUp.setOnClickListener{

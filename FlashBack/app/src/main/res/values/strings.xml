@@ -17,4 +17,5 @@
     <string name="menu_logged_packages">My packages</string>
     <string name="menu_logged_new_words">New words</string>
     <string name="menu_logged_credits">Credits</string>
+    <string name="menu_logged_logout">Log out</string>
 </resources>
