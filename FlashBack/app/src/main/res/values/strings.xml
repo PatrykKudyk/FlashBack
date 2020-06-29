@@ -1,5 +1,24 @@
 <resources>
     <string name="app_name">Flash Back</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_log_in">Log in</string>
+    <string name="menu_credits">Credits</string>
+    <string name="credits_made_by">The app was made by</string>
+    <string name="credits_authors">Marcin Fassa\n&amp;\nPatryk Kudyk</string>
+    <string name="credits_icons">Icon made by\nEucalyp</string>
+    <string name="hint_login">Login</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_password_repeat">Repeat password</string>
+    <string name="hint_email">E-mail</string>
+    <string name="hint_email_repeat">Repeat e-mail</string>
+    <string name="login_login">Log In</string>
+    <string name="login_register_question">Don\'t have an account yet?</string>
+    <string name="login_register">Sign up</string>
+    <string name="register_back">Back to log in</string>
+    <string name="menu_logged_packages">My packages</string>
+    <string name="menu_logged_new_words">New words</string>
+    <string name="menu_logged_credits">Credits</string>
+    <string name="menu_logged_logout">Log out</string>
+    <string name="package_add_new">Add new package</string>
+    <string name="hint_package_name">Package name</string>
+    <string name="button_add">Add</string>
 </resources>

@@ -4,15 +4,11 @@ package com.partos.flashback.fragments
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import android.widget.Button
-import android.widget.ImageView
-import android.widget.LinearLayout
 import com.partos.flashback.R
 
 
@@ -29,17 +25,17 @@ private const val ARG_PARAM2 = "param2"
  * Use the [AccountFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class MainMenuFragment : Fragment() {
+class LoggedMenuFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
     private lateinit var rootView: View
-    private lateinit var image: ImageView
-    private lateinit var linearLayout: LinearLayout
-    private lateinit var loginButton: Button
+    private lateinit var myPackagesButton: Button
+    private lateinit var newWordsButton: Button
     private lateinit var creditsButton: Button
+    private lateinit var logoutButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +50,7 @@ class MainMenuFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootView = inflater.inflate(R.layout.fragment_main_menu, container, false);
+        rootView = inflater.inflate(R.layout.fragment_logged_menu, container, false);
         initFragment()
         return rootView
     }
@@ -85,29 +81,33 @@ class MainMenuFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            MainMenuFragment().apply {
+            LoggedMenuFragment().apply {
                 arguments = Bundle().apply {
                 }
             }
     }
 
     private fun initFragment() {
-        image = rootView.findViewById(R.id.menu_image_view)
-        linearLayout = rootView.findViewById(R.id.main_linear_layout)
-        loginButton = rootView.findViewById(R.id.menu_button_log_in)
-        creditsButton = rootView.findViewById(R.id.menu_button_credits)
+        myPackagesButton = rootView.findViewById(R.id.logged_menu_button_packages)
+        newWordsButton = rootView.findViewById(R.id.logged_menu_button_new_words)
+        creditsButton = rootView.findViewById(R.id.logged_menu_button_credits)
+        logoutButton = rootView.findViewById(R.id.logged_menu_button_logout)
 
-        image.setOnClickListener {
-            val animation = AnimationUtils.loadAnimation(rootView.context, R.anim.disapear_front)
-            image.startAnimation(animation)
-            Handler().postDelayed({
-                image.visibility = View.GONE
-                linearLayout.visibility = View.VISIBLE
-                val anim1 = AnimationUtils.loadAnimation(rootView.context, R.anim.enter_left_to_right)
-                val anim2 = AnimationUtils.loadAnimation(rootView.context, R.anim.enter_right_to_left)
-                loginButton.startAnimation(anim1)
-                creditsButton.startAnimation(anim2)
-            }, 500)
+        myPackagesButton.setOnClickListener {
+            val myPackageFragment = MyPackagesFragment.newInstance()
+            fragmentManager
+                ?.beginTransaction()
+                ?.setCustomAnimations(
+                    R.anim.enter_right_to_left, R.anim.exit_left_to_right,
+                    R.anim.enter_left_to_right, R.anim.exit_right_to_left
+                )
+                ?.replace(R.id.main_frame_layout, myPackageFragment)
+                ?.addToBackStack(MyPackagesFragment.toString())
+                ?.commit()
+        }
+
+        newWordsButton.setOnClickListener {
+
         }
 
         creditsButton.setOnClickListener {
@@ -123,15 +123,15 @@ class MainMenuFragment : Fragment() {
                 ?.commit()
         }
 
-        loginButton.setOnClickListener {
-            val logInFragment = LogInFragment.newInstance()
+        logoutButton.setOnClickListener {
+            val menuFragment = MainMenuFragment.newInstance()
             fragmentManager
                 ?.beginTransaction()
                 ?.setCustomAnimations(
                     R.anim.enter_right_to_left, R.anim.exit_left_to_right,
                     R.anim.enter_left_to_right, R.anim.exit_right_to_left
                 )
-                ?.replace(R.id.main_frame_layout, logInFragment)
+                ?.replace(R.id.main_frame_layout, menuFragment)
                 ?.commit()
         }
     }
