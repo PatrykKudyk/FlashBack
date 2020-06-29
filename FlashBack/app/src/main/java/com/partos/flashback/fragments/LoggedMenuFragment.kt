@@ -94,7 +94,16 @@ class LoggedMenuFragment : Fragment() {
         logoutButton = rootView.findViewById(R.id.logged_menu_button_logout)
 
         myPackagesButton.setOnClickListener {
-
+            val myPackageFragment = MyPackagesFragment.newInstance()
+            fragmentManager
+                ?.beginTransaction()
+                ?.setCustomAnimations(
+                    R.anim.enter_right_to_left, R.anim.exit_left_to_right,
+                    R.anim.enter_left_to_right, R.anim.exit_right_to_left
+                )
+                ?.replace(R.id.main_frame_layout, myPackageFragment)
+                ?.addToBackStack(MyPackagesFragment.toString())
+                ?.commit()
         }
 
         newWordsButton.setOnClickListener {

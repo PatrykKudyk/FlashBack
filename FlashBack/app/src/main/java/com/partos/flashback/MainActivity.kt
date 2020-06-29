@@ -10,7 +10,9 @@ class MainActivity : AppCompatActivity(),
     CreditsFragment.OnFragmentInteractionListener,
     LogInFragment.OnFragmentInteractionListener,
     RegisterFragment.OnFragmentInteractionListener,
-    LoggedMenuFragment.OnFragmentInteractionListener {
+    LoggedMenuFragment.OnFragmentInteractionListener,
+    MyPackagesFragment.OnFragmentInteractionListener,
+    AddPackageFragment.OnFragmentInteractionListener {
 
     private lateinit var mainMenuFragment: MainMenuFragment
 

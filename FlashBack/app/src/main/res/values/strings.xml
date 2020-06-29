@@ -19,4 +19,6 @@
     <string name="menu_logged_credits">Credits</string>
     <string name="menu_logged_logout">Log out</string>
     <string name="package_add_new">Add new package</string>
+    <string name="hint_package_name">Package name</string>
+    <string name="button_add">Add</string>
 </resources>
