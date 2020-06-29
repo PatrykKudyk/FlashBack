@@ -21,4 +21,14 @@
     <string name="package_add_new">Add new package</string>
     <string name="hint_package_name">Package name</string>
     <string name="button_add">Add</string>
+    <string name="button_delete_yes">Yes</string>
+    <string name="button_delete_no">No</string>
+    <string name="delete_question_package">Are you sure to delete package?</string>
+    <string name="toast_package_name_not_null">Package name cannot be empty</string>
+    <string name="toast_package_added">Package successfully added</string>
+    <string name="toast_package_not_added">Something went wrong, try again</string>
+    <string name="toast_package_changed">Package successfully changed</string>
+    <string name="toast_package_not_changed">Something went wrong, try again</string>
+    <string name="toast_package_deleted">Package successfully deleted</string>
+    <string name="toast_package_not_deleted">Something went wrong, try again</string>
 </resources>
