@@ -33,7 +33,6 @@ class AddPackageFragment : Fragment() {
 
     private lateinit var rootView: View
     private lateinit var addButton: Button
-    private lateinit var nameEditText: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,6 +85,11 @@ class AddPackageFragment : Fragment() {
     }
 
     private fun initFragment() {
+        addButton = rootView.findViewById(R.id.add_package_button_add)
 
+        addButton.setOnClickListener {
+            fragmentManager
+                ?.popBackStack()
+        }
     }
 }
