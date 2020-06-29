@@ -3,16 +3,14 @@ package com.partos.flashback
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.partos.flashback.fragments.CreditsFragment
-import com.partos.flashback.fragments.LogInFragment
-import com.partos.flashback.fragments.MainMenuFragment
-import com.partos.flashback.fragments.RegisterFragment
+import com.partos.flashback.fragments.*
 
 class MainActivity : AppCompatActivity(),
     MainMenuFragment.OnFragmentInteractionListener,
     CreditsFragment.OnFragmentInteractionListener,
     LogInFragment.OnFragmentInteractionListener,
-    RegisterFragment.OnFragmentInteractionListener {
+    RegisterFragment.OnFragmentInteractionListener,
+    LoggedMenuFragment.OnFragmentInteractionListener {
 
     private lateinit var mainMenuFragment: MainMenuFragment
 

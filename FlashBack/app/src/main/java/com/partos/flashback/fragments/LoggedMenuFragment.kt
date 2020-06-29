@@ -9,10 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
-import androidx.core.content.res.ResourcesCompat
 import com.partos.flashback.R
-import kotlinx.android.synthetic.main.fragment_log_in.view.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -28,15 +25,17 @@ private const val ARG_PARAM2 = "param2"
  * Use the [AccountFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class LogInFragment : Fragment() {
+class LoggedMenuFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
     private lateinit var rootView: View
-    private lateinit var loginButton: Button
-    private lateinit var signUp: TextView
+    private lateinit var myPackagesButton: Button
+    private lateinit var newWordsButton: Button
+    private lateinit var creditsButton: Button
+    private lateinit var logoutButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +50,7 @@ class LogInFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootView = inflater.inflate(R.layout.fragment_log_in, container, false);
+        rootView = inflater.inflate(R.layout.fragment_logged_menu, container, false);
         initFragment()
         return rootView
     }
@@ -82,45 +81,49 @@ class LogInFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            LogInFragment().apply {
+            LoggedMenuFragment().apply {
                 arguments = Bundle().apply {
                 }
             }
     }
 
     private fun initFragment() {
-        initFonts()
-        signUp = rootView.findViewById(R.id.login_text_register)
-        loginButton = rootView.findViewById(R.id.login_button_login)
+        myPackagesButton = rootView.findViewById(R.id.logged_menu_button_packages)
+        newWordsButton = rootView.findViewById(R.id.logged_menu_button_new_words)
+        creditsButton = rootView.findViewById(R.id.logged_menu_button_credits)
+        logoutButton = rootView.findViewById(R.id.logged_menu_button_logout)
 
-        loginButton.setOnClickListener {
-            val loggedMenuFragment = LoggedMenuFragment.newInstance()
+        myPackagesButton.setOnClickListener {
+
+        }
+
+        newWordsButton.setOnClickListener {
+
+        }
+
+        creditsButton.setOnClickListener {
+            val creditsFragment = CreditsFragment.newInstance()
+            fragmentManager
+                ?.beginTransaction()
+                ?.setCustomAnimations(
+                    R.anim.enter_bottom_to_top, R.anim.exit_top_to_bottom,
+                    R.anim.enter_top_to_bottom, R.anim.exit_bottom_to_top
+                )
+                ?.replace(R.id.main_frame_layout, creditsFragment)
+                ?.addToBackStack(CreditsFragment.toString())
+                ?.commit()
+        }
+
+        logoutButton.setOnClickListener {
+            val menuFragment = MainMenuFragment.newInstance()
             fragmentManager
                 ?.beginTransaction()
                 ?.setCustomAnimations(
                     R.anim.enter_right_to_left, R.anim.exit_left_to_right,
                     R.anim.enter_left_to_right, R.anim.exit_right_to_left
                 )
-                ?.replace(R.id.main_frame_layout, loggedMenuFragment)
+                ?.replace(R.id.main_frame_layout, menuFragment)
                 ?.commit()
         }
-
-        signUp.setOnClickListener{
-            val registerFragment = RegisterFragment.newInstance()
-            fragmentManager
-                ?.beginTransaction()
-                ?.setCustomAnimations(
-                    R.anim.enter_right_to_left, R.anim.exit_left_to_right,
-                    R.anim.enter_left_to_right, R.anim.exit_right_to_left
-                )
-                ?.replace(R.id.main_frame_layout, registerFragment)
-                ?.addToBackStack(RegisterFragment.toString())
-                ?.commit()
-        }
-    }
-
-    private fun initFonts() {
-        val typeface = ResourcesCompat.getFont(rootView.context, R.font.dustismo_bold)
-        rootView.login_text_layout_password.typeface = typeface
     }
 }
