@@ -12,6 +12,7 @@ import com.partos.flashback.fragments.flashcard.MyFlashcardsFragment
 import com.partos.flashback.fragments.menu.CreditsFragment
 import com.partos.flashback.fragments.menu.LoggedMenuFragment
 import com.partos.flashback.fragments.menu.MainMenuFragment
+import com.partos.flashback.fragments.reviews.ClassicReviewFragment
 
 class MainActivity : AppCompatActivity(),
     MainMenuFragment.OnFragmentInteractionListener,
@@ -22,7 +23,8 @@ class MainActivity : AppCompatActivity(),
     MyPackagesFragment.OnFragmentInteractionListener,
     AddPackageFragment.OnFragmentInteractionListener,
     MyFlashcardsFragment.OnFragmentInteractionListener,
-    AddFlashcardFragment.OnFragmentInteractionListener {
+    AddFlashcardFragment.OnFragmentInteractionListener,
+    ClassicReviewFragment.OnFragmentInteractionListener {
 
     private lateinit var mainMenuFragment: MainMenuFragment
 

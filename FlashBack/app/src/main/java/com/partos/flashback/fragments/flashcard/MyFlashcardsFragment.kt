@@ -13,6 +13,7 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.partos.flashback.R
+import com.partos.flashback.fragments.reviews.ClassicReviewFragment
 import com.partos.flashback.models.MyFlashcard
 import com.partos.flashback.recycler.FlashcardRecyclerViewAdapter
 import com.partos.flashback.recycler.MarginItemDecoration
@@ -96,6 +97,7 @@ class MyFlashcardsFragment : Fragment() {
 
     private fun initFragment() {
         addFlashcardButton = rootView.findViewById(R.id.my_flashcards_linear_layout_add_new)
+        classicReviewButton = rootView.findViewById(R.id.my_flashcards_button_classic_review)
 
         val flashcardList = ArrayList<MyFlashcard>()
         flashcardList.add(MyFlashcard(0, 0, 0, "cześć", "hi", 10, false, true))
@@ -103,7 +105,18 @@ class MyFlashcardsFragment : Fragment() {
         flashcardList.add(MyFlashcard(0, 0, 0, "ja", "I", 0, false, false))
         flashcardList.add(MyFlashcard(0, 0, 0, "stół", "table", 0, false, false))
         flashcardList.add(MyFlashcard(0, 0, 0, "głośnik", "speaker", 0, false, false))
-        flashcardList.add(MyFlashcard(0, 0, 0, "sklejasz akcje", "you know what I'm sayin'", 8, false, true))
+        flashcardList.add(
+            MyFlashcard(
+                0,
+                0,
+                0,
+                "sklejasz akcje",
+                "you know what I'm sayin'",
+                8,
+                false,
+                true
+            )
+        )
 
         recyclerView = rootView.findViewById(R.id.my_flashcards_recycler_view)
 
@@ -118,8 +131,7 @@ class MyFlashcardsFragment : Fragment() {
         recyclerView.adapter = FlashcardRecyclerViewAdapter(flashcardList)
 
         addFlashcardButton.setOnClickListener {
-            val addFlashcardFragment =
-                AddFlashcardFragment.newInstance()
+            val addFlashcardFragment = AddFlashcardFragment.newInstance()
             fragmentManager
                 ?.beginTransaction()
                 ?.setCustomAnimations(
@@ -128,6 +140,19 @@ class MyFlashcardsFragment : Fragment() {
                 )
                 ?.replace(R.id.main_frame_layout, addFlashcardFragment)
                 ?.addToBackStack(AddFlashcardFragment.toString())
+                ?.commit()
+        }
+
+        classicReviewButton.setOnClickListener {
+            val classicReviewFragment = ClassicReviewFragment.newInstance()
+            fragmentManager
+                ?.beginTransaction()
+                ?.setCustomAnimations(
+                    R.anim.enter_right_to_left, R.anim.exit_left_to_right,
+                    R.anim.enter_left_to_right, R.anim.exit_right_to_left
+                )
+                ?.replace(R.id.main_frame_layout, classicReviewFragment)
+                ?.addToBackStack(ClassicReviewFragment.toString())
                 ?.commit()
         }
     }

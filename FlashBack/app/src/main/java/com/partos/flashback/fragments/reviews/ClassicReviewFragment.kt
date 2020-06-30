@@ -1,13 +1,20 @@
 package com.partos.flashback.fragments.reviews
 
 import android.content.Context
+import android.media.Image
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.*
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import com.partos.flashback.R
+import com.partos.flashback.models.MyFlashcard
+import kotlinx.android.synthetic.main.fragment_classic_review.*
+import kotlin.random.Random
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -30,6 +37,18 @@ class ClassicReviewFragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
 
     private lateinit var rootView: View
+    private lateinit var questionCardView: CardView
+    private lateinit var answerCardView: CardView
+    private lateinit var questionTextView: TextView
+    private lateinit var answerEditText: EditText
+    private lateinit var checkButton: Button
+    private lateinit var skipButton: Button
+    private lateinit var quitButton: Button
+    private lateinit var imageView: ImageView
+    private lateinit var normalLinearLayout: LinearLayout
+    private lateinit var checkLinearLayout: LinearLayout
+    private lateinit var nextButton: Button
+    private lateinit var quitButton2: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,6 +101,132 @@ class ClassicReviewFragment : Fragment() {
     }
 
     private fun initFragment() {
+        val flashcardList = ArrayList<MyFlashcard>()
+        flashcardList.add(MyFlashcard(0, 0, 0, "cześć", "hi", 10, false, true))
+        flashcardList.add(MyFlashcard(0, 0, 0, "ty", "you", 10, false, true))
+        flashcardList.add(MyFlashcard(0, 0, 0, "ja", "I", 0, false, false))
+        flashcardList.add(MyFlashcard(0, 0, 0, "stół", "table", 0, false, false))
+        flashcardList.add(MyFlashcard(0, 0, 0, "głośnik", "speaker", 0, false, false))
+        flashcardList.add(
+            MyFlashcard(
+                0,
+                0,
+                0,
+                "sklejasz akcje",
+                "you know what I'm sayin'",
+                8,
+                false,
+                true
+            )
+        )
 
+        questionCardView = rootView.findViewById(R.id.classic_review_card_view_question)
+        answerCardView = rootView.findViewById(R.id.classic_review_card_view_answer)
+        questionTextView = rootView.findViewById(R.id.classic_review_text_view_question)
+        answerEditText = rootView.findViewById(R.id.classic_review_edit_text_answer)
+        checkButton = rootView.findViewById(R.id.classic_review_button_check)
+        skipButton = rootView.findViewById(R.id.classic_review_button_skip)
+        quitButton = rootView.findViewById(R.id.classic_review_button_quit)
+        imageView = rootView.findViewById(R.id.classic_review_image_view)
+        normalLinearLayout = rootView.findViewById(R.id.classic_review_linear_layout_normal)
+        checkLinearLayout = rootView.findViewById(R.id.classic_review_linear_layout_check)
+        nextButton = rootView.findViewById(R.id.classic_review_button_next)
+        quitButton2 = rootView.findViewById(R.id.classic_review_button_exit)
+
+        var flashcards = ArrayList<MyFlashcard>()
+
+        for (flashcard in flashcardList) {
+            if (flashcard.isKnown) {
+                flashcards.add(flashcard)
+            }
+        }
+        flashcards.shuffle()
+        var random = Random.nextInt(0, 1000)
+        var position = 0
+        if (random <= 500) {
+            questionTextView.setText(flashcards[0].english)
+        } else {
+            questionTextView.setText(flashcards[0].polish)
+        }
+
+        checkButton.setOnClickListener {
+            if (random <= 500) {
+                if (answerEditText.text.toString() == flashcards[position].polish) {
+                    setCorrect()
+                } else {
+                    setIncorrect()
+                }
+            } else {
+                if (answerEditText.text.toString() == flashcards[position].english) {
+                    setCorrect()
+                } else {
+                    setIncorrect()
+                }
+            }
+        }
+
+        nextButton.setOnClickListener {
+            if (position < flashcards.size - 1) {
+                random = Random.nextInt(0, 1000)
+                position++
+                if (random <= 500) {
+                    questionTextView.setText(flashcards[position].english)
+                } else {
+                    questionTextView.setText(flashcards[position].polish)
+                }
+                setEmpty()
+            } else {
+                fragmentManager
+                    ?.popBackStack()
+            }
+        }
+
+        quitButton.setOnClickListener {
+            fragmentManager
+                ?.popBackStack()
+        }
+
+        quitButton2.setOnClickListener {
+            fragmentManager
+                ?.popBackStack()
+        }
+
+        skipButton.setOnClickListener {
+            if (position < flashcards.size - 1) {
+                random = Random.nextInt(0, 1000)
+                position++
+                if (random <= 500) {
+                    questionTextView.setText(flashcards[position].english)
+                } else {
+                    questionTextView.setText(flashcards[position].polish)
+                }
+                setEmpty()
+            } else {
+                fragmentManager
+                    ?.popBackStack()
+            }
+        }
+    }
+
+    private fun setCorrect() {
+        imageView.setImageResource(R.drawable.ic_correct)
+        imageView.setBackgroundResource(R.drawable.button_background_delete_yes)
+        checkLinearLayout.visibility = View.VISIBLE
+        normalLinearLayout.visibility = View.GONE
+    }
+
+    private fun setIncorrect() {
+        imageView.setImageResource(R.drawable.ic_incorrect)
+        imageView.setBackgroundResource(R.drawable.button_background_delete_no)
+        checkLinearLayout.visibility = View.VISIBLE
+        normalLinearLayout.visibility = View.GONE
+    }
+
+    private fun setEmpty() {
+        imageView.setImageDrawable(null)
+        imageView.background = null
+        answerEditText.setText("")
+        checkLinearLayout.visibility = View.GONE
+        normalLinearLayout.visibility = View.VISIBLE
     }
 }

@@ -42,4 +42,5 @@
     <string name="review_check">Check</string>
     <string name="review_skip">Skip</string>
     <string name="review_quit">Quit</string>
+    <string name="review_next">Next</string>
 </resources>
