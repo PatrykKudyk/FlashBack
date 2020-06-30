@@ -25,7 +25,6 @@ class PackageRecyclerViewAdapter(var packagesList: ArrayList<MyPackage>) :
     }
 
     override fun onBindViewHolder(holder: PackageViewHolder, position: Int) {
-        var editing = false
         val title = holder.view.package_cell_name
         val editButton = holder.view.package_cell_image_view_edit
         val saveButton = holder.view.package_cell_image_view_save
@@ -69,6 +68,8 @@ class PackageRecyclerViewAdapter(var packagesList: ArrayList<MyPackage>) :
             packagesList.removeAt(position)
             notifyItemRemoved(position)
             notifyItemRangeChanged(position, packagesList.size)
+            holder.view.package_cell_linear_layout_main.visibility = View.VISIBLE
+            holder.view.package_cell_linear_layout_delete.visibility = View.GONE
         }
 
         deleteNo.setOnClickListener {

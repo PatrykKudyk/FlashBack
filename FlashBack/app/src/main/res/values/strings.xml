@@ -7,9 +7,9 @@
     <string name="credits_icons">Icon made by\nEucalyp</string>
     <string name="hint_login">Login</string>
     <string name="hint_password">Password</string>
-    <string name="hint_password_repeat">Repeat password</string>
+    <string name="hint_password_repeat">Confirm password</string>
     <string name="hint_email">E-mail</string>
-    <string name="hint_email_repeat">Repeat e-mail</string>
+    <string name="hint_email_repeat">Confirm e-mail</string>
     <string name="login_login">Log In</string>
     <string name="login_register_question">Don\'t have an account yet?</string>
     <string name="login_register">Sign up</string>
