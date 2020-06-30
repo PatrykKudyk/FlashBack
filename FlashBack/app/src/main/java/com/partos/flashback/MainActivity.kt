@@ -12,7 +12,8 @@ class MainActivity : AppCompatActivity(),
     RegisterFragment.OnFragmentInteractionListener,
     LoggedMenuFragment.OnFragmentInteractionListener,
     MyPackagesFragment.OnFragmentInteractionListener,
-    AddPackageFragment.OnFragmentInteractionListener {
+    AddPackageFragment.OnFragmentInteractionListener,
+    MyFlashcardsFragment.OnFragmentInteractionListener {
 
     private lateinit var mainMenuFragment: MainMenuFragment
 
