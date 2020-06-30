@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.reviews.ClassicReviewFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBackground"
+            android:gravity="center|top"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/dustismo_bold"
+                android:gravity="center"
+                android:text="@string/flashcard_review_classic"
+                android:textSize="32dip" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="23dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="@color/colorMainDark"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/classic_review_card_view_question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:theme="@style/Theme.MaterialComponents.Light"
+                app:cardBackgroundColor="@color/colorMainLight"
+                app:cardCornerRadius="18dp"
+                app:strokeColor="@color/colorMainDark"
+                app:strokeWidth="2dp">
+
+                <TextView
+                    android:id="@+id/classic_review_text_view_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:fontFamily="@font/dustismo_bold"
+                    android:gravity="center"
+                    android:textSize="40dip"
+
+                    tools:text="Sklejasz akcje, sklej dupe, rucham psa" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+            <ImageView
+                android:id="@+id/classic_review_image_view"
+                android:layout_width="match_parent"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_height="70dp"
+                tools:src="@drawable/ic_incorrect"
+                tools:background="@drawable/button_background_delete_no"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/classic_review_card_view_answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:theme="@style/Theme.MaterialComponents.Light"
+                app:cardBackgroundColor="@color/colorMainLight"
+                app:cardCornerRadius="18dp"
+                app:strokeColor="@color/colorMainDark"
+                app:strokeWidth="2dp">
+
+                <EditText
+                    android:id="@+id/classic_review_edit_text_answer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:fontFamily="@font/dustismo_bold"
+                    android:gravity="center"
+                    android:textSize="40dip"
+
+                    tools:text="Sklejasz akcje, sklej dupe, rucham psa" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <LinearLayout
+                android:id="@+id/classic_review_linear_layout_normal"
+                tools:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:orientation="horizontal"
+                android:weightSum="96">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/classic_review_button_check"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="30"
+                    android:background="@drawable/button_background_dark"
+                    android:fontFamily="@font/dustismo_bold"
+                    android:text="@string/review_check"
+                    android:textColor="@color/colorBackground"
+                    android:textSize="17dip" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2" />
+
+                <Button
+                    android:id="@+id/classic_review_button_skip"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="30"
+                    android:background="@drawable/button_background_medium"
+                    android:fontFamily="@font/dustismo_bold"
+                    android:text="@string/review_skip"
+                    android:textColor="@color/colorBackground"
+                    android:textSize="17dip" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2" />
+
+                <Button
+                    android:id="@+id/classic_review_button_quit"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="30"
+                    android:background="@drawable/button_background_dark"
+                    android:fontFamily="@font/dustismo_bold"
+                    android:text="@string/review_quit"
+                    android:textColor="@color/colorBackground"
+                    android:textSize="17dip" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/classic_review_linear_layout_check"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:weightSum="96">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/classic_review_button_exit"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="45"
+                    android:background="@drawable/button_background_dark"
+                    android:fontFamily="@font/dustismo_bold"
+                    android:text="@string/review_quit"
+                    android:textColor="@color/colorBackground"
+                    android:textSize="17dip" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3" />
+
+                <Button
+                    android:id="@+id/classic_review_button_next"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="45"
+                    android:background="@drawable/button_background_medium"
+                    android:fontFamily="@font/dustismo_bold"
+                    android:text="@string/review_next"
+                    android:textColor="@color/colorBackground"
+                    android:textSize="17dip" />
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</FrameLayout>

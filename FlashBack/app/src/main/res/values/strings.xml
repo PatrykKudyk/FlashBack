@@ -32,11 +32,15 @@
     <string name="toast_package_deleted">Package successfully deleted</string>
     <string name="toast_package_not_deleted">Something went wrong, try again</string>
     <string name="flashcard_add_new">Add new flashcard</string>
-    <string name="flashcard_review_classic">Classic review</string>
-    <string name="flashcard_learn_new_words">Learn new words</string>
-    <string name="flashcard_review_hard_words">Hard words</string>
+    <string name="flashcard_review_classic">Classic Review</string>
+    <string name="flashcard_learn_new_words">Learn New Words</string>
+    <string name="flashcard_review_hard_words">Hard Words</string>
     <string name="delete_question_flashcard">Are you sure to delete flashcard?</string>
     <string name="hint_flashcard_polish">Polish</string>
     <string name="hint_flashcard_english">English</string>
     <string name="toast_flashcard_not_null">Flashcard fields cannot be empty</string>
+    <string name="review_check">Check</string>
+    <string name="review_skip">Skip</string>
+    <string name="review_quit">Quit</string>
+    <string name="review_next">Next</string>
 </resources>
