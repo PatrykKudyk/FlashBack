@@ -52,7 +52,7 @@ class ClassicReviewFragment : Fragment() {
     private lateinit var nextButton: Button
     private lateinit var quitButton2: Button
     private lateinit var soundPool: SoundPool
-
+    private lateinit var correctAnswerTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -151,6 +151,7 @@ class ClassicReviewFragment : Fragment() {
         checkLinearLayout = rootView.findViewById(R.id.classic_review_linear_layout_check)
         nextButton = rootView.findViewById(R.id.classic_review_button_next)
         quitButton2 = rootView.findViewById(R.id.classic_review_button_exit)
+        correctAnswerTextView = rootView.findViewById(R.id.classic_review_text_view_correct_answer)
 
         var flashcards = ArrayList<MyFlashcard>()
 
@@ -175,6 +176,7 @@ class ClassicReviewFragment : Fragment() {
                     correct++
                 } else {
                     setIncorrect(soundIncorrect)
+                    correctAnswerTextView.setText(flashcards[position].polish)
                 }
             } else {
                 if (answerEditText.text.toString() == flashcards[position].english) {
@@ -182,6 +184,7 @@ class ClassicReviewFragment : Fragment() {
                     correct++
                 } else {
                     setIncorrect(soundIncorrect)
+                    correctAnswerTextView.setText(flashcards[position].english)
                 }
             }
         }
@@ -263,6 +266,7 @@ class ClassicReviewFragment : Fragment() {
     private fun setIncorrect(sound: Int) {
         imageView.setImageResource(R.drawable.ic_incorrect)
         imageView.setBackgroundResource(R.drawable.button_background_delete_no)
+        correctAnswerTextView.visibility = View.VISIBLE
         checkLinearLayout.visibility = View.VISIBLE
         normalLinearLayout.visibility = View.GONE
         soundPool.play(sound, 1F, 1F, 0, 0, 1F)
@@ -271,6 +275,7 @@ class ClassicReviewFragment : Fragment() {
     private fun setEmpty() {
         imageView.setImageDrawable(null)
         imageView.background = null
+        correctAnswerTextView.visibility = View.GONE
         answerEditText.setText("")
         checkLinearLayout.visibility = View.GONE
         normalLinearLayout.visibility = View.VISIBLE

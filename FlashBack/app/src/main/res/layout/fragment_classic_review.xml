@@ -68,6 +68,17 @@
 
             </com.google.android.material.card.MaterialCardView>
 
+            <TextView
+                android:id="@+id/classic_review_text_view_correct_answer"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:fontFamily="@font/dustismo_bold"
+                android:gravity="center"
+                android:textColor="@color/colorRed"
+                android:textSize="40dip"
+                tools:visibility="visible"
+                tools:text="you know"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="50dp" />
