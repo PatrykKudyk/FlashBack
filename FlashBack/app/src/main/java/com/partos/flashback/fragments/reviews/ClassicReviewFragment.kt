@@ -135,7 +135,9 @@ class ClassicReviewFragment : Fragment() {
 
         val soundCorrect = soundPool.load(rootView.context, R.raw.correct, 1)
         val soundIncorrect = soundPool.load(rootView.context, R.raw.incorrect, 1)
-        val soundEnd = soundPool.load(rootView.context, R.raw.done, 1)
+
+        var correct = 0
+        var skipped = 0
 
         questionCardView = rootView.findViewById(R.id.classic_review_card_view_question)
         answerCardView = rootView.findViewById(R.id.classic_review_card_view_answer)
@@ -170,12 +172,14 @@ class ClassicReviewFragment : Fragment() {
             if (random <= 500) {
                 if (answerEditText.text.toString() == flashcards[position].polish) {
                     setCorrect(soundCorrect)
+                    correct++
                 } else {
                     setIncorrect(soundIncorrect)
                 }
             } else {
                 if (answerEditText.text.toString() == flashcards[position].english) {
                     setCorrect(soundCorrect)
+                    correct++
                 } else {
                     setIncorrect(soundIncorrect)
                 }
@@ -194,8 +198,17 @@ class ClassicReviewFragment : Fragment() {
                 setEmpty()
             } else {
                 soundPool.release()
+                val reviewSummaryFragment =
+                    ReviewSummaryFragment.newInstance(correct, skipped, flashcards.size)
                 fragmentManager
-                    ?.popBackStack()
+                    ?.beginTransaction()
+                    ?.setCustomAnimations(
+                        R.anim.enter_right_to_left, R.anim.exit_left_to_right,
+                        R.anim.enter_left_to_right, R.anim.exit_right_to_left
+                    )
+                    ?.replace(R.id.main_frame_layout, reviewSummaryFragment)
+                    ?.addToBackStack(ReviewSummaryFragment.toString())
+                    ?.commit()
             }
         }
 
@@ -212,6 +225,7 @@ class ClassicReviewFragment : Fragment() {
         }
 
         skipButton.setOnClickListener {
+            skipped++
             if (position < flashcards.size - 1) {
                 random = Random.nextInt(0, 1000)
                 position++
@@ -223,8 +237,17 @@ class ClassicReviewFragment : Fragment() {
                 setEmpty()
             } else {
                 soundPool.release()
+                val reviewSummaryFragment =
+                    ReviewSummaryFragment.newInstance(correct, skipped, flashcards.size)
                 fragmentManager
-                    ?.popBackStack()
+                    ?.beginTransaction()
+                    ?.setCustomAnimations(
+                        R.anim.enter_right_to_left, R.anim.exit_left_to_right,
+                        R.anim.enter_left_to_right, R.anim.exit_right_to_left
+                    )
+                    ?.replace(R.id.main_frame_layout, reviewSummaryFragment)
+                    ?.addToBackStack(ReviewSummaryFragment.toString())
+                    ?.commit()
             }
         }
     }
@@ -234,7 +257,7 @@ class ClassicReviewFragment : Fragment() {
         imageView.setBackgroundResource(R.drawable.button_background_delete_yes)
         checkLinearLayout.visibility = View.VISIBLE
         normalLinearLayout.visibility = View.GONE
-        soundPool.play(sound, 1F,1F,0, 0,1F)
+        soundPool.play(sound, 1F, 1F, 0, 0, 1F)
     }
 
     private fun setIncorrect(sound: Int) {
@@ -242,7 +265,7 @@ class ClassicReviewFragment : Fragment() {
         imageView.setBackgroundResource(R.drawable.button_background_delete_no)
         checkLinearLayout.visibility = View.VISIBLE
         normalLinearLayout.visibility = View.GONE
-        soundPool.play(sound, 1F,1F,0, 0,1F)
+        soundPool.play(sound, 1F, 1F, 0, 0, 1F)
     }
 
     private fun setEmpty() {
