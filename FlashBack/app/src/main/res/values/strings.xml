@@ -43,4 +43,8 @@
     <string name="review_skip">Skip</string>
     <string name="review_quit">Quit</string>
     <string name="review_next">Next</string>
+    <string name="summary_title">Review Summary</string>
+    <string name="summary_correct">Correct:</string>
+    <string name="summary_skipped">Skipped:</string>
+    <string name="summary_back">Back to flashcards</string>
 </resources>

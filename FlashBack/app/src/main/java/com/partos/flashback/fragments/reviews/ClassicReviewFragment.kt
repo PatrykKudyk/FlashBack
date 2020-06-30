@@ -1,7 +1,9 @@
 package com.partos.flashback.fragments.reviews
 
 import android.content.Context
+import android.media.AudioAttributes
 import android.media.Image
+import android.media.SoundPool
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -49,6 +51,8 @@ class ClassicReviewFragment : Fragment() {
     private lateinit var checkLinearLayout: LinearLayout
     private lateinit var nextButton: Button
     private lateinit var quitButton2: Button
+    private lateinit var soundPool: SoundPool
+    private lateinit var correctAnswerTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -120,6 +124,21 @@ class ClassicReviewFragment : Fragment() {
             )
         )
 
+        val audioAttributes = AudioAttributes.Builder()
+            .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+            .build()
+        soundPool = SoundPool.Builder()
+            .setMaxStreams(3)
+            .setAudioAttributes(audioAttributes)
+            .build()
+
+        val soundCorrect = soundPool.load(rootView.context, R.raw.correct, 1)
+        val soundIncorrect = soundPool.load(rootView.context, R.raw.incorrect, 1)
+
+        var correct = 0
+        var skipped = 0
+
         questionCardView = rootView.findViewById(R.id.classic_review_card_view_question)
         answerCardView = rootView.findViewById(R.id.classic_review_card_view_answer)
         questionTextView = rootView.findViewById(R.id.classic_review_text_view_question)
@@ -132,6 +151,7 @@ class ClassicReviewFragment : Fragment() {
         checkLinearLayout = rootView.findViewById(R.id.classic_review_linear_layout_check)
         nextButton = rootView.findViewById(R.id.classic_review_button_next)
         quitButton2 = rootView.findViewById(R.id.classic_review_button_exit)
+        correctAnswerTextView = rootView.findViewById(R.id.classic_review_text_view_correct_answer)
 
         var flashcards = ArrayList<MyFlashcard>()
 
@@ -152,15 +172,19 @@ class ClassicReviewFragment : Fragment() {
         checkButton.setOnClickListener {
             if (random <= 500) {
                 if (answerEditText.text.toString() == flashcards[position].polish) {
-                    setCorrect()
+                    setCorrect(soundCorrect)
+                    correct++
                 } else {
-                    setIncorrect()
+                    setIncorrect(soundIncorrect)
+                    correctAnswerTextView.setText(flashcards[position].polish)
                 }
             } else {
                 if (answerEditText.text.toString() == flashcards[position].english) {
-                    setCorrect()
+                    setCorrect(soundCorrect)
+                    correct++
                 } else {
-                    setIncorrect()
+                    setIncorrect(soundIncorrect)
+                    correctAnswerTextView.setText(flashcards[position].english)
                 }
             }
         }
@@ -176,22 +200,35 @@ class ClassicReviewFragment : Fragment() {
                 }
                 setEmpty()
             } else {
+                soundPool.release()
+                val reviewSummaryFragment =
+                    ReviewSummaryFragment.newInstance(correct, skipped, flashcards.size)
                 fragmentManager
-                    ?.popBackStack()
+                    ?.beginTransaction()
+                    ?.setCustomAnimations(
+                        R.anim.enter_right_to_left, R.anim.exit_left_to_right,
+                        R.anim.enter_left_to_right, R.anim.exit_right_to_left
+                    )
+                    ?.replace(R.id.main_frame_layout, reviewSummaryFragment)
+                    ?.addToBackStack(ReviewSummaryFragment.toString())
+                    ?.commit()
             }
         }
 
         quitButton.setOnClickListener {
+            soundPool.release()
             fragmentManager
                 ?.popBackStack()
         }
 
         quitButton2.setOnClickListener {
+            soundPool.release()
             fragmentManager
                 ?.popBackStack()
         }
 
         skipButton.setOnClickListener {
+            skipped++
             if (position < flashcards.size - 1) {
                 random = Random.nextInt(0, 1000)
                 position++
@@ -202,29 +239,43 @@ class ClassicReviewFragment : Fragment() {
                 }
                 setEmpty()
             } else {
+                soundPool.release()
+                val reviewSummaryFragment =
+                    ReviewSummaryFragment.newInstance(correct, skipped, flashcards.size)
                 fragmentManager
-                    ?.popBackStack()
+                    ?.beginTransaction()
+                    ?.setCustomAnimations(
+                        R.anim.enter_right_to_left, R.anim.exit_left_to_right,
+                        R.anim.enter_left_to_right, R.anim.exit_right_to_left
+                    )
+                    ?.replace(R.id.main_frame_layout, reviewSummaryFragment)
+                    ?.addToBackStack(ReviewSummaryFragment.toString())
+                    ?.commit()
             }
         }
     }
 
-    private fun setCorrect() {
+    private fun setCorrect(sound: Int) {
         imageView.setImageResource(R.drawable.ic_correct)
         imageView.setBackgroundResource(R.drawable.button_background_delete_yes)
         checkLinearLayout.visibility = View.VISIBLE
         normalLinearLayout.visibility = View.GONE
+        soundPool.play(sound, 1F, 1F, 0, 0, 1F)
     }
 
-    private fun setIncorrect() {
+    private fun setIncorrect(sound: Int) {
         imageView.setImageResource(R.drawable.ic_incorrect)
         imageView.setBackgroundResource(R.drawable.button_background_delete_no)
+        correctAnswerTextView.visibility = View.VISIBLE
         checkLinearLayout.visibility = View.VISIBLE
         normalLinearLayout.visibility = View.GONE
+        soundPool.play(sound, 1F, 1F, 0, 0, 1F)
     }
 
     private fun setEmpty() {
         imageView.setImageDrawable(null)
         imageView.background = null
+        correctAnswerTextView.visibility = View.GONE
         answerEditText.setText("")
         checkLinearLayout.visibility = View.GONE
         normalLinearLayout.visibility = View.VISIBLE
