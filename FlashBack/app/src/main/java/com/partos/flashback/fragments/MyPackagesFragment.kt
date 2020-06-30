@@ -9,7 +9,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.partos.flashback.R
+import com.partos.flashback.models.MyPackage
+import com.partos.flashback.recycler.MarginItemDecoration
+import com.partos.flashback.recycler.PackageRecyclerViewAdapter
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -33,6 +38,7 @@ class MyPackagesFragment : Fragment() {
 
     private lateinit var rootView: View
     private lateinit var addPackageButton: LinearLayout
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,6 +92,28 @@ class MyPackagesFragment : Fragment() {
 
     private fun initFragment() {
         addPackageButton = rootView.findViewById(R.id.my_package_linear_layout_add_new)
+
+        val packagesList = ArrayList<MyPackage>()
+        packagesList.add(MyPackage(0,"Przykładowy pakiet"))
+        packagesList.add(MyPackage(1,"Pakiet testowy"))
+        packagesList.add(MyPackage(2,"Pokaż brudasa, barabasza"))
+        packagesList.add(MyPackage(3,"Mój stary"))
+        packagesList.add(MyPackage(4,"to fanatyk nauki"))
+        packagesList.add(MyPackage(5,"Pół mieszkania"))
+        packagesList.add(MyPackage(6,"W fiszkach zajebane"))
+
+        recyclerView = rootView.findViewById(R.id.my_packages_recycler_view)
+
+        val mLayoutManager: LinearLayoutManager = LinearLayoutManager(this.context)
+        recyclerView.layoutManager = mLayoutManager
+        recyclerView.addItemDecoration(
+            MarginItemDecoration(
+                12
+            )
+        )
+
+        recyclerView.adapter = PackageRecyclerViewAdapter(packagesList)
+
 
         addPackageButton.setOnClickListener {
             val addPackageFragment = AddPackageFragment.newInstance()
