@@ -1,4 +1,4 @@
-package com.partos.flashback.fragments
+package com.partos.flashback.fragments.menu
 
 
 import android.content.Context
@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import com.partos.flashback.R
+import com.partos.flashback.fragments.`package`.MyPackagesFragment
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -94,7 +95,8 @@ class LoggedMenuFragment : Fragment() {
         logoutButton = rootView.findViewById(R.id.logged_menu_button_logout)
 
         myPackagesButton.setOnClickListener {
-            val myPackageFragment = MyPackagesFragment.newInstance()
+            val myPackageFragment =
+                MyPackagesFragment.newInstance()
             fragmentManager
                 ?.beginTransaction()
                 ?.setCustomAnimations(
@@ -111,7 +113,8 @@ class LoggedMenuFragment : Fragment() {
         }
 
         creditsButton.setOnClickListener {
-            val creditsFragment = CreditsFragment.newInstance()
+            val creditsFragment =
+                CreditsFragment.newInstance()
             fragmentManager
                 ?.beginTransaction()
                 ?.setCustomAnimations(
@@ -124,7 +127,8 @@ class LoggedMenuFragment : Fragment() {
         }
 
         logoutButton.setOnClickListener {
-            val menuFragment = MainMenuFragment.newInstance()
+            val menuFragment =
+                MainMenuFragment.newInstance()
             fragmentManager
                 ?.beginTransaction()
                 ?.setCustomAnimations(

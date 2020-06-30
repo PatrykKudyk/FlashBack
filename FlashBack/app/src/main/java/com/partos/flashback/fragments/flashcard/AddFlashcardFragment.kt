@@ -1,5 +1,4 @@
-package com.partos.flashback.fragments
-
+package com.partos.flashback.fragments.flashcard
 
 import android.content.Context
 import android.net.Uri
@@ -8,6 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import com.partos.flashback.R
 
 
@@ -24,18 +26,21 @@ private const val ARG_PARAM2 = "param2"
  * Use the [AccountFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class CreditsFragment : Fragment() {
+class AddFlashcardFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
+    private var param1: Long? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
     private lateinit var rootView: View
+    private lateinit var addButton: Button
+    private lateinit var questionEditText: EditText
+    private lateinit var answerEditText: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
+            param1 = it.getLong(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
     }
@@ -45,7 +50,7 @@ class CreditsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootView = inflater.inflate(R.layout.fragment_credits, container, false);
+        rootView = inflater.inflate(R.layout.fragment_add_flashcard, container, false);
         initFragment()
         return rootView
     }
@@ -76,13 +81,28 @@ class CreditsFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            CreditsFragment().apply {
+            AddFlashcardFragment().apply {
                 arguments = Bundle().apply {
                 }
             }
     }
 
     private fun initFragment() {
+        addButton = rootView.findViewById(R.id.add_flashcard_button_add)
+        questionEditText = rootView.findViewById(R.id.add_flashcard_english_edit_text)
+        answerEditText = rootView.findViewById(R.id.add_flashcard_polish_edit_text)
 
+        addButton.setOnClickListener {
+            if (questionEditText.text.toString() != "" && answerEditText.text.toString() != "") {
+                fragmentManager
+                    ?.popBackStack()
+            } else {
+                Toast.makeText(
+                    rootView.context,
+                    rootView.context.getString(R.string.toast_flashcard_not_null),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
 }
