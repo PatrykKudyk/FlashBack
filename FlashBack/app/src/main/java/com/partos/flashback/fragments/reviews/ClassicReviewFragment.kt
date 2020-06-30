@@ -1,7 +1,9 @@
 package com.partos.flashback.fragments.reviews
 
 import android.content.Context
+import android.media.AudioAttributes
 import android.media.Image
+import android.media.SoundPool
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -49,6 +51,8 @@ class ClassicReviewFragment : Fragment() {
     private lateinit var checkLinearLayout: LinearLayout
     private lateinit var nextButton: Button
     private lateinit var quitButton2: Button
+    private lateinit var soundPool: SoundPool
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -120,6 +124,19 @@ class ClassicReviewFragment : Fragment() {
             )
         )
 
+        val audioAttributes = AudioAttributes.Builder()
+            .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+            .build()
+        soundPool = SoundPool.Builder()
+            .setMaxStreams(3)
+            .setAudioAttributes(audioAttributes)
+            .build()
+
+        val soundCorrect = soundPool.load(rootView.context, R.raw.correct, 1)
+        val soundIncorrect = soundPool.load(rootView.context, R.raw.incorrect, 1)
+        val soundEnd = soundPool.load(rootView.context, R.raw.done, 1)
+
         questionCardView = rootView.findViewById(R.id.classic_review_card_view_question)
         answerCardView = rootView.findViewById(R.id.classic_review_card_view_answer)
         questionTextView = rootView.findViewById(R.id.classic_review_text_view_question)
@@ -152,15 +169,15 @@ class ClassicReviewFragment : Fragment() {
         checkButton.setOnClickListener {
             if (random <= 500) {
                 if (answerEditText.text.toString() == flashcards[position].polish) {
-                    setCorrect()
+                    setCorrect(soundCorrect)
                 } else {
-                    setIncorrect()
+                    setIncorrect(soundIncorrect)
                 }
             } else {
                 if (answerEditText.text.toString() == flashcards[position].english) {
-                    setCorrect()
+                    setCorrect(soundCorrect)
                 } else {
-                    setIncorrect()
+                    setIncorrect(soundIncorrect)
                 }
             }
         }
@@ -176,17 +193,20 @@ class ClassicReviewFragment : Fragment() {
                 }
                 setEmpty()
             } else {
+                soundPool.release()
                 fragmentManager
                     ?.popBackStack()
             }
         }
 
         quitButton.setOnClickListener {
+            soundPool.release()
             fragmentManager
                 ?.popBackStack()
         }
 
         quitButton2.setOnClickListener {
+            soundPool.release()
             fragmentManager
                 ?.popBackStack()
         }
@@ -202,24 +222,27 @@ class ClassicReviewFragment : Fragment() {
                 }
                 setEmpty()
             } else {
+                soundPool.release()
                 fragmentManager
                     ?.popBackStack()
             }
         }
     }
 
-    private fun setCorrect() {
+    private fun setCorrect(sound: Int) {
         imageView.setImageResource(R.drawable.ic_correct)
         imageView.setBackgroundResource(R.drawable.button_background_delete_yes)
         checkLinearLayout.visibility = View.VISIBLE
         normalLinearLayout.visibility = View.GONE
+        soundPool.play(sound, 1F,1F,0, 0,1F)
     }
 
-    private fun setIncorrect() {
+    private fun setIncorrect(sound: Int) {
         imageView.setImageResource(R.drawable.ic_incorrect)
         imageView.setBackgroundResource(R.drawable.button_background_delete_no)
         checkLinearLayout.visibility = View.VISIBLE
         normalLinearLayout.visibility = View.GONE
+        soundPool.play(sound, 1F,1F,0, 0,1F)
     }
 
     private fun setEmpty() {
