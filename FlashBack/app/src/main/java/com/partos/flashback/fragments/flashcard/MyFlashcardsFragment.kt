@@ -98,12 +98,12 @@ class MyFlashcardsFragment : Fragment() {
         addFlashcardButton = rootView.findViewById(R.id.my_flashcards_linear_layout_add_new)
 
         val flashcardList = ArrayList<MyFlashcard>()
-        flashcardList.add(MyFlashcard(0, 0, 0, "cześć", "hi", 0, false, true))
-        flashcardList.add(MyFlashcard(0, 0, 0, "ty", "you", 0, false, true))
+        flashcardList.add(MyFlashcard(0, 0, 0, "cześć", "hi", 10, false, true))
+        flashcardList.add(MyFlashcard(0, 0, 0, "ty", "you", 10, false, true))
         flashcardList.add(MyFlashcard(0, 0, 0, "ja", "I", 0, false, false))
         flashcardList.add(MyFlashcard(0, 0, 0, "stół", "table", 0, false, false))
         flashcardList.add(MyFlashcard(0, 0, 0, "głośnik", "speaker", 0, false, false))
-        flashcardList.add(MyFlashcard(0, 0, 0, "sklejasz akcje", "you know what I'm sayin'", 0, false, true))
+        flashcardList.add(MyFlashcard(0, 0, 0, "sklejasz akcje", "you know what I'm sayin'", 8, false, true))
 
         recyclerView = rootView.findViewById(R.id.my_flashcards_recycler_view)
 
