@@ -36,4 +36,7 @@
     <string name="flashcard_learn_new_words">Learn new words</string>
     <string name="flashcard_review_hard_words">Hard words</string>
     <string name="delete_question_flashcard">Are you sure to delete flashcard?</string>
+    <string name="hint_flashcard_polish">Polish</string>
+    <string name="hint_flashcard_english">English</string>
+    <string name="toast_flashcard_not_null">Flashcard fields cannot be empty</string>
 </resources>

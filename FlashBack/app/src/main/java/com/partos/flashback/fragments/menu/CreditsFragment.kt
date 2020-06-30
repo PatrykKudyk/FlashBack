@@ -1,4 +1,4 @@
-package com.partos.flashback.fragments
+package com.partos.flashback.fragments.menu
 
 
 import android.content.Context
@@ -8,11 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.core.content.res.ResourcesCompat
 import com.partos.flashback.R
-import kotlinx.android.synthetic.main.fragment_log_in.view.*
-import kotlinx.android.synthetic.main.fragment_register.view.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -28,14 +24,13 @@ private const val ARG_PARAM2 = "param2"
  * Use the [AccountFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class RegisterFragment : Fragment() {
+class CreditsFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
     private lateinit var rootView: View
-    private lateinit var backButton: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +45,7 @@ class RegisterFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootView = inflater.inflate(R.layout.fragment_register, container, false);
+        rootView = inflater.inflate(R.layout.fragment_credits, container, false);
         initFragment()
         return rootView
     }
@@ -81,25 +76,13 @@ class RegisterFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            RegisterFragment().apply {
+            CreditsFragment().apply {
                 arguments = Bundle().apply {
                 }
             }
     }
 
     private fun initFragment() {
-        backButton = rootView.findViewById(R.id.register_text_back)
-        initFonts()
 
-        backButton.setOnClickListener {
-            fragmentManager
-                ?.popBackStack()
-        }
-    }
-
-    private fun initFonts() {
-        val typeface = ResourcesCompat.getFont(rootView.context, R.font.dustismo_bold)
-        rootView.register_text_layout_password.typeface = typeface
-        rootView.register_text_layout_password_repeat.typeface = typeface
     }
 }

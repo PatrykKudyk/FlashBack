@@ -1,4 +1,4 @@
-package com.partos.flashback.fragments
+package com.partos.flashback.fragments.menu
 
 
 import android.content.Context
@@ -14,6 +14,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import com.partos.flashback.R
+import com.partos.flashback.fragments.account.LogInFragment
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -111,7 +112,8 @@ class MainMenuFragment : Fragment() {
         }
 
         creditsButton.setOnClickListener {
-            val creditsFragment = CreditsFragment.newInstance()
+            val creditsFragment =
+                CreditsFragment.newInstance()
             fragmentManager
                 ?.beginTransaction()
                 ?.setCustomAnimations(
@@ -124,7 +126,8 @@ class MainMenuFragment : Fragment() {
         }
 
         loginButton.setOnClickListener {
-            val logInFragment = LogInFragment.newInstance()
+            val logInFragment =
+                LogInFragment.newInstance()
             fragmentManager
                 ?.beginTransaction()
                 ?.setCustomAnimations(
