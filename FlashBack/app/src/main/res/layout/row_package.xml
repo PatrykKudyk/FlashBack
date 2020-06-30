@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorBackground">
 
     <com.google.android.material.card.MaterialCardView
@@ -19,6 +20,7 @@
         app:strokeWidth="2dp">
 
         <LinearLayout
+            tools:visibility="gone"
             android:id="@+id/package_cell_linear_layout_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -113,6 +115,7 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:visibility="gone"
+            tools:visibility="visible"
             android:weightSum="100">
 
             <View
@@ -148,22 +151,6 @@
                         android:layout_height="match_parent"
                         android:layout_weight="10" />
 
-                    <Button
-                        android:id="@+id/package_cell_button_delete_no"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="30"
-                        android:background="@drawable/button_background_delete_no"
-                        android:fontFamily="@font/dustismo_bold"
-                        android:text="@string/button_delete_no"
-                        android:textAllCaps="false"
-                        android:textSize="15dip" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="20" />
-
 
                     <Button
                         android:id="@+id/package_cell_button_delete_yes"
@@ -176,6 +163,22 @@
                         android:textAllCaps="false"
                         android:textSize="15dip" />
 
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="20" />
+
+
+                    <Button
+                        android:id="@+id/package_cell_button_delete_no"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="30"
+                        android:background="@drawable/button_background_delete_no"
+                        android:fontFamily="@font/dustismo_bold"
+                        android:text="@string/button_delete_no"
+                        android:textAllCaps="false"
+                        android:textSize="15dip" />
                 </LinearLayout>
 
 
