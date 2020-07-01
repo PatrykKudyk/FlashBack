@@ -13,7 +13,7 @@ import com.partos.flashback.models.MyPackage
 import kotlinx.android.synthetic.main.row_assign_package.view.*
 import kotlinx.android.synthetic.main.row_package.view.*
 
-class AssignPackageRecyclerViewAdapter (var packagesList: ArrayList<MyPackage>) :
+class AssignPackageRecyclerViewAdapter(var packagesList: ArrayList<MyPackage>) :
     RecyclerView.Adapter<AssignPackageViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AssignPackageViewHolder {
@@ -27,11 +27,12 @@ class AssignPackageRecyclerViewAdapter (var packagesList: ArrayList<MyPackage>) 
     }
 
     override fun onBindViewHolder(holder: AssignPackageViewHolder, position: Int) {
-       holder.view.assign_package_cell_card_view.setOnClickListener {
-           val manager = (holder.itemView.context as MainActivity).supportFragmentManager
-           manager
-               .popBackStack()
-       }
+        holder.view.assign_package_cell_name.setText(packagesList[position].title)
+        holder.view.assign_package_cell_card_view.setOnClickListener {
+            val manager = (holder.itemView.context as MainActivity).supportFragmentManager
+            manager
+                .popBackStack()
+        }
     }
 
 }

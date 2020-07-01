@@ -10,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import com.partos.flashback.R
+import com.partos.flashback.fragments.flashcard.AssignFlashcardsFragment
+import com.partos.flashback.fragments.packages.AssignPackagesFragment
 import com.partos.flashback.fragments.packages.MyPackagesFragment
 
 
@@ -109,7 +111,16 @@ class LoggedMenuFragment : Fragment() {
         }
 
         newWordsButton.setOnClickListener {
-
+            val assignFlashcardsFragment = AssignFlashcardsFragment.newInstance()
+            fragmentManager
+                ?.beginTransaction()
+                ?.setCustomAnimations(
+                    R.anim.enter_right_to_left, R.anim.exit_left_to_right,
+                    R.anim.enter_left_to_right, R.anim.exit_right_to_left
+                )
+                ?.replace(R.id.main_frame_layout, assignFlashcardsFragment)
+                ?.addToBackStack(AssignFlashcardsFragment.toString())
+                ?.commit()
         }
 
         creditsButton.setOnClickListener {
