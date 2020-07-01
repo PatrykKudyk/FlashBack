@@ -1,4 +1,4 @@
-package com.partos.flashback.fragments.`package`
+package com.partos.flashback.fragments.packages
 
 import android.content.Context
 import android.net.Uri

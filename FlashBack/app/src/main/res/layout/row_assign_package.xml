@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/assign_package_cell_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:theme="@style/Theme.MaterialComponents.Light"
+        app:cardBackgroundColor="@color/colorMainLight"
+        app:cardCornerRadius="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/colorMainDarkMedium"
+        app:strokeWidth="2dp">
+
+        <TextView
+            android:id="@+id/assign_package_cell_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            tools:text="Nazwa pakietu"
+            android:fontFamily="@font/dustismo_bold"
+            android:gravity="center"
+            android:textSize="30dip" />
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
