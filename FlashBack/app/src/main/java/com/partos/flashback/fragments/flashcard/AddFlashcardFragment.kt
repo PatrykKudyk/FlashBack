@@ -10,7 +10,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.partos.flashback.R
+import com.partos.flashback.recycler.flashcard.AddFlashcardRecyclerViewAdapter
+import com.partos.flashback.recycler.packages.AddPackageRecyclerViewAdapter
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -33,9 +37,7 @@ class AddFlashcardFragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
 
     private lateinit var rootView: View
-    private lateinit var addButton: Button
-    private lateinit var questionEditText: EditText
-    private lateinit var answerEditText: EditText
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,21 +90,11 @@ class AddFlashcardFragment : Fragment() {
     }
 
     private fun initFragment() {
-        addButton = rootView.findViewById(R.id.add_flashcard_button_add)
-        questionEditText = rootView.findViewById(R.id.add_flashcard_english_edit_text)
-        answerEditText = rootView.findViewById(R.id.add_flashcard_polish_edit_text)
+        recyclerView = rootView.findViewById(R.id.add_flashcard_recycler_view)
 
-        addButton.setOnClickListener {
-            if (questionEditText.text.toString() != "" && answerEditText.text.toString() != "") {
-                fragmentManager
-                    ?.popBackStack()
-            } else {
-                Toast.makeText(
-                    rootView.context,
-                    rootView.context.getString(R.string.toast_flashcard_not_null),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
+        val mLayoutManager: LinearLayoutManager = LinearLayoutManager(this.context)
+        recyclerView.layoutManager = mLayoutManager
+
+        recyclerView.adapter = AddFlashcardRecyclerViewAdapter()
     }
 }
