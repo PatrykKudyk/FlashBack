@@ -1,6 +1,7 @@
 package com.partos.flashback.fragments.reviews
 
 import android.content.Context
+import android.hardware.input.InputManager
 import android.media.AudioAttributes
 import android.media.Image
 import android.media.SoundPool
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
@@ -32,7 +34,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [AccountFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HardWordsReviewFragment : Fragment() {
+class LearnNewWordsFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -43,6 +45,7 @@ class HardWordsReviewFragment : Fragment() {
     private lateinit var answerCardView: CardView
     private lateinit var questionTextView: TextView
     private lateinit var answerEditText: EditText
+    private lateinit var answerTextView: TextView
     private lateinit var checkButton: Button
     private lateinit var skipButton: Button
     private lateinit var quitButton: Button
@@ -67,7 +70,7 @@ class HardWordsReviewFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootView = inflater.inflate(R.layout.fragment_hard_words_review, container, false);
+        rootView = inflater.inflate(R.layout.fragment_learn_new_words, container, false);
         initFragment()
         return rootView
     }
@@ -98,7 +101,7 @@ class HardWordsReviewFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            HardWordsReviewFragment().apply {
+            LearnNewWordsFragment().apply {
                 arguments = Bundle().apply {
                 }
             }
@@ -112,8 +115,8 @@ class HardWordsReviewFragment : Fragment() {
         flashcardList.add(MyFlashcard(0, 0, 0, "nie", "no", 2, false, true))
         flashcardList.add(MyFlashcard(0, 0, 0, "może", "maybe", 5, false, true))
         flashcardList.add(MyFlashcard(0, 0, 0, "ja", "I", 0, false, false))
-        flashcardList.add(MyFlashcard(0, 0, 0, "stół", "table", 0, false, false))
-        flashcardList.add(MyFlashcard(0, 0, 0, "głośnik", "speaker", 0, false, false))
+        flashcardList.add(MyFlashcard(0, 0, 0, "dziecko", "kid", 0, false, false))
+        flashcardList.add(MyFlashcard(0, 0, 0, "cukier", "sugar", 0, false, false))
         flashcardList.add(
             MyFlashcard(
                 0,
@@ -139,83 +142,100 @@ class HardWordsReviewFragment : Fragment() {
         val soundCorrect = soundPool.load(rootView.context, R.raw.correct, 1)
         val soundIncorrect = soundPool.load(rootView.context, R.raw.incorrect, 1)
 
-        var correct = 0
-        var skipped = 0
 
-        questionCardView = rootView.findViewById(R.id.hard_review_card_view_question)
-        answerCardView = rootView.findViewById(R.id.hard_review_card_view_answer)
-        questionTextView = rootView.findViewById(R.id.hard_review_text_view_question)
-        answerEditText = rootView.findViewById(R.id.hard_review_edit_text_answer)
-        checkButton = rootView.findViewById(R.id.hard_review_button_check)
-        skipButton = rootView.findViewById(R.id.hard_review_button_skip)
-        quitButton = rootView.findViewById(R.id.hard_review_button_quit)
-        imageView = rootView.findViewById(R.id.hard_review_image_view)
-        normalLinearLayout = rootView.findViewById(R.id.hard_review_linear_layout_normal)
-        checkLinearLayout = rootView.findViewById(R.id.hard_review_linear_layout_check)
-        nextButton = rootView.findViewById(R.id.hard_review_button_next)
-        quitButton2 = rootView.findViewById(R.id.hard_review_button_exit)
-        correctAnswerTextView = rootView.findViewById(R.id.hard_review_text_view_correct_answer)
+        questionCardView = rootView.findViewById(R.id.new_words_review_card_view_question)
+        answerCardView = rootView.findViewById(R.id.new_words_review_card_view_answer)
+        questionTextView = rootView.findViewById(R.id.new_words_review_text_view_question)
+        answerEditText = rootView.findViewById(R.id.new_words_review_edit_text_answer)
+        checkButton = rootView.findViewById(R.id.new_words_review_button_check)
+        quitButton = rootView.findViewById(R.id.new_words_review_button_quit)
+        imageView = rootView.findViewById(R.id.new_words_review_image_view)
+        normalLinearLayout = rootView.findViewById(R.id.new_words_review_linear_layout_normal)
+        checkLinearLayout = rootView.findViewById(R.id.new_words_review_linear_layout_check)
+        nextButton = rootView.findViewById(R.id.new_words_review_button_next)
+        quitButton2 = rootView.findViewById(R.id.new_words_review_button_exit)
+        correctAnswerTextView = rootView.findViewById(R.id.new_words_review_text_view_correct_answer)
+        answerTextView = rootView.findViewById(R.id.new_words_review_edit_text_answer_answer)
 
         var flashcards = ArrayList<MyFlashcard>()
-
+        var number = 0
         for (flashcard in flashcardList) {
-            if (flashcard.knowledgeLevel <= 4 && flashcard.isKnown) {
+            if (!flashcard.isKnown) {
                 flashcards.add(flashcard)
+                number++
             }
         }
         flashcards.shuffle()
+        var afterNew = ArrayList<MyFlashcard>()
+        for (i in 0..4) {
+            afterNew.addAll(flashcards)
+        }
+        afterNew.shuffle()
+        flashcards.addAll(afterNew)
         var random = Random.nextInt(0, 1000)
         var position = 0
-        if (random <= 500) {
-            questionTextView.setText(flashcards[0].english)
-        } else {
-            questionTextView.setText(flashcards[0].polish)
-        }
+        questionTextView.setText(flashcards[0].english)
+        answerTextView.setText(flashcards[0].polish)
+
 
         checkButton.setOnClickListener {
             if (random <= 500) {
-                if (answerEditText.text.toString().toLowerCase() == flashcards[position].polish.toLowerCase()) {
+                if (answerEditText.text.toString()
+                        .toLowerCase() == flashcards[position].polish.toLowerCase()
+                ) {
                     setCorrect(soundCorrect)
-                    correct++
                 } else {
                     setIncorrect(soundIncorrect)
+                    flashcards.add(flashcards[position])
                     correctAnswerTextView.setText(flashcards[position].polish)
                 }
             } else {
-                if (answerEditText.text.toString().toLowerCase() == flashcards[position].english.toLowerCase()) {
+                if (answerEditText.text.toString()
+                        .toLowerCase() == flashcards[position].english.toLowerCase()
+                ) {
                     setCorrect(soundCorrect)
-                    correct++
                 } else {
                     setIncorrect(soundIncorrect)
+                    flashcards.add(flashcards[position])
                     correctAnswerTextView.setText(flashcards[position].english)
                 }
             }
         }
 
         nextButton.setOnClickListener {
-            if (position < flashcards.size - 1) {
-                random = Random.nextInt(0, 1000)
-                position++
-                if (random <= 500) {
-                    questionTextView.setText(flashcards[position].english)
-                } else {
-                    questionTextView.setText(flashcards[position].polish)
-                }
-                setEmpty()
-            } else {
-                soundPool.release()
-                val reviewSummaryFragment =
-                    ReviewSummaryFragment.newInstance(correct, skipped, flashcards.size)
-                fragmentManager
-                    ?.beginTransaction()
-                    ?.setCustomAnimations(
-                        R.anim.enter_right_to_left, R.anim.exit_left_to_right,
-                        R.anim.enter_left_to_right, R.anim.exit_right_to_left
-                    )
-                    ?.replace(R.id.main_frame_layout, reviewSummaryFragment)
-                    ?.addToBackStack(ReviewSummaryFragment.toString())
-                    ?.commit()
-            }
+           if (position < number - 1) {
+               position++
+               questionTextView.setText(flashcards[position].english)
+               answerTextView.setText(flashcards[position].polish)
+           } else {
+               answerEditText.visibility = View.VISIBLE
+               answerTextView.visibility = View.GONE
+               normalLinearLayout.visibility = View.VISIBLE
+               checkLinearLayout.visibility = View.GONE
+               if (position < flashcards.size - 1) {
+                   random = Random.nextInt(0, 1000)
+                   position++
+                   if (random <= 500) {
+                       questionTextView.setText(flashcards[position].english)
+                   } else {
+                       questionTextView.setText(flashcards[position].polish)
+                   }
+                   setEmpty()
+               } else {
+                   soundPool.release()
+                   val learnedSummaryFragment =
+                       LearnedSummaryFragment.newInstance()
+                   fragmentManager
+                       ?.beginTransaction()
+                       ?.setCustomAnimations(
+                           R.anim.enter_right_to_left, R.anim.exit_left_to_right,
+                           R.anim.enter_left_to_right, R.anim.exit_right_to_left
+                       )
+                       ?.replace(R.id.main_frame_layout, learnedSummaryFragment)
+                       ?.addToBackStack(LearnedSummaryFragment.toString())
+                       ?.commit()
+               }
+           }
         }
 
         quitButton.setOnClickListener {
@@ -230,35 +250,10 @@ class HardWordsReviewFragment : Fragment() {
                 ?.popBackStack()
         }
 
-        skipButton.setOnClickListener {
-            skipped++
-            if (position < flashcards.size - 1) {
-                random = Random.nextInt(0, 1000)
-                position++
-                if (random <= 500) {
-                    questionTextView.setText(flashcards[position].english)
-                } else {
-                    questionTextView.setText(flashcards[position].polish)
-                }
-                setEmpty()
-            } else {
-                soundPool.release()
-                val reviewSummaryFragment =
-                    ReviewSummaryFragment.newInstance(correct, skipped, flashcards.size)
-                fragmentManager
-                    ?.beginTransaction()
-                    ?.setCustomAnimations(
-                        R.anim.enter_right_to_left, R.anim.exit_left_to_right,
-                        R.anim.enter_left_to_right, R.anim.exit_right_to_left
-                    )
-                    ?.replace(R.id.main_frame_layout, reviewSummaryFragment)
-                    ?.addToBackStack(ReviewSummaryFragment.toString())
-                    ?.commit()
-            }
-        }
     }
 
     private fun setCorrect(sound: Int) {
+        hideKeyboard()
         imageView.setImageResource(R.drawable.ic_correct)
         imageView.setBackgroundResource(R.drawable.button_background_delete_yes)
         checkLinearLayout.visibility = View.VISIBLE
@@ -267,6 +262,7 @@ class HardWordsReviewFragment : Fragment() {
     }
 
     private fun setIncorrect(sound: Int) {
+        hideKeyboard()
         imageView.setImageResource(R.drawable.ic_incorrect)
         imageView.setBackgroundResource(R.drawable.button_background_delete_no)
         correctAnswerTextView.visibility = View.VISIBLE
@@ -276,11 +272,20 @@ class HardWordsReviewFragment : Fragment() {
     }
 
     private fun setEmpty() {
+        hideKeyboard()
         imageView.setImageDrawable(null)
         imageView.background = null
         correctAnswerTextView.visibility = View.INVISIBLE
         answerEditText.setText("")
         checkLinearLayout.visibility = View.GONE
         normalLinearLayout.visibility = View.VISIBLE
+    }
+
+    private fun hideKeyboard() {
+        val view = activity?.currentFocus
+        if (view != null) {
+            val inputManager = rootView.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputManager.hideSoftInputFromWindow(view.windowToken, 0)
+        }
     }
 }

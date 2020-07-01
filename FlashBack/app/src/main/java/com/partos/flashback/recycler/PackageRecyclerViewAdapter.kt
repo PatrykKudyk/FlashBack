@@ -25,7 +25,6 @@ class PackageRecyclerViewAdapter(var packagesList: ArrayList<MyPackage>) :
     }
 
     override fun onBindViewHolder(holder: PackageViewHolder, position: Int) {
-        var editing = false
         val title = holder.view.package_cell_name
         val editButton = holder.view.package_cell_image_view_edit
         val saveButton = holder.view.package_cell_image_view_save

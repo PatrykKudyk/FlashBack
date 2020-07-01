@@ -47,6 +47,9 @@
     <string name="summary_correct">Correct:</string>
     <string name="summary_skipped">Skipped:</string>
     <string name="summary_back">Back to flashcards</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="learn_summary_title">Learning summary</string>
+    <string name="learn_summary_text">Congratulations!\n
+        You have learned new words!\n
+        Now you can review them any time you want.</string>
+
 </resources>
