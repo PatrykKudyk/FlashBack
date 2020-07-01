@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat
 import com.partos.flashback.R
 import com.partos.flashback.models.MyFlashcard
 import kotlinx.android.synthetic.main.fragment_classic_review.*
+import kotlinx.android.synthetic.main.fragment_learn_new_words.view.*
 import kotlin.random.Random
 
 
@@ -154,7 +155,8 @@ class LearnNewWordsFragment : Fragment() {
         checkLinearLayout = rootView.findViewById(R.id.new_words_review_linear_layout_check)
         nextButton = rootView.findViewById(R.id.new_words_review_button_next)
         quitButton2 = rootView.findViewById(R.id.new_words_review_button_exit)
-        correctAnswerTextView = rootView.findViewById(R.id.new_words_review_text_view_correct_answer)
+        correctAnswerTextView =
+            rootView.findViewById(R.id.new_words_review_text_view_correct_answer)
         answerTextView = rootView.findViewById(R.id.new_words_review_edit_text_answer_answer)
 
         var flashcards = ArrayList<MyFlashcard>()
@@ -179,9 +181,9 @@ class LearnNewWordsFragment : Fragment() {
 
 
         checkButton.setOnClickListener {
+            val answer = answerEditText.text.toString().replace(" ", "").toLowerCase()
             if (random <= 500) {
-                if (answerEditText.text.toString()
-                        .toLowerCase() == flashcards[position].polish.toLowerCase()
+                if (answer == flashcards[position].polish.replace(" ", "").toLowerCase()
                 ) {
                     setCorrect(soundCorrect)
                 } else {
@@ -190,8 +192,7 @@ class LearnNewWordsFragment : Fragment() {
                     correctAnswerTextView.setText(flashcards[position].polish)
                 }
             } else {
-                if (answerEditText.text.toString()
-                        .toLowerCase() == flashcards[position].english.toLowerCase()
+                if (answer == flashcards[position].english.replace(" ", "").toLowerCase()
                 ) {
                     setCorrect(soundCorrect)
                 } else {
@@ -203,39 +204,41 @@ class LearnNewWordsFragment : Fragment() {
         }
 
         nextButton.setOnClickListener {
-           if (position < number - 1) {
-               position++
-               questionTextView.setText(flashcards[position].english)
-               answerTextView.setText(flashcards[position].polish)
-           } else {
-               answerEditText.visibility = View.VISIBLE
-               answerTextView.visibility = View.GONE
-               normalLinearLayout.visibility = View.VISIBLE
-               checkLinearLayout.visibility = View.GONE
-               if (position < flashcards.size - 1) {
-                   random = Random.nextInt(0, 1000)
-                   position++
-                   if (random <= 500) {
-                       questionTextView.setText(flashcards[position].english)
-                   } else {
-                       questionTextView.setText(flashcards[position].polish)
-                   }
-                   setEmpty()
-               } else {
-                   soundPool.release()
-                   val learnedSummaryFragment =
-                       LearnedSummaryFragment.newInstance()
-                   fragmentManager
-                       ?.beginTransaction()
-                       ?.setCustomAnimations(
-                           R.anim.enter_right_to_left, R.anim.exit_left_to_right,
-                           R.anim.enter_left_to_right, R.anim.exit_right_to_left
-                       )
-                       ?.replace(R.id.main_frame_layout, learnedSummaryFragment)
-                       ?.addToBackStack(LearnedSummaryFragment.toString())
-                       ?.commit()
-               }
-           }
+            if (position < number - 1) {
+                position++
+                questionTextView.setText(flashcards[position].english)
+                answerTextView.setText(flashcards[position].polish)
+            } else {
+                rootView.new_words_review_card_view_learn.visibility = View.GONE
+                rootView.new_words_review_card_view_answer.visibility = View.VISIBLE
+                answerEditText.visibility = View.VISIBLE
+                answerTextView.visibility = View.GONE
+                normalLinearLayout.visibility = View.VISIBLE
+                checkLinearLayout.visibility = View.GONE
+                if (position < flashcards.size - 1) {
+                    random = Random.nextInt(0, 1000)
+                    position++
+                    if (random <= 500) {
+                        questionTextView.setText(flashcards[position].english)
+                    } else {
+                        questionTextView.setText(flashcards[position].polish)
+                    }
+                    setEmpty()
+                } else {
+                    soundPool.release()
+                    val learnedSummaryFragment =
+                        LearnedSummaryFragment.newInstance()
+                    fragmentManager
+                        ?.beginTransaction()
+                        ?.setCustomAnimations(
+                            R.anim.enter_right_to_left, R.anim.exit_left_to_right,
+                            R.anim.enter_left_to_right, R.anim.exit_right_to_left
+                        )
+                        ?.replace(R.id.main_frame_layout, learnedSummaryFragment)
+                        ?.addToBackStack(LearnedSummaryFragment.toString())
+                        ?.commit()
+                }
+            }
         }
 
         quitButton.setOnClickListener {
@@ -284,7 +287,8 @@ class LearnNewWordsFragment : Fragment() {
     private fun hideKeyboard() {
         val view = activity?.currentFocus
         if (view != null) {
-            val inputManager = rootView.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val inputManager =
+                rootView.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputManager.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }

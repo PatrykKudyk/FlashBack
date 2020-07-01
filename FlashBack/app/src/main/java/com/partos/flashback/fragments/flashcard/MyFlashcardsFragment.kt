@@ -17,7 +17,7 @@ import com.partos.flashback.fragments.reviews.ClassicReviewFragment
 import com.partos.flashback.fragments.reviews.HardWordsReviewFragment
 import com.partos.flashback.fragments.reviews.LearnNewWordsFragment
 import com.partos.flashback.models.MyFlashcard
-import com.partos.flashback.recycler.FlashcardRecyclerViewAdapter
+import com.partos.flashback.recycler.flashcard.FlashcardRecyclerViewAdapter
 import com.partos.flashback.recycler.MarginItemDecoration
 
 
@@ -132,7 +132,10 @@ class MyFlashcardsFragment : Fragment() {
             )
         )
 
-        recyclerView.adapter = FlashcardRecyclerViewAdapter(flashcardList)
+        recyclerView.adapter =
+            FlashcardRecyclerViewAdapter(
+                flashcardList
+            )
 
         addFlashcardButton.setOnClickListener {
             val addFlashcardFragment = AddFlashcardFragment.newInstance()

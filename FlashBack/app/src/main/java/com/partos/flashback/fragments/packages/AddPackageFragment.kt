@@ -8,7 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.partos.flashback.R
+import com.partos.flashback.recycler.MarginItemDecoration
+import com.partos.flashback.recycler.packages.AddPackageRecyclerViewAdapter
+import com.partos.flashback.recycler.packages.PackageRecyclerViewAdapter
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -31,7 +36,7 @@ class AddPackageFragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
 
     private lateinit var rootView: View
-    private lateinit var addButton: Button
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,11 +89,11 @@ class AddPackageFragment : Fragment() {
     }
 
     private fun initFragment() {
-        addButton = rootView.findViewById(R.id.add_package_button_add)
+        recyclerView = rootView.findViewById(R.id.add_package_recycler_view)
 
-        addButton.setOnClickListener {
-            fragmentManager
-                ?.popBackStack()
-        }
+        val mLayoutManager: LinearLayoutManager = LinearLayoutManager(this.context)
+        recyclerView.layoutManager = mLayoutManager
+
+        recyclerView.adapter = AddPackageRecyclerViewAdapter()
     }
 }
