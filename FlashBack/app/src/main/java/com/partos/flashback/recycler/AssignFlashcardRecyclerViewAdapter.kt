@@ -6,10 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.partos.flashback.MainActivity
 import com.partos.flashback.R
-import com.partos.flashback.fragments.flashcard.MyFlashcardsFragment
+import com.partos.flashback.fragments.packages.AssignPackagesFragment
 import com.partos.flashback.models.MyFlashcard
 import kotlinx.android.synthetic.main.row_assign_flashcard.view.*
-import kotlinx.android.synthetic.main.row_flashcard.view.*
 
 class AssignFlashcardRecyclerViewAdapter (var flashcardList: ArrayList<MyFlashcard>) :
     RecyclerView.Adapter<AssignFlashcardViewHolder>() {
@@ -25,8 +24,8 @@ class AssignFlashcardRecyclerViewAdapter (var flashcardList: ArrayList<MyFlashca
     }
 
     override fun onBindViewHolder(holder: AssignFlashcardViewHolder, position: Int) {
-       holder.view.assign_flashcard_cell_card_view.setOnCheckedChangeListener{
-           val flashcardsFragment = MyFlashcardsFragment.newInstance()
+       holder.view.assign_flashcard_cell_card_view.setOnClickListener{
+           val assignPackagesFragment = AssignPackagesFragment.newInstance()
            val manager = (holder.itemView.context as MainActivity).supportFragmentManager
            manager
                .beginTransaction()
@@ -34,8 +33,8 @@ class AssignFlashcardRecyclerViewAdapter (var flashcardList: ArrayList<MyFlashca
                    R.anim.enter_left_to_right, R.anim.exit_right_to_left,
                    R.anim.enter_right_to_left, R.anim.exit_left_to_right
                )
-               .replace(R.id.main_frame_layout, flashcardsFragment)
-               .addToBackStack(MyFlashcardsFragment.toString())
+               .replace(R.id.main_frame_layout, assignPackagesFragment)
+               .addToBackStack(AssignPackagesFragment.toString())
                .commit()
        }
     }

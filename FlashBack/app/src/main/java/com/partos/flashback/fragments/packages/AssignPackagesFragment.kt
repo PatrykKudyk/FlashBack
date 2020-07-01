@@ -1,4 +1,4 @@
-package com.partos.flashback.fragments.`package`
+package com.partos.flashback.fragments.packages
 
 
 import android.content.Context
@@ -30,7 +30,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [AccountFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class MyPackagesFragment : Fragment() {
+class AssignPackagesFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -53,7 +53,7 @@ class MyPackagesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootView = inflater.inflate(R.layout.fragment_my_packages, container, false);
+        rootView = inflater.inflate(R.layout.fragment_assign_packages, container, false);
         initFragment()
         return rootView
     }
@@ -84,14 +84,14 @@ class MyPackagesFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            MyPackagesFragment().apply {
+            AssignPackagesFragment().apply {
                 arguments = Bundle().apply {
                 }
             }
     }
 
     private fun initFragment() {
-        addPackageButton = rootView.findViewById(R.id.my_package_linear_layout_add_new)
+        addPackageButton = rootView.findViewById(R.id.assign_package_linear_layout_add_new)
 
         val packagesList = ArrayList<MyPackage>()
         packagesList.add(MyPackage(0,"Przykładowy pakiet"))
@@ -102,7 +102,7 @@ class MyPackagesFragment : Fragment() {
         packagesList.add(MyPackage(5,"Pół mieszkania"))
         packagesList.add(MyPackage(6,"W fiszkach zajebane"))
 
-        recyclerView = rootView.findViewById(R.id.my_packages_recycler_view)
+        recyclerView = rootView.findViewById(R.id.assign_packages_recycler_view)
 
         val mLayoutManager: LinearLayoutManager = LinearLayoutManager(this.context)
         recyclerView.layoutManager = mLayoutManager
@@ -112,12 +112,8 @@ class MyPackagesFragment : Fragment() {
             )
         )
 
-        recyclerView.adapter = PackageRecyclerViewAdapter(packagesList)
-
-
         addPackageButton.setOnClickListener {
-            val addPackageFragment =
-                AddPackageFragment.newInstance()
+            val addPackageFragment = AddPackageFragment.newInstance()
             fragmentManager
                 ?.beginTransaction()
                 ?.setCustomAnimations(
@@ -128,5 +124,6 @@ class MyPackagesFragment : Fragment() {
                 ?.addToBackStack(AddPackageFragment.toString())
                 ?.commit()
         }
+
     }
 }

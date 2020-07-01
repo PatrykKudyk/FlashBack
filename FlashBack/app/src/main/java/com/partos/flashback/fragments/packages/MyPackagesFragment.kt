@@ -1,4 +1,4 @@
-package com.partos.flashback.fragments.flashcard
+package com.partos.flashback.fragments.packages
 
 
 import android.content.Context
@@ -8,12 +8,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.partos.flashback.R
-import com.partos.flashback.models.MyFlashcard
-import com.partos.flashback.recycler.AssignFlashcardRecyclerViewAdapter
+import com.partos.flashback.models.MyPackage
 import com.partos.flashback.recycler.MarginItemDecoration
+import com.partos.flashback.recycler.PackageRecyclerViewAdapter
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -29,13 +30,14 @@ private const val ARG_PARAM2 = "param2"
  * Use the [AccountFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class AssignFlashcardsFragment : Fragment() {
+class MyPackagesFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
     private lateinit var rootView: View
+    private lateinit var addPackageButton: LinearLayout
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,7 +53,7 @@ class AssignFlashcardsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootView = inflater.inflate(R.layout.fragment_assign_flashcards, container, false);
+        rootView = inflater.inflate(R.layout.fragment_my_packages, container, false);
         initFragment()
         return rootView
     }
@@ -82,14 +84,25 @@ class AssignFlashcardsFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            AssignFlashcardsFragment().apply {
+            MyPackagesFragment().apply {
                 arguments = Bundle().apply {
                 }
             }
     }
 
     private fun initFragment() {
-        recyclerView = rootView.findViewById(R.id.assign_flashcards_recycler_view)
+        addPackageButton = rootView.findViewById(R.id.my_package_linear_layout_add_new)
+
+        val packagesList = ArrayList<MyPackage>()
+        packagesList.add(MyPackage(0,"Przykładowy pakiet"))
+        packagesList.add(MyPackage(1,"Pakiet testowy"))
+        packagesList.add(MyPackage(2,"Pokaż brudasa, barabasza"))
+        packagesList.add(MyPackage(3,"Mój stary"))
+        packagesList.add(MyPackage(4,"to fanatyk nauki"))
+        packagesList.add(MyPackage(5,"Pół mieszkania"))
+        packagesList.add(MyPackage(6,"W fiszkach zajebane"))
+
+        recyclerView = rootView.findViewById(R.id.my_packages_recycler_view)
 
         val mLayoutManager: LinearLayoutManager = LinearLayoutManager(this.context)
         recyclerView.layoutManager = mLayoutManager
@@ -98,15 +111,22 @@ class AssignFlashcardsFragment : Fragment() {
                 12
             )
         )
-        val flashcardList = ArrayList<MyFlashcard>()
-        flashcardList.add(MyFlashcard(0, 0, 0, "cześć", "hi", 10, false, true))
-        flashcardList.add(MyFlashcard(0, 0, 0, "ty", "you", 10, false, true))
-        flashcardList.add(MyFlashcard(0, 0, 0, "ja", "I", 0, false, false))
-        flashcardList.add(MyFlashcard(0, 0, 0, "stół", "table", 0, false, false))
-        flashcardList.add(MyFlashcard(0, 0, 0, "głośnik", "speaker", 0, false, false))
+
+        recyclerView.adapter = PackageRecyclerViewAdapter(packagesList)
 
 
-        recyclerView.adapter = AssignFlashcardRecyclerViewAdapter(flashcardList)
-
+        addPackageButton.setOnClickListener {
+            val addPackageFragment =
+                AddPackageFragment.newInstance()
+            fragmentManager
+                ?.beginTransaction()
+                ?.setCustomAnimations(
+                    R.anim.enter_right_to_left, R.anim.exit_left_to_right,
+                    R.anim.enter_left_to_right, R.anim.exit_right_to_left
+                )
+                ?.replace(R.id.main_frame_layout, addPackageFragment)
+                ?.addToBackStack(AddPackageFragment.toString())
+                ?.commit()
+        }
     }
 }

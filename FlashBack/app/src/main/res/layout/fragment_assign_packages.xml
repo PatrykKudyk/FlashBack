@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.packages.MyPackagesFragment">
+    tools:context=".fragments.packages.AssignPackagesFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -45,7 +45,7 @@
                     app:layout_constraintTop_toBottomOf="@id/view1" />
 
                 <LinearLayout
-                    android:id="@+id/my_package_linear_layout_add_new"
+                    android:id="@+id/assign_package_linear_layout_add_new"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginStart="8dp"
@@ -95,10 +95,10 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight_percent="0.01"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/my_package_linear_layout_add_new" />
+                    app:layout_constraintTop_toBottomOf="@id/assign_package_linear_layout_add_new" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/my_packages_recycler_view"
+                    android:id="@+id/assign_packages_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginStart="8dp"
@@ -114,5 +114,6 @@
 
         </LinearLayout>
     </ScrollView>
+
 
 </FrameLayout>

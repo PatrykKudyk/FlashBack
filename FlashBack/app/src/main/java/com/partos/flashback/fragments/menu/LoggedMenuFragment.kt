@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import com.partos.flashback.R
-import com.partos.flashback.fragments.`package`.MyPackagesFragment
+import com.partos.flashback.fragments.packages.MyPackagesFragment
 
 
 // TODO: Rename parameter arguments, choose names that match
