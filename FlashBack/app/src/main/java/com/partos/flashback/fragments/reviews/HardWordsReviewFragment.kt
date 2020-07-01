@@ -174,7 +174,7 @@ class HardWordsReviewFragment : Fragment() {
         }
 
         checkButton.setOnClickListener {
-            val answer = answerEditText.text.toString().replace(" ", "").toLowerCase()
+            val answer = answerEditText.text.toString().trim().replace(" ", "").toLowerCase()
             if (random <= 500) {
                 if (answer == flashcards[position].polish.replace(" ", "").toLowerCase()) {
                     setCorrect(soundCorrect)
