@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.partos.flashback.R
 import com.partos.flashback.fragments.reviews.ClassicReviewFragment
 import com.partos.flashback.fragments.reviews.HardWordsReviewFragment
+import com.partos.flashback.fragments.reviews.LearnNewWordsFragment
 import com.partos.flashback.models.MyFlashcard
 import com.partos.flashback.recycler.FlashcardRecyclerViewAdapter
 import com.partos.flashback.recycler.MarginItemDecoration
@@ -169,6 +170,19 @@ class MyFlashcardsFragment : Fragment() {
                 )
                 ?.replace(R.id.main_frame_layout, hardWordsReviewFragment)
                 ?.addToBackStack(HardWordsReviewFragment.toString())
+                ?.commit()
+        }
+
+        newWordsButton.setOnClickListener {
+            val learnNewWordsFragment = LearnNewWordsFragment.newInstance()
+            fragmentManager
+                ?.beginTransaction()
+                ?.setCustomAnimations(
+                    R.anim.enter_right_to_left, R.anim.exit_left_to_right,
+                    R.anim.enter_left_to_right, R.anim.exit_right_to_left
+                )
+                ?.replace(R.id.main_frame_layout, learnNewWordsFragment)
+                ?.addToBackStack(LearnNewWordsFragment.toString())
                 ?.commit()
         }
     }

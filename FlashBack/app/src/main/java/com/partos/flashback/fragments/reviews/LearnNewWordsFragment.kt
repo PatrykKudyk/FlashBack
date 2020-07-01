@@ -1,6 +1,7 @@
 package com.partos.flashback.fragments.reviews
 
 import android.content.Context
+import android.hardware.input.InputManager
 import android.media.AudioAttributes
 import android.media.Image
 import android.media.SoundPool
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
@@ -113,8 +115,8 @@ class LearnNewWordsFragment : Fragment() {
         flashcardList.add(MyFlashcard(0, 0, 0, "nie", "no", 2, false, true))
         flashcardList.add(MyFlashcard(0, 0, 0, "może", "maybe", 5, false, true))
         flashcardList.add(MyFlashcard(0, 0, 0, "ja", "I", 0, false, false))
-        flashcardList.add(MyFlashcard(0, 0, 0, "stół", "table", 0, false, false))
-        flashcardList.add(MyFlashcard(0, 0, 0, "głośnik", "speaker", 0, false, false))
+        flashcardList.add(MyFlashcard(0, 0, 0, "dziecko", "kid", 0, false, false))
+        flashcardList.add(MyFlashcard(0, 0, 0, "cukier", "sugar", 0, false, false))
         flashcardList.add(
             MyFlashcard(
                 0,
@@ -133,15 +135,13 @@ class LearnNewWordsFragment : Fragment() {
             .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
             .build()
         soundPool = SoundPool.Builder()
-            .setMaxStreams(3)
+            .setMaxStreams(2)
             .setAudioAttributes(audioAttributes)
             .build()
 
         val soundCorrect = soundPool.load(rootView.context, R.raw.correct, 1)
         val soundIncorrect = soundPool.load(rootView.context, R.raw.incorrect, 1)
 
-        var correct = 0
-        var skipped = 0
 
         questionCardView = rootView.findViewById(R.id.new_words_review_card_view_question)
         answerCardView = rootView.findViewById(R.id.new_words_review_card_view_answer)
@@ -160,14 +160,14 @@ class LearnNewWordsFragment : Fragment() {
         var flashcards = ArrayList<MyFlashcard>()
         var number = 0
         for (flashcard in flashcardList) {
-            if (flashcard.isNew && number < 4) {
+            if (!flashcard.isKnown) {
                 flashcards.add(flashcard)
                 number++
             }
         }
         flashcards.shuffle()
         var afterNew = ArrayList<MyFlashcard>()
-        for (i in 0..3) {
+        for (i in 0..4) {
             afterNew.addAll(flashcards)
         }
         afterNew.shuffle()
@@ -186,6 +186,7 @@ class LearnNewWordsFragment : Fragment() {
                     setCorrect(soundCorrect)
                 } else {
                     setIncorrect(soundIncorrect)
+                    flashcards.add(flashcards[position])
                     correctAnswerTextView.setText(flashcards[position].polish)
                 }
             } else {
@@ -195,17 +196,22 @@ class LearnNewWordsFragment : Fragment() {
                     setCorrect(soundCorrect)
                 } else {
                     setIncorrect(soundIncorrect)
+                    flashcards.add(flashcards[position])
                     correctAnswerTextView.setText(flashcards[position].english)
                 }
             }
         }
 
         nextButton.setOnClickListener {
-           if (position <= number) {
+           if (position < number - 1) {
                position++
                questionTextView.setText(flashcards[position].english)
                answerTextView.setText(flashcards[position].polish)
            } else {
+               answerEditText.visibility = View.VISIBLE
+               answerTextView.visibility = View.GONE
+               normalLinearLayout.visibility = View.VISIBLE
+               checkLinearLayout.visibility = View.GONE
                if (position < flashcards.size - 1) {
                    random = Random.nextInt(0, 1000)
                    position++
@@ -247,6 +253,7 @@ class LearnNewWordsFragment : Fragment() {
     }
 
     private fun setCorrect(sound: Int) {
+        hideKeyboard()
         imageView.setImageResource(R.drawable.ic_correct)
         imageView.setBackgroundResource(R.drawable.button_background_delete_yes)
         checkLinearLayout.visibility = View.VISIBLE
@@ -255,6 +262,7 @@ class LearnNewWordsFragment : Fragment() {
     }
 
     private fun setIncorrect(sound: Int) {
+        hideKeyboard()
         imageView.setImageResource(R.drawable.ic_incorrect)
         imageView.setBackgroundResource(R.drawable.button_background_delete_no)
         correctAnswerTextView.visibility = View.VISIBLE
@@ -264,11 +272,20 @@ class LearnNewWordsFragment : Fragment() {
     }
 
     private fun setEmpty() {
+        hideKeyboard()
         imageView.setImageDrawable(null)
         imageView.background = null
         correctAnswerTextView.visibility = View.INVISIBLE
         answerEditText.setText("")
         checkLinearLayout.visibility = View.GONE
         normalLinearLayout.visibility = View.VISIBLE
+    }
+
+    private fun hideKeyboard() {
+        val view = activity?.currentFocus
+        if (view != null) {
+            val inputManager = rootView.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputManager.hideSoftInputFromWindow(view.windowToken, 0)
+        }
     }
 }

@@ -132,7 +132,7 @@ class HardWordsReviewFragment : Fragment() {
             .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
             .build()
         soundPool = SoundPool.Builder()
-            .setMaxStreams(3)
+            .setMaxStreams(2)
             .setAudioAttributes(audioAttributes)
             .build()
 
