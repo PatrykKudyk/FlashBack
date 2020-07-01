@@ -47,4 +47,6 @@
     <string name="summary_correct">Correct:</string>
     <string name="summary_skipped">Skipped:</string>
     <string name="summary_back">Back to flashcards</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
