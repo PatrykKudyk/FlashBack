@@ -170,8 +170,9 @@ class ClassicReviewFragment : Fragment() {
         }
 
         checkButton.setOnClickListener {
+            val answer = answerEditText.text.toString().replace(" ", "").toLowerCase()
             if (random <= 500) {
-                if (answerEditText.text.toString().toLowerCase() == flashcards[position].polish.toLowerCase()) {
+                if (answer == flashcards[position].polish.replace(" ", "").toLowerCase()) {
                     setCorrect(soundCorrect)
                     correct++
                 } else {
@@ -179,7 +180,7 @@ class ClassicReviewFragment : Fragment() {
                     correctAnswerTextView.setText(flashcards[position].polish)
                 }
             } else {
-                if (answerEditText.text.toString().toLowerCase() == flashcards[position].english.toLowerCase()) {
+                if (answer == flashcards[position].english.replace(" ", "").toLowerCase()) {
                     setCorrect(soundCorrect)
                     correct++
                 } else {
