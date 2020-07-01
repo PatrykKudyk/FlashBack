@@ -1,4 +1,4 @@
-package com.partos.flashback.recycler
+package com.partos.flashback.recycler.packages
 
 import android.view.LayoutInflater
 import android.view.View

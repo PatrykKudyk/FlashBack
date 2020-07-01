@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.partos.flashback.R
 import com.partos.flashback.models.MyFlashcard
-import com.partos.flashback.recycler.AssignFlashcardRecyclerViewAdapter
+import com.partos.flashback.recycler.flashcard.AssignFlashcardRecyclerViewAdapter
 import com.partos.flashback.recycler.MarginItemDecoration
 
 
@@ -106,7 +106,10 @@ class AssignFlashcardsFragment : Fragment() {
         flashcardList.add(MyFlashcard(0, 0, 0, "głośnik", "speaker", 0, false, false))
 
 
-        recyclerView.adapter = AssignFlashcardRecyclerViewAdapter(flashcardList)
+        recyclerView.adapter =
+            AssignFlashcardRecyclerViewAdapter(
+                flashcardList
+            )
 
     }
 }

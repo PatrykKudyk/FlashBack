@@ -1,4 +1,4 @@
-package com.partos.flashback.recycler
+package com.partos.flashback.recycler.flashcard
 
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +13,9 @@ class FlashcardRecyclerViewAdapter(var flashcardList: ArrayList<MyFlashcard>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FlashcardViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val rowCell = layoutInflater.inflate(R.layout.row_flashcard, parent, false)
-        return FlashcardViewHolder(rowCell)
+        return FlashcardViewHolder(
+            rowCell
+        )
     }
 
     override fun getItemCount(): Int {

@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.partos.flashback.R
 import com.partos.flashback.models.MyPackage
 import com.partos.flashback.recycler.MarginItemDecoration
-import com.partos.flashback.recycler.PackageRecyclerViewAdapter
+import com.partos.flashback.recycler.packages.PackageRecyclerViewAdapter
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -112,7 +112,10 @@ class MyPackagesFragment : Fragment() {
             )
         )
 
-        recyclerView.adapter = PackageRecyclerViewAdapter(packagesList)
+        recyclerView.adapter =
+            PackageRecyclerViewAdapter(
+                packagesList
+            )
 
 
         addPackageButton.setOnClickListener {

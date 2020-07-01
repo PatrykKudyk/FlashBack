@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <View
+        android:id="@+id/view9"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:theme="@style/Theme.MaterialComponents.Light"
+        app:cardBackgroundColor="@color/colorMainLight"
+        app:cardCornerRadius="18dp"
+        app:strokeColor="@color/colorMainDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view9"
+        app:strokeWidth="2dp">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/add_package_name_edit_text_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp"
+            app:boxBackgroundColor="@color/colorMainLight"
+            app:boxStrokeColor="@color/colorPrimaryDark">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/add_package_name_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/dustismo"
+                android:hint="@string/hint_package_name"
+                android:inputType="textLongMessage"
+                android:maxLength="30"
+                android:textSize="20dip" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView"/>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:weightSum="100"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view1">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="15" />
+
+        <Button
+            android:id="@+id/add_package_button_add"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="70"
+            android:background="@drawable/button_background_dark"
+            android:fontFamily="@font/dustismo_bold"
+            android:text="@string/button_add"
+            android:textAllCaps="false"
+            android:textColor="@color/colorBackground"
+            android:textSize="20dip" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
