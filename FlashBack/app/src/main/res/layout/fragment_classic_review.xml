@@ -70,9 +70,9 @@
 
             <TextView
                 android:id="@+id/classic_review_text_view_correct_answer"
-                android:visibility="gone"
+                android:visibility="invisible"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="100dp"
                 android:fontFamily="@font/dustismo_bold"
                 android:gravity="center"
                 android:textColor="@color/colorRed"
