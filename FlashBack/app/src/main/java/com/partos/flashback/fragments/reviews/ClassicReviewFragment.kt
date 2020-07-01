@@ -179,7 +179,7 @@ class ClassicReviewFragment : Fragment() {
                     correctAnswerTextView.setText(flashcards[position].polish)
                 }
             } else {
-                if (answerEditText.text.toString()toLowerCase() == flashcards[position].englishtoLowerCase()) {
+                if (answerEditText.text.toString().toLowerCase() == flashcards[position].english.toLowerCase()) {
                     setCorrect(soundCorrect)
                     correct++
                 } else {
@@ -275,7 +275,7 @@ class ClassicReviewFragment : Fragment() {
     private fun setEmpty() {
         imageView.setImageDrawable(null)
         imageView.background = null
-        correctAnswerTextView.visibility = View.GONE
+        correctAnswerTextView.visibility = View.INVISIBLE
         answerEditText.setText("")
         checkLinearLayout.visibility = View.GONE
         normalLinearLayout.visibility = View.VISIBLE
