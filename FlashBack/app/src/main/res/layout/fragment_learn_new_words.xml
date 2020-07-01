@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.reviews.HardWordsReviewFragment">
+    tools:context=".fragments.reviews.LearnNewWordsFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/dustismo_bold"
                 android:gravity="center"
-                android:text="@string/flashcard_review_hard_words"
+                android:text="@string/flashcard_learn_new_words"
                 android:textSize="32dip" />
 
             <View
@@ -44,7 +44,7 @@
                 android:layout_height="20dp" />
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/hard_review_card_view_question"
+                android:id="@+id/new_words_review_card_view_question"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -56,7 +56,7 @@
                 app:strokeWidth="2dp">
 
                 <TextView
-                    android:id="@+id/hard_review_text_view_question"
+                    android:id="@+id/new_words_review_text_view_question"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
@@ -69,7 +69,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
-                android:id="@+id/hard_review_text_view_correct_answer"
+                android:id="@+id/new_words_review_text_view_correct_answer"
                 android:visibility="invisible"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
@@ -84,7 +84,7 @@
                 android:layout_height="50dp" />
 
             <ImageView
-                android:id="@+id/hard_review_image_view"
+                android:id="@+id/new_words_review_image_view"
                 android:layout_width="match_parent"
                 android:layout_marginStart="40dp"
                 android:layout_marginEnd="40dp"
@@ -96,7 +96,7 @@
                 android:layout_height="50dp" />
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/hard_review_card_view_answer"
+                android:id="@+id/new_words_review_card_view_answer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -108,9 +108,21 @@
                 app:strokeWidth="2dp">
 
                 <EditText
-                    android:id="@+id/hard_review_edit_text_answer"
+                    android:id="@+id/new_words_review_edit_text_answer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:fontFamily="@font/dustismo_bold"
+                    android:gravity="center"
+                    android:textSize="40dip"
+
+                    tools:text="Sklejasz akcje, sklej dupe, rucham psa" />
+
+                <TextView
+                    android:id="@+id/new_words_review_edit_text_answer_answer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_margin="16dp"
                     android:fontFamily="@font/dustismo_bold"
                     android:gravity="center"
@@ -125,10 +137,11 @@
                 android:layout_height="20dp" />
 
             <LinearLayout
-                android:id="@+id/hard_review_linear_layout_normal"
+                android:id="@+id/new_words_review_linear_layout_normal"
                 tools:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
+                android:visibility="gone"
                 android:orientation="horizontal"
                 android:weightSum="96">
 
@@ -138,10 +151,10 @@
                     android:layout_weight="1" />
 
                 <Button
-                    android:id="@+id/hard_review_button_check"
+                    android:id="@+id/new_words_review_button_check"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="30"
+                    android:layout_weight="45"
                     android:background="@drawable/button_background_dark"
                     android:fontFamily="@font/dustismo_bold"
                     android:text="@string/review_check"
@@ -154,27 +167,11 @@
                     android:layout_weight="2" />
 
                 <Button
-                    android:id="@+id/hard_review_button_skip"
+                    android:id="@+id/new_words_review_button_quit"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="30"
+                    android:layout_weight="45"
                     android:background="@drawable/button_background_medium"
-                    android:fontFamily="@font/dustismo_bold"
-                    android:text="@string/review_skip"
-                    android:textColor="@color/colorBackground"
-                    android:textSize="17dip" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2" />
-
-                <Button
-                    android:id="@+id/hard_review_button_quit"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="30"
-                    android:background="@drawable/button_background_dark"
                     android:fontFamily="@font/dustismo_bold"
                     android:text="@string/review_quit"
                     android:textColor="@color/colorBackground"
@@ -188,11 +185,11 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/hard_review_linear_layout_check"
+                android:id="@+id/new_words_review_linear_layout_check"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:orientation="horizontal"
-                android:visibility="gone"
+                android:visibility="visible"
                 tools:visibility="visible"
                 android:weightSum="96">
 
@@ -202,7 +199,7 @@
                     android:layout_weight="1" />
 
                 <Button
-                    android:id="@+id/hard_review_button_exit"
+                    android:id="@+id/new_words_review_button_exit"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="45"
@@ -218,7 +215,7 @@
                     android:layout_weight="3" />
 
                 <Button
-                    android:id="@+id/hard_review_button_next"
+                    android:id="@+id/new_words_review_button_next"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="45"
@@ -235,6 +232,5 @@
         </LinearLayout>
 
     </ScrollView>
-
 
 </FrameLayout>
