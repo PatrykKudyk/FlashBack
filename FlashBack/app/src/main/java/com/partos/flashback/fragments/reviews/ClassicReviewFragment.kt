@@ -171,7 +171,7 @@ class ClassicReviewFragment : Fragment() {
 
         checkButton.setOnClickListener {
             if (random <= 500) {
-                if (answerEditText.text.toString() == flashcards[position].polish) {
+                if (answerEditText.text.toString().toLowerCase() == flashcards[position].polish.toLowerCase()) {
                     setCorrect(soundCorrect)
                     correct++
                 } else {
@@ -179,7 +179,7 @@ class ClassicReviewFragment : Fragment() {
                     correctAnswerTextView.setText(flashcards[position].polish)
                 }
             } else {
-                if (answerEditText.text.toString() == flashcards[position].english) {
+                if (answerEditText.text.toString()toLowerCase() == flashcards[position].englishtoLowerCase()) {
                     setCorrect(soundCorrect)
                     correct++
                 } else {
