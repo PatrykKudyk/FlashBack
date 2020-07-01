@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.partos.flashback.R
 import com.partos.flashback.fragments.reviews.ClassicReviewFragment
+import com.partos.flashback.fragments.reviews.HardWordsReviewFragment
 import com.partos.flashback.models.MyFlashcard
 import com.partos.flashback.recycler.FlashcardRecyclerViewAdapter
 import com.partos.flashback.recycler.MarginItemDecoration
@@ -98,6 +99,8 @@ class MyFlashcardsFragment : Fragment() {
     private fun initFragment() {
         addFlashcardButton = rootView.findViewById(R.id.my_flashcards_linear_layout_add_new)
         classicReviewButton = rootView.findViewById(R.id.my_flashcards_button_classic_review)
+        hardWordsButton = rootView.findViewById(R.id.my_flashcards_button_hard_words)
+        newWordsButton = rootView.findViewById(R.id.my_flashcards_button_learn_new)
 
         val flashcardList = ArrayList<MyFlashcard>()
         flashcardList.add(MyFlashcard(0, 0, 0, "cześć", "hi", 10, false, true))
@@ -153,6 +156,19 @@ class MyFlashcardsFragment : Fragment() {
                 )
                 ?.replace(R.id.main_frame_layout, classicReviewFragment)
                 ?.addToBackStack(ClassicReviewFragment.toString())
+                ?.commit()
+        }
+
+        hardWordsButton.setOnClickListener {
+            val hardWordsReviewFragment = HardWordsReviewFragment.newInstance()
+            fragmentManager
+                ?.beginTransaction()
+                ?.setCustomAnimations(
+                    R.anim.enter_right_to_left, R.anim.exit_left_to_right,
+                    R.anim.enter_left_to_right, R.anim.exit_right_to_left
+                )
+                ?.replace(R.id.main_frame_layout, hardWordsReviewFragment)
+                ?.addToBackStack(HardWordsReviewFragment.toString())
                 ?.commit()
         }
     }
