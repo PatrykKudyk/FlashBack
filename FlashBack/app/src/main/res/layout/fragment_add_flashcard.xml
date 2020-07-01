@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.packages.AddPackageFragment">
+    tools:context=".fragments.flashcard.AddFlashcardFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -25,13 +25,13 @@
                 android:layout_height="100dp"
                 android:fontFamily="@font/dustismo_bold"
                 android:gravity="center"
-                android:text="@string/package_add_new"
-                android:textSize="26dip" />
+                android:text="@string/flashcard_add_new"
+                android:textSize="33dip" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="250dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:theme="@style/Theme.MaterialComponents.Light"
@@ -40,26 +40,51 @@
                 app:strokeColor="@color/colorMainDark"
                 app:strokeWidth="2dp">
 
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/add_package_name_edit_text_layout"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="16dp"
-                    app:boxBackgroundColor="@color/colorMainLight"
-                    app:boxStrokeColor="@color/colorPrimaryDark">
+                    android:orientation="vertical">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/add_package_name_edit_text"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/add_flashcard_english_edit_text_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/dustismo"
-                        android:hint="@string/hint_package_name"
-                        android:inputType="textLongMessage"
-                        android:maxLength="30"
-                        android:textSize="20dip" />
+                        android:layout_height="125dp"
+                        app:boxBackgroundColor="@color/colorMainLight"
+                        app:boxStrokeColor="@color/colorPrimaryDark">
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/add_flashcard_english_edit_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/dustismo_bold"
+                            android:hint="@string/hint_flashcard_english"
+                            android:inputType="textLongMessage"
+                            android:maxLength="40"
+                            android:textSize="20dip" />
+
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/add_flashcard_polish_edit_text_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="125dp"
+                        app:boxBackgroundColor="@color/colorMainLight"
+                        app:boxStrokeColor="@color/colorPrimaryDark">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/add_flashcard_polish_edit_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/dustismo_bold"
+                            android:hint="@string/hint_flashcard_polish"
+                            android:inputType="textLongMessage"
+                            android:maxLength="70"
+                            android:textSize="20dip" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </LinearLayout>
 
 
             </com.google.android.material.card.MaterialCardView>
@@ -67,7 +92,7 @@
             <View
                 android:id="@+id/view1"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"/>
+                android:layout_height="20dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -78,10 +103,10 @@
                 <View
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="15"/>
+                    android:layout_weight="15" />
 
                 <Button
-                    android:id="@+id/add_package_button_add"
+                    android:id="@+id/add_flashcard_button_add"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="70"
@@ -94,6 +119,10 @@
 
             </LinearLayout>
 
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
         </LinearLayout>
     </ScrollView>
 

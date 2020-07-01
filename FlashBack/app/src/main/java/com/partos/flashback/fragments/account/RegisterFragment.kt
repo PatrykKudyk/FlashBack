@@ -1,4 +1,4 @@
-package com.partos.flashback.fragments
+package com.partos.flashback.fragments.account
 
 
 import android.content.Context
@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import com.partos.flashback.R
-import kotlinx.android.synthetic.main.fragment_log_in.view.*
 import kotlinx.android.synthetic.main.fragment_register.view.*
 
 

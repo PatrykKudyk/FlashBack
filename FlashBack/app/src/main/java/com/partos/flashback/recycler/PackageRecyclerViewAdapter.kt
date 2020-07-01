@@ -1,13 +1,13 @@
 package com.partos.flashback.recycler
 
-import android.content.Context
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.partos.flashback.MainActivity
 import com.partos.flashback.R
+import com.partos.flashback.fragments.flashcard.MyFlashcardsFragment
 import com.partos.flashback.models.MyPackage
 import kotlinx.android.synthetic.main.row_package.view.*
 
@@ -78,17 +78,17 @@ class PackageRecyclerViewAdapter(var packagesList: ArrayList<MyPackage>) :
         }
 
         cardView.setOnClickListener {
-//            val flashcardsFragment = FlashcardsFragment.newInstance(packagesList[position].id)
-//            val manager = (holder.itemView.context as MainActivity).supportFragmentManager
-//            manager
-//                .beginTransaction()
-//                .setCustomAnimations(
-//                    R.anim.enter_left_to_right, R.anim.exit_right_to_left,
-//                    R.anim.enter_right_to_left, R.anim.exit_left_to_right
-//                )
-//                .replace(R.id.main_frame_layout, flashcardsFragment)
-//                .addToBackStack(FlashcardsFragment.toString())
-//                .commit()
+            val flashcardsFragment = MyFlashcardsFragment.newInstance()
+            val manager = (holder.itemView.context as MainActivity).supportFragmentManager
+            manager
+                .beginTransaction()
+                .setCustomAnimations(
+                    R.anim.enter_left_to_right, R.anim.exit_right_to_left,
+                    R.anim.enter_right_to_left, R.anim.exit_left_to_right
+                )
+                .replace(R.id.main_frame_layout, flashcardsFragment)
+                .addToBackStack(MyFlashcardsFragment.toString())
+                .commit()
         }
     }
 

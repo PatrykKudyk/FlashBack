@@ -3,7 +3,18 @@ package com.partos.flashback
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.partos.flashback.fragments.*
+import com.partos.flashback.fragments.packages.AddPackageFragment
+import com.partos.flashback.fragments.packages.MyPackagesFragment
+import com.partos.flashback.fragments.account.LogInFragment
+import com.partos.flashback.fragments.account.RegisterFragment
+import com.partos.flashback.fragments.flashcard.AddFlashcardFragment
+import com.partos.flashback.fragments.flashcard.AssignFlashcardsFragment
+import com.partos.flashback.fragments.flashcard.MyFlashcardsFragment
+import com.partos.flashback.fragments.menu.CreditsFragment
+import com.partos.flashback.fragments.menu.LoggedMenuFragment
+import com.partos.flashback.fragments.menu.MainMenuFragment
+import com.partos.flashback.fragments.packages.AssignPackagesFragment
+import com.partos.flashback.fragments.reviews.*
 
 class MainActivity : AppCompatActivity(),
     MainMenuFragment.OnFragmentInteractionListener,
@@ -12,7 +23,16 @@ class MainActivity : AppCompatActivity(),
     RegisterFragment.OnFragmentInteractionListener,
     LoggedMenuFragment.OnFragmentInteractionListener,
     MyPackagesFragment.OnFragmentInteractionListener,
-    AddPackageFragment.OnFragmentInteractionListener {
+    AddPackageFragment.OnFragmentInteractionListener,
+    MyFlashcardsFragment.OnFragmentInteractionListener,
+    AddFlashcardFragment.OnFragmentInteractionListener,
+    ClassicReviewFragment.OnFragmentInteractionListener,
+    ReviewSummaryFragment.OnFragmentInteractionListener,
+    HardWordsReviewFragment.OnFragmentInteractionListener,
+    LearnNewWordsFragment.OnFragmentInteractionListener,
+    LearnedSummaryFragment.OnFragmentInteractionListener,
+    AssignFlashcardsFragment.OnFragmentInteractionListener,
+    AssignPackagesFragment.OnFragmentInteractionListener {
 
     private lateinit var mainMenuFragment: MainMenuFragment
 

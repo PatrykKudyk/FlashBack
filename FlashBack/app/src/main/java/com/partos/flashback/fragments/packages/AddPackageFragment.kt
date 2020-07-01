@@ -1,5 +1,4 @@
-package com.partos.flashback.fragments
-
+package com.partos.flashback.fragments.packages
 
 import android.content.Context
 import android.net.Uri
@@ -8,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import com.partos.flashback.R
 
 
@@ -24,13 +24,14 @@ private const val ARG_PARAM2 = "param2"
  * Use the [AccountFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class CreditsFragment : Fragment() {
+class AddPackageFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
     private lateinit var rootView: View
+    private lateinit var addButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +46,7 @@ class CreditsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootView = inflater.inflate(R.layout.fragment_credits, container, false);
+        rootView = inflater.inflate(R.layout.fragment_add_package, container, false);
         initFragment()
         return rootView
     }
@@ -76,13 +77,18 @@ class CreditsFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            CreditsFragment().apply {
+            AddPackageFragment().apply {
                 arguments = Bundle().apply {
                 }
             }
     }
 
     private fun initFragment() {
+        addButton = rootView.findViewById(R.id.add_package_button_add)
 
+        addButton.setOnClickListener {
+            fragmentManager
+                ?.popBackStack()
+        }
     }
 }

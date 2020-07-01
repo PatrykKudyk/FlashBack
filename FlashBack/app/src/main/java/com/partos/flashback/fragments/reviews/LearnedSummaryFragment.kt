@@ -1,14 +1,17 @@
-package com.partos.flashback.fragments
-
+package com.partos.flashback.fragments.reviews
 
 import android.content.Context
+import android.media.AudioAttributes
+import android.media.SoundPool
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.FragmentManager
 import com.partos.flashback.R
 
 
@@ -25,17 +28,15 @@ private const val ARG_PARAM2 = "param2"
  * Use the [AccountFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class LoggedMenuFragment : Fragment() {
+class LearnedSummaryFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
     private lateinit var rootView: View
-    private lateinit var myPackagesButton: Button
-    private lateinit var newWordsButton: Button
-    private lateinit var creditsButton: Button
-    private lateinit var logoutButton: Button
+    private lateinit var backButton: Button
+    private lateinit var soundPool: SoundPool
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +51,7 @@ class LoggedMenuFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootView = inflater.inflate(R.layout.fragment_logged_menu, container, false);
+        rootView = inflater.inflate(R.layout.fragment_learned_summary, container, false);
         initFragment()
         return rootView
     }
@@ -81,58 +82,35 @@ class LoggedMenuFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            LoggedMenuFragment().apply {
+            LearnedSummaryFragment().apply {
                 arguments = Bundle().apply {
                 }
             }
     }
 
     private fun initFragment() {
-        myPackagesButton = rootView.findViewById(R.id.logged_menu_button_packages)
-        newWordsButton = rootView.findViewById(R.id.logged_menu_button_new_words)
-        creditsButton = rootView.findViewById(R.id.logged_menu_button_credits)
-        logoutButton = rootView.findViewById(R.id.logged_menu_button_logout)
+        backButton = rootView.findViewById(R.id.summary_button_back)
 
-        myPackagesButton.setOnClickListener {
-            val myPackageFragment = MyPackagesFragment.newInstance()
+        val audioAttributes = AudioAttributes.Builder()
+            .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+            .build()
+        soundPool = SoundPool.Builder()
+            .setMaxStreams(1)
+            .setAudioAttributes(audioAttributes)
+            .build()
+        val soundEnd = soundPool.load(rootView.context, R.raw.done, 1)
+        Handler().postDelayed({
+            soundPool.play(soundEnd, 1F, 1F, 0, 0, 1F)
+        }, 400)
+
+        backButton.setOnClickListener {
+            soundPool.release()
             fragmentManager
-                ?.beginTransaction()
-                ?.setCustomAnimations(
-                    R.anim.enter_right_to_left, R.anim.exit_left_to_right,
-                    R.anim.enter_left_to_right, R.anim.exit_right_to_left
+                ?.popBackStack(
+                    fragmentManager!!.getBackStackEntryAt((fragmentManager!!.backStackEntryCount - 2)).id,
+                    FragmentManager.POP_BACK_STACK_INCLUSIVE
                 )
-                ?.replace(R.id.main_frame_layout, myPackageFragment)
-                ?.addToBackStack(MyPackagesFragment.toString())
-                ?.commit()
-        }
-
-        newWordsButton.setOnClickListener {
-
-        }
-
-        creditsButton.setOnClickListener {
-            val creditsFragment = CreditsFragment.newInstance()
-            fragmentManager
-                ?.beginTransaction()
-                ?.setCustomAnimations(
-                    R.anim.enter_bottom_to_top, R.anim.exit_top_to_bottom,
-                    R.anim.enter_top_to_bottom, R.anim.exit_bottom_to_top
-                )
-                ?.replace(R.id.main_frame_layout, creditsFragment)
-                ?.addToBackStack(CreditsFragment.toString())
-                ?.commit()
-        }
-
-        logoutButton.setOnClickListener {
-            val menuFragment = MainMenuFragment.newInstance()
-            fragmentManager
-                ?.beginTransaction()
-                ?.setCustomAnimations(
-                    R.anim.enter_right_to_left, R.anim.exit_left_to_right,
-                    R.anim.enter_left_to_right, R.anim.exit_right_to_left
-                )
-                ?.replace(R.id.main_frame_layout, menuFragment)
-                ?.commit()
         }
     }
 }

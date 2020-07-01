@@ -1,4 +1,4 @@
-package com.partos.flashback.fragments
+package com.partos.flashback.fragments.packages
 
 
 import android.content.Context
@@ -116,7 +116,8 @@ class MyPackagesFragment : Fragment() {
 
 
         addPackageButton.setOnClickListener {
-            val addPackageFragment = AddPackageFragment.newInstance()
+            val addPackageFragment =
+                AddPackageFragment.newInstance()
             fragmentManager
                 ?.beginTransaction()
                 ?.setCustomAnimations(

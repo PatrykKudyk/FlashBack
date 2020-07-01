@@ -1,5 +1,4 @@
-package com.partos.flashback.fragments
-
+package com.partos.flashback.fragments.flashcard
 
 import android.content.Context
 import android.net.Uri
@@ -9,10 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
-import androidx.core.content.res.ResourcesCompat
+import android.widget.EditText
+import android.widget.Toast
 import com.partos.flashback.R
-import kotlinx.android.synthetic.main.fragment_log_in.view.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -28,20 +26,21 @@ private const val ARG_PARAM2 = "param2"
  * Use the [AccountFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class LogInFragment : Fragment() {
+class AddFlashcardFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
+    private var param1: Long? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
     private lateinit var rootView: View
-    private lateinit var loginButton: Button
-    private lateinit var signUp: TextView
+    private lateinit var addButton: Button
+    private lateinit var questionEditText: EditText
+    private lateinit var answerEditText: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
+            param1 = it.getLong(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
     }
@@ -51,7 +50,7 @@ class LogInFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootView = inflater.inflate(R.layout.fragment_log_in, container, false);
+        rootView = inflater.inflate(R.layout.fragment_add_flashcard, container, false);
         initFragment()
         return rootView
     }
@@ -82,45 +81,28 @@ class LogInFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            LogInFragment().apply {
+            AddFlashcardFragment().apply {
                 arguments = Bundle().apply {
                 }
             }
     }
 
     private fun initFragment() {
-        initFonts()
-        signUp = rootView.findViewById(R.id.login_text_register)
-        loginButton = rootView.findViewById(R.id.login_button_login)
+        addButton = rootView.findViewById(R.id.add_flashcard_button_add)
+        questionEditText = rootView.findViewById(R.id.add_flashcard_english_edit_text)
+        answerEditText = rootView.findViewById(R.id.add_flashcard_polish_edit_text)
 
-        loginButton.setOnClickListener {
-            val loggedMenuFragment = LoggedMenuFragment.newInstance()
-            fragmentManager
-                ?.beginTransaction()
-                ?.setCustomAnimations(
-                    R.anim.enter_right_to_left, R.anim.exit_left_to_right,
-                    R.anim.enter_left_to_right, R.anim.exit_right_to_left
-                )
-                ?.replace(R.id.main_frame_layout, loggedMenuFragment)
-                ?.commit()
+        addButton.setOnClickListener {
+            if (questionEditText.text.toString() != "" && answerEditText.text.toString() != "") {
+                fragmentManager
+                    ?.popBackStack()
+            } else {
+                Toast.makeText(
+                    rootView.context,
+                    rootView.context.getString(R.string.toast_flashcard_not_null),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
-
-        signUp.setOnClickListener{
-            val registerFragment = RegisterFragment.newInstance()
-            fragmentManager
-                ?.beginTransaction()
-                ?.setCustomAnimations(
-                    R.anim.enter_right_to_left, R.anim.exit_left_to_right,
-                    R.anim.enter_left_to_right, R.anim.exit_right_to_left
-                )
-                ?.replace(R.id.main_frame_layout, registerFragment)
-                ?.addToBackStack(RegisterFragment.toString())
-                ?.commit()
-        }
-    }
-
-    private fun initFonts() {
-        val typeface = ResourcesCompat.getFont(rootView.context, R.font.dustismo_bold)
-        rootView.login_text_layout_password.typeface = typeface
     }
 }
