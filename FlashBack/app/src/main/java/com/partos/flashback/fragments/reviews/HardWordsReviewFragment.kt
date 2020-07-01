@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
@@ -260,6 +261,7 @@ class HardWordsReviewFragment : Fragment() {
     }
 
     private fun setCorrect(sound: Int) {
+        hideKeyboard()
         imageView.setImageResource(R.drawable.ic_correct)
         imageView.setBackgroundResource(R.drawable.button_background_delete_yes)
         checkLinearLayout.visibility = View.VISIBLE
@@ -268,6 +270,7 @@ class HardWordsReviewFragment : Fragment() {
     }
 
     private fun setIncorrect(sound: Int) {
+        hideKeyboard()
         imageView.setImageResource(R.drawable.ic_incorrect)
         imageView.setBackgroundResource(R.drawable.button_background_delete_no)
         correctAnswerTextView.visibility = View.VISIBLE
@@ -277,11 +280,21 @@ class HardWordsReviewFragment : Fragment() {
     }
 
     private fun setEmpty() {
+        hideKeyboard()
         imageView.setImageDrawable(null)
         imageView.background = null
         correctAnswerTextView.visibility = View.INVISIBLE
         answerEditText.setText("")
         checkLinearLayout.visibility = View.GONE
         normalLinearLayout.visibility = View.VISIBLE
+    }
+
+    private fun hideKeyboard() {
+        val view = activity?.currentFocus
+        if (view != null) {
+            val inputManager =
+                rootView.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputManager.hideSoftInputFromWindow(view.windowToken, 0)
+        }
     }
 }
