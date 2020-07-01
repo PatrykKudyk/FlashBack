@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.partos.flashback.R
 import com.partos.flashback.models.MyPackage
+import com.partos.flashback.recycler.AssignPackageRecyclerViewAdapter
 import com.partos.flashback.recycler.MarginItemDecoration
 import com.partos.flashback.recycler.PackageRecyclerViewAdapter
 
@@ -111,6 +112,8 @@ class AssignPackagesFragment : Fragment() {
                 12
             )
         )
+
+        recyclerView.adapter = AssignPackageRecyclerViewAdapter(packagesList)
 
         addPackageButton.setOnClickListener {
             val addPackageFragment = AddPackageFragment.newInstance()
