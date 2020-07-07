@@ -46,8 +46,15 @@ class PackageRecyclerViewAdapter(var packagesList: ArrayList<MyPackage>) :
         }
         saveButton.setOnClickListener {
             if (titleEdit.text.toString() != "") {
+                val db = DataBaseHelper(holder.view.context)
                 packagesList[position].title = titleEdit.text.toString()
+                db.updatePackage(packagesList[position])
                 title.setText(titleEdit.text.toString())
+                Toast.makeText(
+                    holder.view.context,
+                    holder.view.context.getString(R.string.toast_package_changed),
+                    Toast.LENGTH_SHORT
+                ).show()
                 holder.view.package_cell_name_edit_text_layout.visibility = View.GONE
                 holder.view.package_cell_linear_layout_edit.visibility = View.GONE
                 editButton.visibility = View.VISIBLE

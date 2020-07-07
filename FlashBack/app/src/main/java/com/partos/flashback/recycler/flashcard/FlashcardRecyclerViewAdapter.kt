@@ -50,10 +50,12 @@ class FlashcardRecyclerViewAdapter(var flashcardList: ArrayList<MyFlashcard>) :
             holder.view.flashcard_cell_edit_text_view_english.setText(holder.view.flashcard_cell_text_view_english.text)
         }
         holder.view.flashcard_cell_image_view_save.setOnClickListener {
+            val db = DataBaseHelper(holder.view.context)
             flashcardList[position].english =
                 holder.view.flashcard_cell_edit_text_view_english.text.toString()
             flashcardList[position].polish =
                 holder.view.flashcard_cell_edit_text_view_polish.text.toString()
+            db.updateFlashcard(flashcardList[position])
             holder.view.flashcard_cell_text_view_english.setText(holder.view.flashcard_cell_edit_text_view_english.text)
             holder.view.flashcard_cell_text_view_polish.setText(holder.view.flashcard_cell_edit_text_view_polish.text)
             holder.view.flashcard_cell_constraint_main.visibility = View.VISIBLE
