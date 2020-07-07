@@ -48,11 +48,10 @@
                 android:id="@+id/new_words_review_card_view_question"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
                 android:theme="@style/Theme.MaterialComponents.Light"
                 app:cardBackgroundColor="@color/colorMainLight"
-                app:cardCornerRadius="18dp"
                 app:strokeColor="@color/colorMainDark"
                 app:strokeWidth="2dp">
 
@@ -90,12 +89,11 @@
                 android:id="@+id/new_words_review_card_view_learn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
                 android:theme="@style/Theme.MaterialComponents.Light"
                 android:visibility="visible"
                 app:cardBackgroundColor="@color/colorMainLight"
-                app:cardCornerRadius="18dp"
                 app:strokeColor="@color/colorMainDark"
                 app:strokeWidth="2dp">
 
@@ -130,12 +128,11 @@
                 android:id="@+id/new_words_review_card_view_answer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
                 android:theme="@style/Theme.MaterialComponents.Light"
                 android:visibility="gone"
                 app:cardBackgroundColor="@color/colorMainLight"
-                app:cardCornerRadius="18dp"
                 app:strokeColor="@color/colorMainDark"
                 app:strokeWidth="2dp">
 
