@@ -15,7 +15,9 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import com.partos.flashback.MyApp
 import com.partos.flashback.R
+import com.partos.flashback.db.DataBaseHelper
 import com.partos.flashback.models.MyFlashcard
 import kotlinx.android.synthetic.main.fragment_classic_review.*
 import kotlinx.android.synthetic.main.fragment_learn_new_words.view.*
@@ -37,7 +39,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class LearnNewWordsFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
+    private var packageId: Long? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
@@ -48,7 +50,6 @@ class LearnNewWordsFragment : Fragment() {
     private lateinit var answerEditText: EditText
     private lateinit var answerTextView: TextView
     private lateinit var checkButton: Button
-    private lateinit var skipButton: Button
     private lateinit var quitButton: Button
     private lateinit var imageView: ImageView
     private lateinit var normalLinearLayout: LinearLayout
@@ -61,7 +62,7 @@ class LearnNewWordsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
+            packageId = it.getLong(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
     }
@@ -101,16 +102,15 @@ class LearnNewWordsFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() =
+        fun newInstance(packageId: Long) =
             LearnNewWordsFragment().apply {
                 arguments = Bundle().apply {
+                    putLong(ARG_PARAM1, packageId)
                 }
             }
     }
 
     private fun initFragment() {
-        val flashcardList = ArrayList<MyFlashcard>()
-
         val audioAttributes = AudioAttributes.Builder()
             .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
             .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
@@ -139,7 +139,10 @@ class LearnNewWordsFragment : Fragment() {
             rootView.findViewById(R.id.new_words_review_text_view_correct_answer)
         answerTextView = rootView.findViewById(R.id.new_words_review_edit_text_answer_answer)
 
+        val db = DataBaseHelper(rootView.context)
+        val flashcardList = db.getFlashcardsList(packageId as Long, MyApp.userId)
         var flashcards = ArrayList<MyFlashcard>()
+
         var number = 0
         for (flashcard in flashcardList) {
             if (flashcard.isKnown == 0) {
@@ -206,6 +209,11 @@ class LearnNewWordsFragment : Fragment() {
                     setEmpty()
                 } else {
                     soundPool.release()
+                    for (flashcard in flashcards){
+                        flashcard.isKnown = 1
+                        flashcard.knowledgeLevel = 10
+                        db.updateFlashcard(flashcard)
+                    }
                     val learnedSummaryFragment =
                         LearnedSummaryFragment.newInstance()
                     fragmentManager

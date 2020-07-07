@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.partos.flashback.MyApp
@@ -138,42 +139,84 @@ class MyFlashcardsFragment : Fragment() {
         }
 
         classicReviewButton.setOnClickListener {
-            val classicReviewFragment = ClassicReviewFragment.newInstance()
-            fragmentManager
-                ?.beginTransaction()
-                ?.setCustomAnimations(
-                    R.anim.enter_right_to_left, R.anim.exit_left_to_right,
-                    R.anim.enter_left_to_right, R.anim.exit_right_to_left
-                )
-                ?.replace(R.id.main_frame_layout, classicReviewFragment)
-                ?.addToBackStack(ClassicReviewFragment.toString())
-                ?.commit()
+            val flashcards = ArrayList<MyFlashcard>()
+            for (flashcard in flashcardList) {
+                if (flashcard.isKnown == 1) {
+                    flashcards.add(flashcard)
+                }
+            }
+            if (flashcards.size != 0) {
+                val classicReviewFragment = ClassicReviewFragment.newInstance(packageId as Long)
+                fragmentManager
+                    ?.beginTransaction()
+                    ?.setCustomAnimations(
+                        R.anim.enter_right_to_left, R.anim.exit_left_to_right,
+                        R.anim.enter_left_to_right, R.anim.exit_right_to_left
+                    )
+                    ?.replace(R.id.main_frame_layout, classicReviewFragment)
+                    ?.addToBackStack(ClassicReviewFragment.toString())
+                    ?.commit()
+            } else {
+                Toast.makeText(
+                    rootView.context,
+                    R.string.toast_too_few_flashcards,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
         hardWordsButton.setOnClickListener {
-            val hardWordsReviewFragment = HardWordsReviewFragment.newInstance()
-            fragmentManager
-                ?.beginTransaction()
-                ?.setCustomAnimations(
-                    R.anim.enter_right_to_left, R.anim.exit_left_to_right,
-                    R.anim.enter_left_to_right, R.anim.exit_right_to_left
-                )
-                ?.replace(R.id.main_frame_layout, hardWordsReviewFragment)
-                ?.addToBackStack(HardWordsReviewFragment.toString())
-                ?.commit()
+            val flashcards = ArrayList<MyFlashcard>()
+            for (flashcard in flashcardList) {
+                if (flashcard.knowledgeLevel <= 4 && flashcard.isKnown == 1 && flashcard.isNew == 0) {
+                    flashcards.add(flashcard)
+                }
+            }
+            if (flashcards.size != 0) {
+                val hardWordsReviewFragment = HardWordsReviewFragment.newInstance(packageId as Long)
+                fragmentManager
+                    ?.beginTransaction()
+                    ?.setCustomAnimations(
+                        R.anim.enter_right_to_left, R.anim.exit_left_to_right,
+                        R.anim.enter_left_to_right, R.anim.exit_right_to_left
+                    )
+                    ?.replace(R.id.main_frame_layout, hardWordsReviewFragment)
+                    ?.addToBackStack(HardWordsReviewFragment.toString())
+                    ?.commit()
+            } else {
+                Toast.makeText(
+                    rootView.context,
+                    R.string.toast_too_few_hard_flashcards,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
         newWordsButton.setOnClickListener {
-            val learnNewWordsFragment = LearnNewWordsFragment.newInstance()
-            fragmentManager
-                ?.beginTransaction()
-                ?.setCustomAnimations(
-                    R.anim.enter_right_to_left, R.anim.exit_left_to_right,
-                    R.anim.enter_left_to_right, R.anim.exit_right_to_left
-                )
-                ?.replace(R.id.main_frame_layout, learnNewWordsFragment)
-                ?.addToBackStack(LearnNewWordsFragment.toString())
-                ?.commit()
+            val flashcards = ArrayList<MyFlashcard>()
+            for (flashcard in flashcardList) {
+                if (flashcard.isKnown == 0) {
+                    flashcards.add(flashcard)
+                }
+            }
+            if (flashcards.size != 0) {
+                val learnNewWordsFragment = LearnNewWordsFragment.newInstance(packageId as Long)
+                fragmentManager
+                    ?.beginTransaction()
+                    ?.setCustomAnimations(
+                        R.anim.enter_right_to_left, R.anim.exit_left_to_right,
+                        R.anim.enter_left_to_right, R.anim.exit_right_to_left
+                    )
+                    ?.replace(R.id.main_frame_layout, learnNewWordsFragment)
+                    ?.addToBackStack(LearnNewWordsFragment.toString())
+                    ?.commit()
+            } else {
+                Toast.makeText(
+                    rootView.context,
+                    R.string.toast_no_words_to_learn,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 }

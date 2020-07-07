@@ -60,4 +60,7 @@
     <string name="add_flashcard_manually">Manually</string>
     <string name="add_flashcard_automatically">Automatically</string>
     <string name="toast_package_not_null">Package name cannot be empty</string>
+    <string name="toast_too_few_flashcards">There are too few words to review</string>
+    <string name="toast_too_few_hard_flashcards">There are too few hard words to review</string>
+    <string name="toast_no_words_to_learn">There are no words to learn</string>
 </resources>

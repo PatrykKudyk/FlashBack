@@ -42,7 +42,7 @@ class AssignPackageRecyclerViewAdapter(
                         flashcard.polish,
                         flashcard.english,
                         flashcard.knowledgeLevel,
-                        flashcard.isNew,
+                        0,
                         flashcard.isKnown
                     )
                 )
