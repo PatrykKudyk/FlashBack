@@ -7,7 +7,7 @@ import com.partos.flashback.fragments.packages.AddPackageFragment
 import com.partos.flashback.fragments.packages.MyPackagesFragment
 import com.partos.flashback.fragments.account.LogInFragment
 import com.partos.flashback.fragments.account.RegisterFragment
-import com.partos.flashback.fragments.flashcard.AddFlashcardFragment
+import com.partos.flashback.fragments.flashcard.AddFlashcardManuallyFragment
 import com.partos.flashback.fragments.flashcard.AssignFlashcardsFragment
 import com.partos.flashback.fragments.flashcard.MyFlashcardsFragment
 import com.partos.flashback.fragments.menu.CreditsFragment
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity(),
     MyPackagesFragment.OnFragmentInteractionListener,
     AddPackageFragment.OnFragmentInteractionListener,
     MyFlashcardsFragment.OnFragmentInteractionListener,
-    AddFlashcardFragment.OnFragmentInteractionListener,
+    AddFlashcardManuallyFragment.OnFragmentInteractionListener,
     ClassicReviewFragment.OnFragmentInteractionListener,
     ReviewSummaryFragment.OnFragmentInteractionListener,
     HardWordsReviewFragment.OnFragmentInteractionListener,
