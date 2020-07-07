@@ -11,7 +11,9 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.partos.flashback.MyApp
 import com.partos.flashback.R
+import com.partos.flashback.db.DataBaseHelper
 import com.partos.flashback.models.MyPackage
 import com.partos.flashback.recycler.MarginItemDecoration
 import com.partos.flashback.recycler.packages.PackageRecyclerViewAdapter
@@ -92,15 +94,9 @@ class MyPackagesFragment : Fragment() {
 
     private fun initFragment() {
         addPackageButton = rootView.findViewById(R.id.my_package_linear_layout_add_new)
+        val db = DataBaseHelper(rootView.context)
 
-        val packagesList = ArrayList<MyPackage>()
-        packagesList.add(MyPackage(0,"Przykładowy pakiet"))
-        packagesList.add(MyPackage(1,"Pakiet testowy"))
-        packagesList.add(MyPackage(2,"Pokaż brudasa, barabasza"))
-        packagesList.add(MyPackage(3,"Mój stary"))
-        packagesList.add(MyPackage(4,"to fanatyk nauki"))
-        packagesList.add(MyPackage(5,"Pół mieszkania"))
-        packagesList.add(MyPackage(6,"W fiszkach zajebane"))
+        val packagesList = db.getPackagesList(MyApp.userId)
 
         recyclerView = rootView.findViewById(R.id.my_packages_recycler_view)
 
@@ -120,7 +116,7 @@ class MyPackagesFragment : Fragment() {
 
         addPackageButton.setOnClickListener {
             val addPackageFragment =
-                AddPackageFragment.newInstance()
+                AddPackageFragment.newInstance(MyApp.userId)
             fragmentManager
                 ?.beginTransaction()
                 ?.setCustomAnimations(

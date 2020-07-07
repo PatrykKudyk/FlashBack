@@ -14,7 +14,9 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import com.partos.flashback.MyApp
 import com.partos.flashback.R
+import com.partos.flashback.db.DataBaseHelper
 import com.partos.flashback.models.MyFlashcard
 import kotlinx.android.synthetic.main.fragment_classic_review.*
 import kotlin.random.Random
@@ -35,7 +37,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class HardWordsReviewFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
+    private var packageId: Long? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
@@ -58,7 +60,7 @@ class HardWordsReviewFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
+            packageId = it.getLong(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
     }
@@ -98,36 +100,15 @@ class HardWordsReviewFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() =
+        fun newInstance(packageId: Long) =
             HardWordsReviewFragment().apply {
                 arguments = Bundle().apply {
+                    putLong(ARG_PARAM1, packageId)
                 }
             }
     }
 
     private fun initFragment() {
-        val flashcardList = ArrayList<MyFlashcard>()
-        flashcardList.add(MyFlashcard(0, 0, 0, "cześć", "hi", 10, false, true))
-        flashcardList.add(MyFlashcard(0, 0, 0, "ty", "you", 10, false, true))
-        flashcardList.add(MyFlashcard(0, 0, 0, "tak", "yes", 3, false, true))
-        flashcardList.add(MyFlashcard(0, 0, 0, "nie", "no", 2, false, true))
-        flashcardList.add(MyFlashcard(0, 0, 0, "może", "maybe", 5, false, true))
-        flashcardList.add(MyFlashcard(0, 0, 0, "ja", "I", 0, false, false))
-        flashcardList.add(MyFlashcard(0, 0, 0, "stół", "table", 0, false, false))
-        flashcardList.add(MyFlashcard(0, 0, 0, "głośnik", "speaker", 0, false, false))
-        flashcardList.add(
-            MyFlashcard(
-                0,
-                0,
-                0,
-                "sklejasz akcje",
-                "you know what I'm sayin'",
-                8,
-                false,
-                true
-            )
-        )
-
         val audioAttributes = AudioAttributes.Builder()
             .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
             .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
@@ -157,10 +138,12 @@ class HardWordsReviewFragment : Fragment() {
         quitButton2 = rootView.findViewById(R.id.hard_review_button_exit)
         correctAnswerTextView = rootView.findViewById(R.id.hard_review_text_view_correct_answer)
 
+        val db = DataBaseHelper(rootView.context)
+        val flashcardList = db.getFlashcardsList(packageId as Long, MyApp.userId)
         var flashcards = ArrayList<MyFlashcard>()
 
         for (flashcard in flashcardList) {
-            if (flashcard.knowledgeLevel <= 4 && flashcard.isKnown) {
+            if (flashcard.knowledgeLevel <= 4 && flashcard.isKnown == 1 && flashcard.isNew == 0) {
                 flashcards.add(flashcard)
             }
         }
@@ -179,7 +162,17 @@ class HardWordsReviewFragment : Fragment() {
                 if (answer == flashcards[position].polish.replace(" ", "").toLowerCase()) {
                     setCorrect(soundCorrect)
                     correct++
+                    flashcards[position].knowledgeLevel += 2
+                    if (flashcards[position].knowledgeLevel > 10) {
+                        flashcards[position].knowledgeLevel = 10
+                    }
+                    db.updateFlashcard(flashcards[position])
                 } else {
+                    flashcards[position].knowledgeLevel -= 2
+                    if (flashcards[position].knowledgeLevel < 0) {
+                        flashcards[position].knowledgeLevel = 0
+                    }
+                    db.updateFlashcard(flashcards[position])
                     setIncorrect(soundIncorrect)
                     correctAnswerTextView.setText(flashcards[position].polish)
                 }
@@ -187,7 +180,17 @@ class HardWordsReviewFragment : Fragment() {
                 if (answer == flashcards[position].english.replace(" ", "").toLowerCase()) {
                     setCorrect(soundCorrect)
                     correct++
+                    flashcards[position].knowledgeLevel += 2
+                    if (flashcards[position].knowledgeLevel > 10) {
+                        flashcards[position].knowledgeLevel = 10
+                    }
+                    db.updateFlashcard(flashcards[position])
                 } else {
+                    flashcards[position].knowledgeLevel -= 2
+                    if (flashcards[position].knowledgeLevel < 0) {
+                        flashcards[position].knowledgeLevel = 0
+                    }
+                    db.updateFlashcard(flashcards[position])
                     setIncorrect(soundIncorrect)
                     correctAnswerTextView.setText(flashcards[position].english)
                 }

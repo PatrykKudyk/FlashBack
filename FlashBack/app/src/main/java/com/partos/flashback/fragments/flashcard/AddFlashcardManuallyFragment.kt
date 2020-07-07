@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.partos.flashback.MyApp
 import com.partos.flashback.R
 import com.partos.flashback.recycler.flashcard.AddFlashcardRecyclerViewAdapter
 
@@ -28,7 +29,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class AddFlashcardManuallyFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: Long? = null
+    private var packageId: Long? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
@@ -38,7 +39,7 @@ class AddFlashcardManuallyFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getLong(ARG_PARAM1)
+            packageId = it.getLong(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
     }
@@ -78,9 +79,10 @@ class AddFlashcardManuallyFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() =
+        fun newInstance(packageId: Long) =
             AddFlashcardManuallyFragment().apply {
                 arguments = Bundle().apply {
+                    putLong(ARG_PARAM1, packageId)
                 }
             }
     }
@@ -91,6 +93,6 @@ class AddFlashcardManuallyFragment : Fragment() {
         val mLayoutManager: LinearLayoutManager = LinearLayoutManager(this.context)
         recyclerView.layoutManager = mLayoutManager
 
-        recyclerView.adapter = AddFlashcardRecyclerViewAdapter()
+        recyclerView.adapter = AddFlashcardRecyclerViewAdapter(MyApp.userId, packageId as Long)
     }
 }

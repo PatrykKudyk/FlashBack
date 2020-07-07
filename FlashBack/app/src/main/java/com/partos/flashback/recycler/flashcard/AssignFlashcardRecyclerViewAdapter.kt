@@ -29,7 +29,7 @@ class AssignFlashcardRecyclerViewAdapter(var flashcardList: ArrayList<MyFlashcar
         holder.view.assign_flashcard_cell_text_view_english.setText(flashcardList[position].english)
         holder.view.assign_flashcard_cell_text_view_polish.setText(flashcardList[position].polish)
         holder.view.assign_flashcard_cell_card_view.setOnClickListener {
-            val assignPackagesFragment = AssignPackagesFragment.newInstance()
+            val assignPackagesFragment = AssignPackagesFragment.newInstance(flashcardList[position].id)
             val manager = (holder.itemView.context as MainActivity).supportFragmentManager
             manager
                 .beginTransaction()

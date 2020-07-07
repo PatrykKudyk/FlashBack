@@ -27,7 +27,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class ChoseAddFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
+    private var packageId: Long? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
@@ -38,7 +38,7 @@ class ChoseAddFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
+            packageId = it.getLong(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
     }
@@ -78,9 +78,10 @@ class ChoseAddFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() =
+        fun newInstance(packageId: Long) =
             ChoseAddFragment().apply {
                 arguments = Bundle().apply {
+                    putLong(ARG_PARAM1, packageId)
                 }
             }
     }
@@ -90,7 +91,7 @@ class ChoseAddFragment : Fragment() {
         automaticallyButton = rootView.findViewById(R.id.add_choice_button_automatically)
 
         manuallyButton.setOnClickListener {
-            val addFlashcardFragment = AddFlashcardManuallyFragment.newInstance()
+            val addFlashcardFragment = AddFlashcardManuallyFragment.newInstance(packageId as Long)
             fragmentManager
                 ?.beginTransaction()
                 ?.setCustomAnimations(
@@ -103,7 +104,7 @@ class ChoseAddFragment : Fragment() {
         }
 
         automaticallyButton.setOnClickListener {
-            val addFlashcardFragment = AddFlashcardAutomaticallyFragment.newInstance()
+            val addFlashcardFragment = AddFlashcardAutomaticallyFragment.newInstance(packageId as Long)
             fragmentManager
                 ?.beginTransaction()
                 ?.setCustomAnimations(

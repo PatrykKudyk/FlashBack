@@ -9,8 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
+import com.partos.flashback.MyApp
 import com.partos.flashback.R
 import com.partos.flashback.fragments.menu.LoggedMenuFragment
 import kotlinx.android.synthetic.main.fragment_log_in.view.*
@@ -38,6 +40,8 @@ class LogInFragment : Fragment() {
     private lateinit var rootView: View
     private lateinit var loginButton: Button
     private lateinit var signUp: TextView
+    private lateinit var loginField: EditText
+    private lateinit var passwordField: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,17 +97,32 @@ class LogInFragment : Fragment() {
         initFonts()
         signUp = rootView.findViewById(R.id.login_text_register)
         loginButton = rootView.findViewById(R.id.login_button_login)
+        loginField = rootView.findViewById(R.id.login_text_edit_login)
+        passwordField = rootView.findViewById(R.id.login_text_edit_password)
 
         loginButton.setOnClickListener {
-            val loggedMenuFragment = LoggedMenuFragment.newInstance()
-            fragmentManager
-                ?.beginTransaction()
-                ?.setCustomAnimations(
-                    R.anim.enter_right_to_left, R.anim.exit_left_to_right,
-                    R.anim.enter_left_to_right, R.anim.exit_right_to_left
-                )
-                ?.replace(R.id.main_frame_layout, loggedMenuFragment)
-                ?.commit()
+            if ((loginField.text.toString() == "admin" && passwordField.text.toString() == "admin") ||
+                (loginField.text.toString() == "marcin" && passwordField.text.toString() == "marcin") ||
+                (loginField.text.toString() == "patryk" && passwordField.text.toString() == "patryk")) {
+                if (loginField.text.toString() == "admin") {
+                    MyApp.userId = 1
+                } else if (loginField.text.toString() == "marcin") {
+                    MyApp.userId = 2
+                } else if (loginField.text.toString() == "patryk") {
+                    MyApp.userId = 3
+                }
+
+                val loggedMenuFragment = LoggedMenuFragment.newInstance()
+                fragmentManager
+                    ?.beginTransaction()
+                    ?.setCustomAnimations(
+                        R.anim.enter_right_to_left, R.anim.exit_left_to_right,
+                        R.anim.enter_left_to_right, R.anim.exit_right_to_left
+                    )
+                    ?.replace(R.id.main_frame_layout, loggedMenuFragment)
+                    ?.commit()
+            }
+
         }
 
         signUp.setOnClickListener{

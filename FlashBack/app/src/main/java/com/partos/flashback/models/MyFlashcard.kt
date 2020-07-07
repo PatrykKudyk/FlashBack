@@ -7,8 +7,8 @@ class MyFlashcard (
     var polish: String,
     var english: String,
     var knowledgeLevel: Int,
-    var isNew: Boolean,
-    var isKnown: Boolean
+    var isNew: Int,
+    var isKnown: Int
 ){
 
 }

@@ -27,10 +27,14 @@
     <string name="toast_package_name_not_null">Package name cannot be empty</string>
     <string name="toast_package_added">Package successfully added</string>
     <string name="toast_package_not_added">Something went wrong, try again</string>
+    <string name="toast_flashcard_added">Flashcard successfully added</string>
+    <string name="toast_flashcard_not_added">Something went wrong, try again</string>
     <string name="toast_package_changed">Package successfully changed</string>
     <string name="toast_package_not_changed">Something went wrong, try again</string>
     <string name="toast_package_deleted">Package successfully deleted</string>
     <string name="toast_package_not_deleted">Something went wrong, try again</string>
+    <string name="toast_flashcard_changed">Flashcard successfully changed</string>
+    <string name="toast_flashcard_not_changed">Something went wrong, try again</string>
     <string name="flashcard_add_new">Add new flashcard</string>
     <string name="flashcard_review_classic">Classic Review</string>
     <string name="flashcard_learn_new_words">Learn New Words</string>
@@ -55,4 +59,8 @@
     <string name="add_flashcard_choice">How do you want to add flashcard?</string>
     <string name="add_flashcard_manually">Manually</string>
     <string name="add_flashcard_automatically">Automatically</string>
+    <string name="toast_package_not_null">Package name cannot be empty</string>
+    <string name="toast_too_few_flashcards">There are too few words to review</string>
+    <string name="toast_too_few_hard_flashcards">There are too few hard words to review</string>
+    <string name="toast_no_words_to_learn">There are no words to learn</string>
 </resources>

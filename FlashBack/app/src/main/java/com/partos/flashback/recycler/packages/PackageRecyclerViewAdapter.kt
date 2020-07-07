@@ -6,7 +6,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.partos.flashback.MainActivity
+import com.partos.flashback.MyApp
 import com.partos.flashback.R
+import com.partos.flashback.db.DataBaseHelper
 import com.partos.flashback.fragments.flashcard.MyFlashcardsFragment
 import com.partos.flashback.models.MyPackage
 import kotlinx.android.synthetic.main.row_package.view.*
@@ -44,8 +46,15 @@ class PackageRecyclerViewAdapter(var packagesList: ArrayList<MyPackage>) :
         }
         saveButton.setOnClickListener {
             if (titleEdit.text.toString() != "") {
+                val db = DataBaseHelper(holder.view.context)
                 packagesList[position].title = titleEdit.text.toString()
+                db.updatePackage(packagesList[position])
                 title.setText(titleEdit.text.toString())
+                Toast.makeText(
+                    holder.view.context,
+                    holder.view.context.getString(R.string.toast_package_changed),
+                    Toast.LENGTH_SHORT
+                ).show()
                 holder.view.package_cell_name_edit_text_layout.visibility = View.GONE
                 holder.view.package_cell_linear_layout_edit.visibility = View.GONE
                 editButton.visibility = View.VISIBLE
@@ -65,6 +74,13 @@ class PackageRecyclerViewAdapter(var packagesList: ArrayList<MyPackage>) :
         }
 
         deleteYes.setOnClickListener {
+            val db = DataBaseHelper(holder.view.context)
+            val flashcardList = db.getFlashcardsList(packagesList[position].id, MyApp.userId)
+            for (flashcard in flashcardList) {
+                db.deleteFlashcard(flashcard.id)
+            }
+            db.deletePackage(packagesList[position].id)
+
             packagesList.removeAt(position)
             notifyItemRemoved(position)
             notifyItemRangeChanged(position, packagesList.size)
@@ -78,7 +94,7 @@ class PackageRecyclerViewAdapter(var packagesList: ArrayList<MyPackage>) :
         }
 
         cardView.setOnClickListener {
-            val flashcardsFragment = MyFlashcardsFragment.newInstance()
+            val flashcardsFragment = MyFlashcardsFragment.newInstance(packagesList[position].id)
             val manager = (holder.itemView.context as MainActivity).supportFragmentManager
             manager
                 .beginTransaction()

@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.partos.flashback.R
+import com.partos.flashback.db.DataBaseHelper
 import com.partos.flashback.models.MyFlashcard
 import kotlinx.android.synthetic.main.row_flashcard.view.*
 
@@ -34,6 +35,8 @@ class FlashcardRecyclerViewAdapter(var flashcardList: ArrayList<MyFlashcard>) :
             holder.view.flashcard_cell_constraint_delete.visibility = View.GONE
         }
         holder.view.flashcard_cell_button_delete_yes.setOnClickListener {
+            val db = DataBaseHelper(holder.view.context)
+            db.deleteFlashcard(flashcardList[position].id)
             flashcardList.removeAt(position)
             notifyItemRemoved(position)
             notifyItemRangeChanged(0, flashcardList.size)
@@ -47,10 +50,12 @@ class FlashcardRecyclerViewAdapter(var flashcardList: ArrayList<MyFlashcard>) :
             holder.view.flashcard_cell_edit_text_view_english.setText(holder.view.flashcard_cell_text_view_english.text)
         }
         holder.view.flashcard_cell_image_view_save.setOnClickListener {
+            val db = DataBaseHelper(holder.view.context)
             flashcardList[position].english =
                 holder.view.flashcard_cell_edit_text_view_english.text.toString()
             flashcardList[position].polish =
                 holder.view.flashcard_cell_edit_text_view_polish.text.toString()
+            db.updateFlashcard(flashcardList[position])
             holder.view.flashcard_cell_text_view_english.setText(holder.view.flashcard_cell_edit_text_view_english.text)
             holder.view.flashcard_cell_text_view_polish.setText(holder.view.flashcard_cell_edit_text_view_polish.text)
             holder.view.flashcard_cell_constraint_main.visibility = View.VISIBLE

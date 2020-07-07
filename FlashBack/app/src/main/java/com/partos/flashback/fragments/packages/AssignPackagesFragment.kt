@@ -11,7 +11,9 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.partos.flashback.MyApp
 import com.partos.flashback.R
+import com.partos.flashback.db.DataBaseHelper
 import com.partos.flashback.models.MyPackage
 import com.partos.flashback.recycler.packages.AssignPackageRecyclerViewAdapter
 import com.partos.flashback.recycler.MarginItemDecoration
@@ -32,7 +34,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class AssignPackagesFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
+    private var flashcardId: Long? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
@@ -43,7 +45,7 @@ class AssignPackagesFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
+            flashcardId = it.getLong(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
     }
@@ -83,9 +85,10 @@ class AssignPackagesFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() =
+        fun newInstance(flashcardId: Long) =
             AssignPackagesFragment().apply {
                 arguments = Bundle().apply {
+                    putLong(ARG_PARAM1, flashcardId)
                 }
             }
     }
@@ -93,14 +96,8 @@ class AssignPackagesFragment : Fragment() {
     private fun initFragment() {
         addPackageButton = rootView.findViewById(R.id.assign_package_linear_layout_add_new)
 
-        val packagesList = ArrayList<MyPackage>()
-        packagesList.add(MyPackage(0,"Przykładowy pakiet"))
-        packagesList.add(MyPackage(1,"Pakiet testowy"))
-        packagesList.add(MyPackage(2,"Pokaż brudasa, barabasza"))
-        packagesList.add(MyPackage(3,"Mój stary"))
-        packagesList.add(MyPackage(4,"to fanatyk nauki"))
-        packagesList.add(MyPackage(5,"Pół mieszkania"))
-        packagesList.add(MyPackage(6,"W fiszkach zajebane"))
+        val db = DataBaseHelper(rootView.context)
+        val packagesList = db.getPackagesList(MyApp.userId)
 
         recyclerView = rootView.findViewById(R.id.assign_packages_recycler_view)
 
@@ -112,13 +109,15 @@ class AssignPackagesFragment : Fragment() {
             )
         )
 
+
         recyclerView.adapter =
             AssignPackageRecyclerViewAdapter(
-                packagesList
+                packagesList,
+                db.getFlashcard(flashcardId as Long)
             )
 
         addPackageButton.setOnClickListener {
-            val addPackageFragment = AddPackageFragment.newInstance()
+            val addPackageFragment = AddPackageFragment.newInstance(MyApp.userId)
             fragmentManager
                 ?.beginTransaction()
                 ?.setCustomAnimations(

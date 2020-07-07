@@ -10,7 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.partos.flashback.MyApp
 import com.partos.flashback.R
+import com.partos.flashback.db.DataBaseHelper
 import com.partos.flashback.models.MyFlashcard
 import com.partos.flashback.recycler.flashcard.AssignFlashcardRecyclerViewAdapter
 import com.partos.flashback.recycler.MarginItemDecoration
@@ -98,13 +100,8 @@ class AssignFlashcardsFragment : Fragment() {
                 12
             )
         )
-        val flashcardList = ArrayList<MyFlashcard>()
-        flashcardList.add(MyFlashcard(0, 0, 0, "cześć", "hi", 10, false, true))
-        flashcardList.add(MyFlashcard(0, 0, 0, "ty", "you", 10, false, true))
-        flashcardList.add(MyFlashcard(0, 0, 0, "ja", "I", 0, false, false))
-        flashcardList.add(MyFlashcard(0, 0, 0, "stół", "table", 0, false, false))
-        flashcardList.add(MyFlashcard(0, 0, 0, "głośnik", "speaker", 0, false, false))
-
+        val db = DataBaseHelper(rootView.context)
+        val flashcardList = db.getNewFlashcardsList(MyApp.userId)
 
         recyclerView.adapter =
             AssignFlashcardRecyclerViewAdapter(
