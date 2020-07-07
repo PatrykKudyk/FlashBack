@@ -41,7 +41,6 @@
                     android:fontFamily="@font/dustismo_bold"
                     android:gravity="center"
                     android:text="@string/add_flashcard_choice"
-                    android:textColor="@color/colorMainDark"
                     android:textSize="35dip"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight_percent="0.2"

@@ -39,6 +39,7 @@
     <string name="hint_flashcard_polish">Polish</string>
     <string name="hint_flashcard_english">English</string>
     <string name="toast_flashcard_not_null">Flashcard fields cannot be empty</string>
+    <string name="toast_flashcard_not_null_2">Flashcard field cannot be empty</string>
     <string name="review_check">Check</string>
     <string name="review_skip">Skip</string>
     <string name="review_quit">Quit</string>
