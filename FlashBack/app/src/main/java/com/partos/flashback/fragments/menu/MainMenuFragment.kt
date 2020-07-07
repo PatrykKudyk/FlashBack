@@ -38,7 +38,6 @@ class MainMenuFragment : Fragment() {
 
     private lateinit var rootView: View
     private lateinit var image: ImageView
-    private lateinit var linearLayout: LinearLayout
     private lateinit var loginButton: Button
     private lateinit var creditsButton: Button
 
@@ -94,7 +93,6 @@ class MainMenuFragment : Fragment() {
 
     private fun initFragment() {
         image = rootView.findViewById(R.id.menu_image_view)
-        linearLayout = rootView.findViewById(R.id.main_linear_layout)
         loginButton = rootView.findViewById(R.id.menu_button_log_in)
         creditsButton = rootView.findViewById(R.id.menu_button_credits)
 
@@ -103,7 +101,8 @@ class MainMenuFragment : Fragment() {
             image.startAnimation(animation)
             Handler().postDelayed({
                 image.visibility = View.GONE
-                linearLayout.visibility = View.VISIBLE
+                loginButton.visibility = View.VISIBLE
+                creditsButton.visibility = View.VISIBLE
                 val anim1 = AnimationUtils.loadAnimation(rootView.context, R.anim.enter_left_to_right)
                 val anim2 = AnimationUtils.loadAnimation(rootView.context, R.anim.enter_right_to_left)
                 loginButton.startAnimation(anim1)

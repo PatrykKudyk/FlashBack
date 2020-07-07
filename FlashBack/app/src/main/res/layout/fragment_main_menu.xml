@@ -69,52 +69,56 @@
                     app:layout_constraintWidth_percent="0.7"
                     tools:visibility="gone" />
 
-                <LinearLayout
-                    android:id="@+id/main_linear_layout"
-                    android:layout_width="0dp"
+
+                <View
+                    android:id="@+id/view10"
+                    android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:orientation="vertical"
-                    android:visibility="gone"
-                    android:weightSum="100"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHeight_percent="0.5"
+                    app:layout_constraintHeight_percent="0.1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view2"
-                    app:layout_constraintWidth_percent="0.6"
-                    tools:visibility="visible">
+                    app:layout_constraintTop_toBottomOf="@+id/view2" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="20" />
+                <Button
+                    android:id="@+id/menu_button_log_in"
+                    android:layout_width="0dp"
+                    android:visibility="gone"
+                    android:layout_height="0dp"
+                    android:background="@drawable/button_background_dark"
+                    android:fontFamily="@font/dustismo_bold"
+                    android:text="@string/menu_log_in"
+                    android:textColor="@color/colorBackground"
+                    android:textSize="30dip"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent="0.08"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view10"
+                    app:layout_constraintWidth_percent="0.7" />
 
-                    <Button
-                        android:id="@+id/menu_button_log_in"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="15"
-                        android:background="@drawable/button_background_dark"
-                        android:fontFamily="@font/dustismo_bold"
-                        android:text="@string/menu_log_in"
-                        android:textColor="@color/colorBackground"
-                        android:textSize="30dip" />
+                <View
+                    android:id="@+id/view11"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent="0.04"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/menu_button_log_in" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="10" />
-
-                    <Button
-                        android:id="@+id/menu_button_credits"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="15"
-                        android:background="@drawable/button_background_medium"
-                        android:fontFamily="@font/dustismo_bold"
-                        android:text="@string/menu_credits"
-                        android:textColor="@color/colorBackground"
-                        android:textSize="30dip" />
-                </LinearLayout>
+                <Button
+                    android:id="@+id/menu_button_credits"
+                    android:layout_width="0dp"
+                    android:visibility="gone"
+                    android:layout_height="0dp"
+                    android:background="@drawable/button_background_medium"
+                    android:fontFamily="@font/dustismo_bold"
+                    android:text="@string/menu_credits"
+                    android:textColor="@color/colorBackground"
+                    android:textSize="30dip"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent="0.08"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view11"
+                    app:layout_constraintWidth_percent="0.7" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
