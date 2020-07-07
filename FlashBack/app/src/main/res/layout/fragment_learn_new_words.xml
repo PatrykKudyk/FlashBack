@@ -6,153 +6,170 @@
     android:layout_height="match_parent"
     tools:context=".fragments.reviews.LearnNewWordsFragment">
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorBackground"
-        android:fillViewport="true">
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/linearLayout"
+            android:background="@color/colorBackground"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorBackground"
+                android:gravity="center|top"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dustismo_bold"
+                    android:gravity="center"
+                    android:text="@string/flashcard_learn_new_words"
+                    android:textSize="32dip" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="23dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:background="@color/colorMainDark" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/new_words_review_card_view_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:theme="@style/Theme.MaterialComponents.Light"
+                    app:cardBackgroundColor="@color/colorMainLight"
+                    app:strokeColor="@color/colorMainDark"
+                    app:strokeWidth="2dp">
+
+                    <TextView
+                        android:id="@+id/new_words_review_text_view_question"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:fontFamily="@font/dustismo_bold"
+                        android:gravity="center"
+                        android:textSize="40dip"
+
+                        tools:text="Sklejasz akcje, sklej dupe, rucham psa" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:id="@+id/new_words_review_text_view_correct_answer"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:fontFamily="@font/dustismo_bold"
+                    android:gravity="center"
+                    android:textColor="@color/colorRed"
+                    android:textSize="40dip"
+                    android:visibility="invisible"
+                    tools:text="you know"
+                    tools:visibility="visible" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp" />
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/new_words_review_card_view_learn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:theme="@style/Theme.MaterialComponents.Light"
+                    android:visibility="visible"
+                    app:cardBackgroundColor="@color/colorMainLight"
+                    app:strokeColor="@color/colorMainDark"
+                    app:strokeWidth="2dp">
+
+                    <TextView
+                        android:id="@+id/new_words_review_edit_text_answer_answer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:fontFamily="@font/dustismo_bold"
+                        android:gravity="center"
+                        android:textSize="40dip"
+                        android:visibility="visible"
+
+                        tools:text="Sklejasz akcje, sklej dupe, rucham psa" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <ImageView
+                    android:id="@+id/new_words_review_image_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    tools:background="@drawable/button_background_delete_no"
+                    tools:src="@drawable/ic_incorrect" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/new_words_review_card_view_answer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:theme="@style/Theme.MaterialComponents.Light"
+                    android:visibility="gone"
+                    app:cardBackgroundColor="@color/colorMainLight"
+                    app:strokeColor="@color/colorMainDark"
+                    app:strokeWidth="2dp">
+
+                    <EditText
+                        android:id="@+id/new_words_review_edit_text_answer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:fontFamily="@font/dustismo_bold"
+                        android:gravity="center"
+                        android:textSize="40dip"
+                        android:visibility="visible"
+                        tools:text="Sklejasz akcje, sklej dupe, rucham psa" />
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
+
+
+            </LinearLayout>
+
+        </ScrollView>
 
         <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorBackground"
-            android:gravity="center|top"
+            android:layout_height="80dp"
             android:orientation="vertical">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="20dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/dustismo_bold"
-                android:gravity="center"
-                android:text="@string/flashcard_learn_new_words"
-                android:textSize="32dip" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="23dp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:background="@color/colorMainDark" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="20dp" />
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/new_words_review_card_view_question"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
-                android:layout_marginEnd="3dp"
-                android:theme="@style/Theme.MaterialComponents.Light"
-                app:cardBackgroundColor="@color/colorMainLight"
-                app:strokeColor="@color/colorMainDark"
-                app:strokeWidth="2dp">
-
-                <TextView
-                    android:id="@+id/new_words_review_text_view_question"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:fontFamily="@font/dustismo_bold"
-                    android:gravity="center"
-                    android:textSize="40dip"
-
-                    tools:text="Sklejasz akcje, sklej dupe, rucham psa" />
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <TextView
-                android:id="@+id/new_words_review_text_view_correct_answer"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:fontFamily="@font/dustismo_bold"
-                android:gravity="center"
-                android:textColor="@color/colorRed"
-                android:textSize="40dip"
-                android:visibility="invisible"
-                tools:text="you know"
-                tools:visibility="visible" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="50dp" />
-
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/new_words_review_card_view_learn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
-                android:layout_marginEnd="3dp"
-                android:theme="@style/Theme.MaterialComponents.Light"
-                android:visibility="visible"
-                app:cardBackgroundColor="@color/colorMainLight"
-                app:strokeColor="@color/colorMainDark"
-                app:strokeWidth="2dp">
-
-                <TextView
-                    android:id="@+id/new_words_review_edit_text_answer_answer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:fontFamily="@font/dustismo_bold"
-                    android:gravity="center"
-                    android:textSize="40dip"
-                    android:visibility="visible"
-
-                    tools:text="Sklejasz akcje, sklej dupe, rucham psa" />
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <ImageView
-                android:id="@+id/new_words_review_image_view"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
-                tools:background="@drawable/button_background_delete_no"
-                tools:src="@drawable/ic_incorrect" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="50dp" />
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/new_words_review_card_view_answer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
-                android:layout_marginEnd="3dp"
-                android:theme="@style/Theme.MaterialComponents.Light"
-                android:visibility="gone"
-                app:cardBackgroundColor="@color/colorMainLight"
-                app:strokeColor="@color/colorMainDark"
-                app:strokeWidth="2dp">
-
-                <EditText
-                    android:id="@+id/new_words_review_edit_text_answer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:fontFamily="@font/dustismo_bold"
-                    android:gravity="center"
-                    android:textSize="40dip"
-                    android:visibility="visible"
-                    tools:text="Sklejasz akcje, sklej dupe, rucham psa" />
-
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="20dp" />
 
             <LinearLayout
                 android:id="@+id/new_words_review_linear_layout_normal"
@@ -247,8 +264,10 @@
 
             </LinearLayout>
 
+
         </LinearLayout>
 
-    </ScrollView>
+    </RelativeLayout>
+
 
 </FrameLayout>

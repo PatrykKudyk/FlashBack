@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.partos.flashback.MainActivity
 import com.partos.flashback.R
@@ -28,7 +29,10 @@ class AddFlashcardRecyclerViewAdapter(): RecyclerView.Adapter<AddFlashcardViewHo
                 holder.view.add_flashcard_polish_edit_text.text.toString() != "") {
                 val manager = (holder.itemView.context as MainActivity).supportFragmentManager
                 manager
-                    .popBackStack()
+                    .popBackStack(
+                        manager!!.getBackStackEntryAt((manager!!.backStackEntryCount - 2)).id,
+                        FragmentManager.POP_BACK_STACK_INCLUSIVE
+                    )
             } else {
                 Toast.makeText(
                     holder.view.context,

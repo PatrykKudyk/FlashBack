@@ -39,6 +39,7 @@
     <string name="hint_flashcard_polish">Polish</string>
     <string name="hint_flashcard_english">English</string>
     <string name="toast_flashcard_not_null">Flashcard fields cannot be empty</string>
+    <string name="toast_flashcard_not_null_2">Flashcard field cannot be empty</string>
     <string name="review_check">Check</string>
     <string name="review_skip">Skip</string>
     <string name="review_quit">Quit</string>
@@ -51,7 +52,7 @@
     <string name="learn_summary_text">Congratulations!\n
         You have learned new words!\n
         Now you can review them any time you want.</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="add_flashcard_choice">How do you want to add flashcard?</string>
+    <string name="add_flashcard_manually">Manually</string>
+    <string name="add_flashcard_automatically">Automatically</string>
 </resources>

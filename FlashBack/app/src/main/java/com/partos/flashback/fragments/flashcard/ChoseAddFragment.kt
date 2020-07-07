@@ -1,5 +1,6 @@
 package com.partos.flashback.fragments.flashcard
 
+
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
@@ -8,13 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.partos.flashback.R
-import com.partos.flashback.recycler.flashcard.AddFlashcardRecyclerViewAdapter
-import com.partos.flashback.recycler.packages.AddPackageRecyclerViewAdapter
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -30,19 +25,20 @@ private const val ARG_PARAM2 = "param2"
  * Use the [AccountFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class AddFlashcardFragment : Fragment() {
+class ChoseAddFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: Long? = null
+    private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
     private lateinit var rootView: View
-    private lateinit var recyclerView: RecyclerView
+    private lateinit var manuallyButton: Button
+    private lateinit var automaticallyButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getLong(ARG_PARAM1)
+            param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
     }
@@ -52,7 +48,7 @@ class AddFlashcardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootView = inflater.inflate(R.layout.fragment_add_flashcard, container, false);
+        rootView = inflater.inflate(R.layout.fragment_chose_add, container, false);
         initFragment()
         return rootView
     }
@@ -83,18 +79,40 @@ class AddFlashcardFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            AddFlashcardFragment().apply {
+            ChoseAddFragment().apply {
                 arguments = Bundle().apply {
                 }
             }
     }
 
     private fun initFragment() {
-        recyclerView = rootView.findViewById(R.id.add_flashcard_recycler_view)
+        manuallyButton = rootView.findViewById(R.id.add_choice_button_manually)
+        automaticallyButton = rootView.findViewById(R.id.add_choice_button_automatically)
 
-        val mLayoutManager: LinearLayoutManager = LinearLayoutManager(this.context)
-        recyclerView.layoutManager = mLayoutManager
+        manuallyButton.setOnClickListener {
+            val addFlashcardFragment = AddFlashcardManuallyFragment.newInstance()
+            fragmentManager
+                ?.beginTransaction()
+                ?.setCustomAnimations(
+                    R.anim.enter_right_to_left, R.anim.exit_left_to_right,
+                    R.anim.enter_left_to_right, R.anim.exit_right_to_left
+                )
+                ?.replace(R.id.main_frame_layout, addFlashcardFragment)
+                ?.addToBackStack(AddFlashcardManuallyFragment.toString())
+                ?.commit()
+        }
 
-        recyclerView.adapter = AddFlashcardRecyclerViewAdapter()
+        automaticallyButton.setOnClickListener {
+            val addFlashcardFragment = AddFlashcardAutomaticallyFragment.newInstance()
+            fragmentManager
+                ?.beginTransaction()
+                ?.setCustomAnimations(
+                    R.anim.enter_right_to_left, R.anim.exit_left_to_right,
+                    R.anim.enter_left_to_right, R.anim.exit_right_to_left
+                )
+                ?.replace(R.id.main_frame_layout, addFlashcardFragment)
+                ?.addToBackStack(AddFlashcardAutomaticallyFragment.toString())
+                ?.commit()
+        }
     }
 }
