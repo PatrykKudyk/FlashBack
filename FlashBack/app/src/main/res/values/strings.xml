@@ -33,6 +33,8 @@
     <string name="toast_package_not_changed">Something went wrong, try again</string>
     <string name="toast_package_deleted">Package successfully deleted</string>
     <string name="toast_package_not_deleted">Something went wrong, try again</string>
+    <string name="toast_flashcard_changed">Flashcard successfully changed</string>
+    <string name="toast_flashcard_not_changed">Something went wrong, try again</string>
     <string name="flashcard_add_new">Add new flashcard</string>
     <string name="flashcard_review_classic">Classic Review</string>
     <string name="flashcard_learn_new_words">Learn New Words</string>

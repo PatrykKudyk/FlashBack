@@ -115,6 +115,63 @@ class DataBaseHelper(context: Context) :
         return Integer.parseInt("$success") != -1
     }
 
+    fun getFlashcard(flashcardId: Long): MyFlashcard {
+        var flashcardsList = ArrayList<MyFlashcard>()
+        val db = readableDatabase
+        val selectQuery =
+            "Select * from ${TableInfo.TABLE_NAME_FLASHCARDS} where ${BaseColumns._ID} = " + flashcardId.toString()
+        val result = db.rawQuery(selectQuery, null)
+        if (result.moveToFirst()) {
+            do {
+                var flashcard = MyFlashcard(
+                    result.getInt(result.getColumnIndex(BaseColumns._ID)).toLong(),
+                    result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_FLASHCARDS_USER_ID))
+                        .toLong(),
+                    result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_FLASHCARDS_PACKAGE_ID))
+                        .toLong(),
+                    result.getString(result.getColumnIndex(TableInfo.TABLE_COLUMN_FLASHCARDS_POLISH)),
+                    result.getString(result.getColumnIndex(TableInfo.TABLE_COLUMN_FLASHCARDS_ENGLISH)),
+                    result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_FLASHCARDS_KNOWLEDGE)),
+                    result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_FLASHCARDS_IS_NEW)),
+                    result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_FLASHCARDS_IS_KNOWN))
+                )
+                flashcardsList.add(flashcard)
+            } while (result.moveToNext())
+        }
+        result.close()
+        db.close()
+        return flashcardsList[0]
+    }
+
+    fun getNewFlashcardsList(userId: Long): ArrayList<MyFlashcard> {
+        var flascardsList = ArrayList<MyFlashcard>()
+        val db = readableDatabase
+        val selectQuery =
+            "Select * from ${TableInfo.TABLE_NAME_FLASHCARDS} where ${TableInfo.TABLE_COLUMN_FLASHCARDS_IS_NEW} = 1" +
+                    " and ${TableInfo.TABLE_COLUMN_FLASHCARDS_USER_ID} = " + userId.toString()
+        val result = db.rawQuery(selectQuery, null)
+        if (result.moveToFirst()) {
+            do {
+                var flashcard = MyFlashcard(
+                    result.getInt(result.getColumnIndex(BaseColumns._ID)).toLong(),
+                    result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_FLASHCARDS_USER_ID))
+                        .toLong(),
+                    result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_FLASHCARDS_PACKAGE_ID))
+                        .toLong(),
+                    result.getString(result.getColumnIndex(TableInfo.TABLE_COLUMN_FLASHCARDS_POLISH)),
+                    result.getString(result.getColumnIndex(TableInfo.TABLE_COLUMN_FLASHCARDS_ENGLISH)),
+                    result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_FLASHCARDS_KNOWLEDGE)),
+                    result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_FLASHCARDS_IS_NEW)),
+                    result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_FLASHCARDS_IS_KNOWN))
+                )
+                flascardsList.add(flashcard)
+            } while (result.moveToNext())
+        }
+        result.close()
+        db.close()
+        return flascardsList
+    }
+
     fun getFlashcardsList(packageId: Long, userId: Long): ArrayList<MyFlashcard> {
         var flascardsList = ArrayList<MyFlashcard>()
         val db = readableDatabase
