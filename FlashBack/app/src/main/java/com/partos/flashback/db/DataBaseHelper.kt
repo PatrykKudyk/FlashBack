@@ -4,10 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.os.Build.ID
 import android.provider.BaseColumns
-import com.example.flashcards.models.Flashcard
-import com.example.flashcards.models.MyPackage
 import com.partos.flashback.models.MyFlashcard
 import com.partos.flashback.models.MyPackage
 
@@ -86,7 +83,7 @@ class DataBaseHelper(context: Context) :
         return packagesList
     }
 
-    fun addPackage(name: String, userId: Int): Boolean {
+    fun addPackage(name: String, userId: Long): Boolean {
         val db = this.writableDatabase
         val values = ContentValues()
         values.put(TableInfo.TABLE_COLUMN_PACKAGES_NAME, name)

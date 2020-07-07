@@ -110,26 +110,6 @@ class LearnNewWordsFragment : Fragment() {
 
     private fun initFragment() {
         val flashcardList = ArrayList<MyFlashcard>()
-        flashcardList.add(MyFlashcard(0, 0, 0, "cześć", "hi", 10, false, true))
-        flashcardList.add(MyFlashcard(0, 0, 0, "ty", "you", 10, false, true))
-        flashcardList.add(MyFlashcard(0, 0, 0, "tak", "yes", 3, false, true))
-        flashcardList.add(MyFlashcard(0, 0, 0, "nie", "no", 2, false, true))
-        flashcardList.add(MyFlashcard(0, 0, 0, "może", "maybe", 5, false, true))
-        flashcardList.add(MyFlashcard(0, 0, 0, "ja", "I", 0, false, false))
-        flashcardList.add(MyFlashcard(0, 0, 0, "dziecko", "kid", 0, false, false))
-        flashcardList.add(MyFlashcard(0, 0, 0, "cukier", "sugar", 0, false, false))
-        flashcardList.add(
-            MyFlashcard(
-                0,
-                0,
-                0,
-                "sklejasz akcje",
-                "you know what I'm sayin'",
-                8,
-                false,
-                true
-            )
-        )
 
         val audioAttributes = AudioAttributes.Builder()
             .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
@@ -162,7 +142,7 @@ class LearnNewWordsFragment : Fragment() {
         var flashcards = ArrayList<MyFlashcard>()
         var number = 0
         for (flashcard in flashcardList) {
-            if (!flashcard.isKnown) {
+            if (flashcard.isKnown == 0) {
                 flashcards.add(flashcard)
                 number++
             }

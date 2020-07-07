@@ -12,7 +12,9 @@ import android.widget.Button
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.partos.flashback.MyApp
 import com.partos.flashback.R
+import com.partos.flashback.db.DataBaseHelper
 import com.partos.flashback.fragments.reviews.ClassicReviewFragment
 import com.partos.flashback.fragments.reviews.HardWordsReviewFragment
 import com.partos.flashback.fragments.reviews.LearnNewWordsFragment
@@ -36,7 +38,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class MyFlashcardsFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
+    private var packageId: Long? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
@@ -50,7 +52,7 @@ class MyFlashcardsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
+            packageId = it.getLong(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
     }
@@ -90,9 +92,10 @@ class MyFlashcardsFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() =
+        fun newInstance(packageId: Long) =
             MyFlashcardsFragment().apply {
                 arguments = Bundle().apply {
+                    putLong(ARG_PARAM1, packageId)
                 }
             }
     }
@@ -103,24 +106,8 @@ class MyFlashcardsFragment : Fragment() {
         hardWordsButton = rootView.findViewById(R.id.my_flashcards_button_hard_words)
         newWordsButton = rootView.findViewById(R.id.my_flashcards_button_learn_new)
 
-        val flashcardList = ArrayList<MyFlashcard>()
-        flashcardList.add(MyFlashcard(0, 0, 0, "cześć", "hi", 10, false, true))
-        flashcardList.add(MyFlashcard(0, 0, 0, "ty", "you", 10, false, true))
-        flashcardList.add(MyFlashcard(0, 0, 0, "ja", "I", 0, false, false))
-        flashcardList.add(MyFlashcard(0, 0, 0, "stół", "table", 0, false, false))
-        flashcardList.add(MyFlashcard(0, 0, 0, "głośnik", "speaker", 0, false, false))
-        flashcardList.add(
-            MyFlashcard(
-                0,
-                0,
-                0,
-                "sklejasz akcje",
-                "you know what I'm sayin'",
-                8,
-                false,
-                true
-            )
-        )
+        val db = DataBaseHelper(rootView.context)
+        val flashcardList = db.getFlashcardsList(packageId as Long, MyApp.userId)
 
         recyclerView = rootView.findViewById(R.id.my_flashcards_recycler_view)
 
@@ -138,7 +125,7 @@ class MyFlashcardsFragment : Fragment() {
             )
 
         addFlashcardButton.setOnClickListener {
-            val choseAddFragment = ChoseAddFragment.newInstance()
+            val choseAddFragment = ChoseAddFragment.newInstance(packageId as Long)
             fragmentManager
                 ?.beginTransaction()
                 ?.setCustomAnimations(

@@ -107,26 +107,7 @@ class HardWordsReviewFragment : Fragment() {
 
     private fun initFragment() {
         val flashcardList = ArrayList<MyFlashcard>()
-        flashcardList.add(MyFlashcard(0, 0, 0, "cześć", "hi", 10, false, true))
-        flashcardList.add(MyFlashcard(0, 0, 0, "ty", "you", 10, false, true))
-        flashcardList.add(MyFlashcard(0, 0, 0, "tak", "yes", 3, false, true))
-        flashcardList.add(MyFlashcard(0, 0, 0, "nie", "no", 2, false, true))
-        flashcardList.add(MyFlashcard(0, 0, 0, "może", "maybe", 5, false, true))
-        flashcardList.add(MyFlashcard(0, 0, 0, "ja", "I", 0, false, false))
-        flashcardList.add(MyFlashcard(0, 0, 0, "stół", "table", 0, false, false))
-        flashcardList.add(MyFlashcard(0, 0, 0, "głośnik", "speaker", 0, false, false))
-        flashcardList.add(
-            MyFlashcard(
-                0,
-                0,
-                0,
-                "sklejasz akcje",
-                "you know what I'm sayin'",
-                8,
-                false,
-                true
-            )
-        )
+
 
         val audioAttributes = AudioAttributes.Builder()
             .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
@@ -160,7 +141,7 @@ class HardWordsReviewFragment : Fragment() {
         var flashcards = ArrayList<MyFlashcard>()
 
         for (flashcard in flashcardList) {
-            if (flashcard.knowledgeLevel <= 4 && flashcard.isKnown) {
+            if (flashcard.knowledgeLevel <= 4 && flashcard.isKnown == 1) {
                 flashcards.add(flashcard)
             }
         }

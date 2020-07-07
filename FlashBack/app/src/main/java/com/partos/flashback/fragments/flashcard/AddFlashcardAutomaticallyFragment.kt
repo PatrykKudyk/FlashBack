@@ -32,7 +32,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class AddFlashcardAutomaticallyFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: Long? = null
+    private var packageId: Long? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
@@ -43,7 +43,7 @@ class AddFlashcardAutomaticallyFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getLong(ARG_PARAM1)
+            packageId = it.getLong(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
     }
@@ -84,9 +84,10 @@ class AddFlashcardAutomaticallyFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() =
+        fun newInstance(packageId: Long) =
             AddFlashcardAutomaticallyFragment().apply {
                 arguments = Bundle().apply {
+                    putLong(ARG_PARAM1, packageId)
                 }
             }
     }
@@ -98,6 +99,11 @@ class AddFlashcardAutomaticallyFragment : Fragment() {
 
         addButton.setOnClickListener {
             if (flashcardEditText.text.toString() != "") {
+                Toast.makeText(
+                    rootView.context,
+                    rootView.context.getString(R.string.toast_flashcard_added),
+                    Toast.LENGTH_SHORT
+                ).show()
                 fragmentManager
                     ?.popBackStack(
                         fragmentManager!!.getBackStackEntryAt((fragmentManager!!.backStackEntryCount - 2)).id,

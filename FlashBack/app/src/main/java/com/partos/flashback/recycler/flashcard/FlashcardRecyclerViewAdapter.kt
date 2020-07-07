@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.partos.flashback.R
+import com.partos.flashback.db.DataBaseHelper
 import com.partos.flashback.models.MyFlashcard
 import kotlinx.android.synthetic.main.row_flashcard.view.*
 
@@ -34,6 +35,8 @@ class FlashcardRecyclerViewAdapter(var flashcardList: ArrayList<MyFlashcard>) :
             holder.view.flashcard_cell_constraint_delete.visibility = View.GONE
         }
         holder.view.flashcard_cell_button_delete_yes.setOnClickListener {
+            val db = DataBaseHelper(holder.view.context)
+            db.deleteFlashcard(flashcardList[position].id)
             flashcardList.removeAt(position)
             notifyItemRemoved(position)
             notifyItemRangeChanged(0, flashcardList.size)

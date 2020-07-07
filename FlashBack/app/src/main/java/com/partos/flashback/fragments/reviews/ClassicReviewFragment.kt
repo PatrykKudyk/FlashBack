@@ -107,23 +107,6 @@ class ClassicReviewFragment : Fragment() {
 
     private fun initFragment() {
         val flashcardList = ArrayList<MyFlashcard>()
-        flashcardList.add(MyFlashcard(0, 0, 0, "cześć", "hi", 10, false, true))
-        flashcardList.add(MyFlashcard(0, 0, 0, "ty", "you", 10, false, true))
-        flashcardList.add(MyFlashcard(0, 0, 0, "ja", "I", 0, false, false))
-        flashcardList.add(MyFlashcard(0, 0, 0, "stół", "table", 0, false, false))
-        flashcardList.add(MyFlashcard(0, 0, 0, "głośnik", "speaker", 0, false, false))
-        flashcardList.add(
-            MyFlashcard(
-                0,
-                0,
-                0,
-                "sklejasz akcje",
-                "you know what I'm sayin'",
-                8,
-                false,
-                true
-            )
-        )
 
         val audioAttributes = AudioAttributes.Builder()
             .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
@@ -157,7 +140,7 @@ class ClassicReviewFragment : Fragment() {
         var flashcards = ArrayList<MyFlashcard>()
 
         for (flashcard in flashcardList) {
-            if (flashcard.isKnown) {
+            if (flashcard.isKnown == 0) {
                 flashcards.add(flashcard)
             }
         }

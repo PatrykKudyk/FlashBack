@@ -27,6 +27,8 @@
     <string name="toast_package_name_not_null">Package name cannot be empty</string>
     <string name="toast_package_added">Package successfully added</string>
     <string name="toast_package_not_added">Something went wrong, try again</string>
+    <string name="toast_flashcard_added">Flashcard successfully added</string>
+    <string name="toast_flashcard_not_added">Something went wrong, try again</string>
     <string name="toast_package_changed">Package successfully changed</string>
     <string name="toast_package_not_changed">Something went wrong, try again</string>
     <string name="toast_package_deleted">Package successfully deleted</string>
@@ -55,4 +57,5 @@
     <string name="add_flashcard_choice">How do you want to add flashcard?</string>
     <string name="add_flashcard_manually">Manually</string>
     <string name="add_flashcard_automatically">Automatically</string>
+    <string name="toast_package_not_null">Package name cannot be empty</string>
 </resources>

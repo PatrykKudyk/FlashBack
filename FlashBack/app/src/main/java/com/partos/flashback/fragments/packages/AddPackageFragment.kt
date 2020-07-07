@@ -31,7 +31,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class AddPackageFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
+    private var userId: Long? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
@@ -41,7 +41,7 @@ class AddPackageFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
+            userId = it.getLong(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
     }
@@ -81,9 +81,10 @@ class AddPackageFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() =
+        fun newInstance(userId: Long) =
             AddPackageFragment().apply {
                 arguments = Bundle().apply {
+                    putLong(ARG_PARAM1, userId)
                 }
             }
     }
@@ -94,6 +95,6 @@ class AddPackageFragment : Fragment() {
         val mLayoutManager: LinearLayoutManager = LinearLayoutManager(this.context)
         recyclerView.layoutManager = mLayoutManager
 
-        recyclerView.adapter = AddPackageRecyclerViewAdapter()
+        recyclerView.adapter = AddPackageRecyclerViewAdapter(userId as Long)
     }
 }
