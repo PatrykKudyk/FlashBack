@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Flash Back</string>
+    <string name="menu_log_in">Logowanie</string>
+    <string name="menu_credits">Twórcy</string>
+    <string name="credits_made_by">Aplikacja stworzona przez</string>
+    <string name="credits_authors">Marcina Fassa\n&amp;\nPatryka Kudyka</string>
+    <string name="credits_icons">Ikona stworzona przez\nEucalyp</string>
+    <string name="hint_login">Login</string>
+    <string name="hint_password">Hasło</string>
+    <string name="hint_password_repeat">Potwierdź hasło</string>
+    <string name="hint_email">E-mail</string>
+    <string name="hint_email_repeat">Potwierdź e-mail</string>
+    <string name="login_login">Zaloguj</string>
+    <string name="login_register_question">Nie masz jeszcze konta?</string>
+    <string name="login_register">Zarejestruj się</string>
+    <string name="register_back">Wróć do logowania</string>
+    <string name="menu_logged_packages">Moje paczki</string>
+    <string name="menu_logged_new_words">Nowe słowa</string>
+    <string name="menu_logged_credits">Twórcy</string>
+    <string name="menu_logged_logout">Wyloguj</string>
+    <string name="package_add_new">Dodaj nową paczkę</string>
+    <string name="hint_package_name">Nazwa paczki</string>
+    <string name="button_add">Dodaj</string>
+    <string name="button_delete_yes">Tak</string>
+    <string name="button_delete_no">Nie</string>
+    <string name="delete_question_package">Czy na pewno usunąć paczkę?</string>
+    <string name="toast_package_name_not_null">Nazwa paczki nie może być pusta</string>
+    <string name="toast_package_added">Paczka pomyślnie dodana</string>
+    <string name="toast_package_not_added">Coś poszło nie tak, spróbuj ponownie</string>
+    <string name="toast_flashcard_added">Fiszka pomyślnie dodana</string>
+    <string name="toast_flashcard_not_added">Coś poszło nie tak, spróbuj ponownie</string>
+    <string name="toast_package_changed">Paczka pomyślnie zmieniona</string>
+    <string name="toast_package_not_changed">Coś poszło nie tak, spróbuj ponownie</string>
+    <string name="toast_package_deleted">Paczka pomyślnie usunięta</string>
+    <string name="toast_package_not_deleted">Coś poszło nie tak, spróbuj ponownie</string>
+    <string name="toast_flashcard_changed">Fiszka pomyślnie zmieniona</string>
+    <string name="toast_flashcard_not_changed">Coś poszło nie tak, spróbuj ponownie</string>
+    <string name="flashcard_add_new">Dodaj nową fiszkę</string>
+    <string name="flashcard_review_classic">Klasyczne powtórzenie</string>
+    <string name="flashcard_learn_new_words">Nowe fiszki</string>
+    <string name="flashcard_review_hard_words">Trudne fiszki</string>
+    <string name="delete_question_flashcard">Czy na pewno usunąć fiszkę?</string>
+    <string name="hint_flashcard_polish">Polski</string>
+    <string name="hint_flashcard_english">Angielski</string>
+    <string name="toast_flashcard_not_null">Pola nie mogą być puste</string>
+    <string name="toast_flashcard_not_null_2">Pole nie może być puste</string>
+    <string name="review_check">Sprawdź</string>
+    <string name="review_skip">Pomiń</string>
+    <string name="review_quit">Wyjdź</string>
+    <string name="review_next">Dalej</string>
+    <string name="summary_title">Podusmowanie</string>
+    <string name="summary_correct">Poprawne:</string>
+    <string name="summary_skipped">Pominięte:</string>
+    <string name="summary_back">Wróć do fiszek</string>
+    <string name="learn_summary_title">Podsumowanie nauki</string>
+    <string name="learn_summary_text">Brawo!\n
+        Nowe fiszki przyswojone!\n
+        Teraz możesz je powtórzyć kiedy zechcesz.</string>
+    <string name="add_flashcard_choice">Jak chciałbyć dodać fiszkę?</string>
+    <string name="add_flashcard_manually">Ręcznie</string>
+    <string name="add_flashcard_automatically">Automatycznie</string>
+    <string name="toast_package_not_null">Nazwa paczki nie może być pusta</string>
+    <string name="toast_too_few_flashcards">Jest za mało fiszek do powtórzenia</string>
+    <string name="toast_too_few_hard_flashcards">Nie ma trudnych fiszek do powtórzenia</string>
+    <string name="toast_no_words_to_learn">Nie ma nowych fiszek do powtórzenia</string>
+</resources>
