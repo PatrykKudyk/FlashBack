@@ -274,7 +274,7 @@ class DataBaseHelper(context: Context) :
         return Integer.parseInt("$success") != -1
     }
 
-    fun getSettings(userId: Long): Settings {
+    fun getSettings(userId: Long): ArrayList<Settings> {
         var settingsList = ArrayList<Settings>()
         val db = readableDatabase
         val selectQuery = "Select * from ${TableInfo.TABLE_NAME_PACKAGES} where " +
@@ -295,7 +295,7 @@ class DataBaseHelper(context: Context) :
         }
         result.close()
         db.close()
-        return settingsList[0]
+        return settingsList
     }
 
     fun addSettings(userId: Long, review: Int, learning: Int, hard: Int): Boolean {
