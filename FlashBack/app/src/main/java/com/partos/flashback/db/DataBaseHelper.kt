@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.provider.BaseColumns
 import com.partos.flashback.models.MyFlashcard
 import com.partos.flashback.models.MyPackage
+import com.partos.flashback.models.Settings
 
 object TableInfo : BaseColumns {
     const val DATABASE_NAME = "FlashBack"
@@ -21,6 +22,11 @@ object TableInfo : BaseColumns {
     const val TABLE_COLUMN_FLASHCARDS_KNOWLEDGE = "knowledgeLevel"
     const val TABLE_COLUMN_FLASHCARDS_IS_NEW = "isNew"
     const val TABLE_COLUMN_FLASHCARDS_IS_KNOWN = "isKnown"
+    const val TABLE_NAME_SETTINGS = "Settings"
+    const val TABLE_COLUMN_SETTINGS_USER_ID = "userId"
+    const val TABLE_COLUMN_SETTINGS_REVIEW_CLASSIC_AMOUNT = "classic"
+    const val TABLE_COLUMN_SETTINGS_REVIEW_HARD_AMOUNT = "hard"
+    const val TABLE_COLUMN_SETTINGS_LEARNING_AMOUNT = "learn"
 
 
 }
@@ -43,9 +49,19 @@ object BasicCommand {
                 "${TableInfo.TABLE_COLUMN_FLASHCARDS_IS_NEW} INTEGER NOT NULL," +
                 "${TableInfo.TABLE_COLUMN_FLASHCARDS_IS_KNOWN} INTEGER NOT NULL)"
 
+    const val SQL_CREATE_TABLE_SETTINGS =
+        "CREATE TABLE ${TableInfo.TABLE_NAME_SETTINGS} (" +
+                "${BaseColumns._ID} INTEGER PRIMARY KEY," +
+                "${TableInfo.TABLE_COLUMN_SETTINGS_USER_ID} INTEGER NOT NULL," +
+                "${TableInfo.TABLE_COLUMN_SETTINGS_REVIEW_CLASSIC_AMOUNT} INTEGER NOT NULL," +
+                "${TableInfo.TABLE_COLUMN_SETTINGS_REVIEW_HARD_AMOUNT} INTEGER NOT NULL," +
+                "${TableInfo.TABLE_COLUMN_SETTINGS_LEARNING_AMOUNT} INTEGER NOT NULL)"
+
 
     const val SQL_DELETE_TABLE_PACKAGES = "DROP TABLE IF EXISTS ${TableInfo.TABLE_NAME_PACKAGES}"
-    const val SQL_DELETE_TABLE_FLASHCARDS = "DROP TABLE IF EXISTS ${TableInfo.TABLE_NAME_PACKAGES}"
+    const val SQL_DELETE_TABLE_FLASHCARDS =
+        "DROP TABLE IF EXISTS ${TableInfo.TABLE_NAME_FLASHCARDS}"
+    const val SQL_DELETE_TABLE_SETTINGS = "DROP TABLE IF EXISTS ${TableInfo.TABLE_NAME_SETTINGS}"
 }
 
 class DataBaseHelper(context: Context) :
@@ -53,11 +69,13 @@ class DataBaseHelper(context: Context) :
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(BasicCommand.SQL_CREATE_TABLE_PACKAGES)
         db?.execSQL(BasicCommand.SQL_CREATE_TABLE_FLASHCARDS)
+        db?.execSQL(BasicCommand.SQL_CREATE_TABLE_SETTINGS)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, p1: Int, p2: Int) {
-        db?.execSQL(BasicCommand.SQL_CREATE_TABLE_PACKAGES)
-        db?.execSQL(BasicCommand.SQL_CREATE_TABLE_FLASHCARDS)
+        db?.execSQL(BasicCommand.SQL_DELETE_TABLE_PACKAGES)
+        db?.execSQL(BasicCommand.SQL_DELETE_TABLE_FLASHCARDS)
+        db?.execSQL(BasicCommand.SQL_DELETE_TABLE_SETTINGS)
 
         onCreate(db)
     }
@@ -255,4 +273,69 @@ class DataBaseHelper(context: Context) :
         db.close()
         return Integer.parseInt("$success") != -1
     }
+
+    fun getSettings(userId: Long): ArrayList<Settings> {
+        var settingsList = ArrayList<Settings>()
+        val db = readableDatabase
+        val selectQuery = "Select * from ${TableInfo.TABLE_NAME_SETTINGS} where " +
+                "${TableInfo.TABLE_COLUMN_SETTINGS_USER_ID} = " + userId.toString()
+        val result = db.rawQuery(selectQuery, null)
+        if (result.moveToFirst()) {
+            do {
+                var mySettings = Settings(
+                    result.getInt(result.getColumnIndex(BaseColumns._ID)).toLong(),
+                    result.getString(result.getColumnIndex(TableInfo.TABLE_COLUMN_SETTINGS_USER_ID))
+                        .toLong(),
+                    result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_SETTINGS_REVIEW_CLASSIC_AMOUNT)),
+                    result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_SETTINGS_LEARNING_AMOUNT)),
+                    result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_SETTINGS_REVIEW_HARD_AMOUNT))
+                )
+                settingsList.add(mySettings)
+            } while (result.moveToNext())
+        }
+        result.close()
+        db.close()
+        return settingsList
+    }
+
+    fun addSettings(userId: Long, review: Int, learning: Int, hard: Int): Boolean {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put(TableInfo.TABLE_COLUMN_SETTINGS_USER_ID, userId)
+        values.put(TableInfo.TABLE_COLUMN_SETTINGS_REVIEW_CLASSIC_AMOUNT, review)
+        values.put(TableInfo.TABLE_COLUMN_SETTINGS_LEARNING_AMOUNT, learning)
+        values.put(TableInfo.TABLE_COLUMN_SETTINGS_REVIEW_HARD_AMOUNT, hard)
+        val success = db.insert(TableInfo.TABLE_NAME_SETTINGS, null, values)
+        db.close()
+        return (Integer.parseInt("$success") != -1)
+    }
+
+    fun updateSettings(settings: Settings): Boolean {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put(TableInfo.TABLE_COLUMN_SETTINGS_USER_ID, settings.userId)
+        values.put(
+            TableInfo.TABLE_COLUMN_SETTINGS_REVIEW_CLASSIC_AMOUNT,
+            settings.reviewClassicAmount
+        )
+        values.put(TableInfo.TABLE_COLUMN_SETTINGS_LEARNING_AMOUNT, settings.learningAmount)
+        values.put(TableInfo.TABLE_COLUMN_SETTINGS_REVIEW_HARD_AMOUNT, settings.reviewHardAmount)
+        val success = db.update(
+            TableInfo.TABLE_NAME_SETTINGS, values, BaseColumns._ID + "=?",
+            arrayOf(settings.id.toString())
+        ).toLong()
+        return Integer.parseInt("$success") != -1
+    }
+
+
+    fun deleteSettings(id: Long): Boolean {
+        val db = this.writableDatabase
+        val success =
+            db.delete(TableInfo.TABLE_NAME_SETTINGS, BaseColumns._ID + "=?", arrayOf(id.toString()))
+                .toLong()
+        db.close()
+        return Integer.parseInt("$success") != -1
+    }
+
+
 }

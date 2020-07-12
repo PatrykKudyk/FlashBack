@@ -9,7 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import com.partos.flashback.MyApp
 import com.partos.flashback.R
+import com.partos.flashback.db.DataBaseHelper
 import com.partos.flashback.fragments.flashcard.AssignFlashcardsFragment
 import com.partos.flashback.fragments.packages.AssignPackagesFragment
 import com.partos.flashback.fragments.packages.MyPackagesFragment
@@ -96,6 +98,8 @@ class LoggedMenuFragment : Fragment() {
         creditsButton = rootView.findViewById(R.id.logged_menu_button_credits)
         logoutButton = rootView.findViewById(R.id.logged_menu_button_logout)
 
+        checkSettings()
+
         myPackagesButton.setOnClickListener {
             val myPackageFragment =
                 MyPackagesFragment.newInstance()
@@ -148,6 +152,13 @@ class LoggedMenuFragment : Fragment() {
                 )
                 ?.replace(R.id.main_frame_layout, menuFragment)
                 ?.commit()
+        }
+    }
+
+    private fun checkSettings() {
+        val db = DataBaseHelper(rootView.context)
+        if (db.getSettings(MyApp.userId).size == 0) {
+            db.addSettings(MyApp.userId, 10, 5, 5)
         }
     }
 }

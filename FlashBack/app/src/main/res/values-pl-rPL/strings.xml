@@ -64,4 +64,9 @@
     <string name="toast_too_few_flashcards">Jest za mało fiszek do powtórzenia</string>
     <string name="toast_too_few_hard_flashcards">Nie ma trudnych fiszek do powtórzenia</string>
     <string name="toast_no_words_to_learn">Nie ma nowych fiszek do powtórzenia</string>
+    <string name="settings">Ustawienia</string>
+    <string name="all">Wszystkie</string>
+    <string name="classic_amount">Fiszki przy klasycznym powtórzeniu</string>
+    <string name="hard_amount">Fiszki przy powtórzeniu trudnych fiszek</string>
+    <string name="learning_amount">Fiszki przy nauce nowych fiszek</string>
 </resources>

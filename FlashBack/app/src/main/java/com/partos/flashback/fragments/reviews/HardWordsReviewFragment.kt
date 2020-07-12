@@ -141,10 +141,17 @@ class HardWordsReviewFragment : Fragment() {
         val db = DataBaseHelper(rootView.context)
         val flashcardList = db.getFlashcardsList(packageId as Long, MyApp.userId)
         var flashcards = ArrayList<MyFlashcard>()
+        var settings = db.getSettings(MyApp.userId)[0]
 
         for (flashcard in flashcardList) {
             if (flashcard.knowledgeLevel <= 4 && flashcard.isKnown == 1 && flashcard.isNew == 0) {
-                flashcards.add(flashcard)
+                if (settings.reviewHardAmount != -1) {
+                    if (flashcards.size < settings.reviewHardAmount) {
+                        flashcards.add(flashcard)
+                    }
+                } else {
+                    flashcards.add(flashcard)
+                }
             }
         }
         flashcards.shuffle()
