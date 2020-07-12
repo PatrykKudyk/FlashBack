@@ -142,10 +142,17 @@ class ClassicReviewFragment : Fragment() {
         val db = DataBaseHelper(rootView.context)
         val flashcardList = db.getFlashcardsList(packageId as Long, MyApp.userId)
         var flashcards = ArrayList<MyFlashcard>()
+        val settings = db.getSettings(MyApp.userId)[0]
 
         for (flashcard in flashcardList) {
             if (flashcard.isKnown == 1) {
-                flashcards.add(flashcard)
+                if (settings.reviewClassicAmount != -1) {
+                    if (flashcards.size < settings.reviewClassicAmount) {
+                        flashcards.add(flashcard)
+                    }
+                } else {
+                    flashcards.add(flashcard)
+                }
             }
         }
         flashcards.shuffle()

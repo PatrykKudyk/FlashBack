@@ -142,12 +142,15 @@ class LearnNewWordsFragment : Fragment() {
         val db = DataBaseHelper(rootView.context)
         val flashcardList = db.getFlashcardsList(packageId as Long, MyApp.userId)
         var flashcards = ArrayList<MyFlashcard>()
+        var settings = db.getSettings(MyApp.userId)[0]
 
         var number = 0
         for (flashcard in flashcardList) {
             if (flashcard.isKnown == 0) {
-                flashcards.add(flashcard)
-                number++
+                if (flashcards.size < settings.learningAmount) {
+                    flashcards.add(flashcard)
+                    number++
+                }
             }
         }
         flashcards.shuffle()
@@ -209,7 +212,7 @@ class LearnNewWordsFragment : Fragment() {
                     setEmpty()
                 } else {
                     soundPool.release()
-                    for (flashcard in flashcards){
+                    for (flashcard in flashcards) {
                         flashcard.isKnown = 1
                         flashcard.knowledgeLevel = 10
                         db.updateFlashcard(flashcard)
