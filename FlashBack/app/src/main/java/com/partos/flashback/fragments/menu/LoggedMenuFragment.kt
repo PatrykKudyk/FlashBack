@@ -158,7 +158,7 @@ class LoggedMenuFragment : Fragment() {
     private fun checkSettings() {
         val db = DataBaseHelper(rootView.context)
         if (db.getSettings(MyApp.userId).size == 0) {
-            db.addSettings(MyApp.userId, 15, 5, 10)
+            db.addSettings(MyApp.userId, 10, 5, 5)
         }
     }
 }

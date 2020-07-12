@@ -8,6 +8,7 @@ import com.partos.flashback.fragments.packages.AddPackageFragment
 import com.partos.flashback.fragments.packages.MyPackagesFragment
 import com.partos.flashback.fragments.account.LogInFragment
 import com.partos.flashback.fragments.account.RegisterFragment
+import com.partos.flashback.fragments.account.SettingsFragment
 import com.partos.flashback.fragments.flashcard.*
 import com.partos.flashback.fragments.menu.CreditsFragment
 import com.partos.flashback.fragments.menu.LoggedMenuFragment
@@ -33,7 +34,8 @@ class MainActivity : AppCompatActivity(),
     AssignFlashcardsFragment.OnFragmentInteractionListener,
     AssignPackagesFragment.OnFragmentInteractionListener,
     ChoseAddFragment.OnFragmentInteractionListener,
-    AddFlashcardAutomaticallyFragment.OnFragmentInteractionListener {
+    AddFlashcardAutomaticallyFragment.OnFragmentInteractionListener,
+    SettingsFragment.OnFragmentInteractionListener {
 
     private lateinit var mainMenuFragment: MainMenuFragment
 

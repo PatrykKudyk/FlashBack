@@ -277,14 +277,14 @@ class DataBaseHelper(context: Context) :
     fun getSettings(userId: Long): ArrayList<Settings> {
         var settingsList = ArrayList<Settings>()
         val db = readableDatabase
-        val selectQuery = "Select * from ${TableInfo.TABLE_NAME_PACKAGES} where " +
+        val selectQuery = "Select * from ${TableInfo.TABLE_NAME_SETTINGS} where " +
                 "${TableInfo.TABLE_COLUMN_SETTINGS_USER_ID} = " + userId.toString()
         val result = db.rawQuery(selectQuery, null)
         if (result.moveToFirst()) {
             do {
                 var mySettings = Settings(
                     result.getInt(result.getColumnIndex(BaseColumns._ID)).toLong(),
-                    result.getString(result.getColumnIndex(TableInfo.TABLE_COLUMN_PACKAGES_USER_ID))
+                    result.getString(result.getColumnIndex(TableInfo.TABLE_COLUMN_SETTINGS_USER_ID))
                         .toLong(),
                     result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_SETTINGS_REVIEW_CLASSIC_AMOUNT)),
                     result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_SETTINGS_LEARNING_AMOUNT)),

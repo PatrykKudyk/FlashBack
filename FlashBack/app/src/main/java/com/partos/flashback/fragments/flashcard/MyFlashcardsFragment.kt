@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.partos.flashback.MyApp
 import com.partos.flashback.R
 import com.partos.flashback.db.DataBaseHelper
+import com.partos.flashback.fragments.account.SettingsFragment
 import com.partos.flashback.fragments.reviews.ClassicReviewFragment
 import com.partos.flashback.fragments.reviews.HardWordsReviewFragment
 import com.partos.flashback.fragments.reviews.LearnNewWordsFragment
@@ -49,6 +51,7 @@ class MyFlashcardsFragment : Fragment() {
     private lateinit var classicReviewButton: Button
     private lateinit var hardWordsButton: Button
     private lateinit var newWordsButton: Button
+    private lateinit var settingsButton: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -106,6 +109,7 @@ class MyFlashcardsFragment : Fragment() {
         classicReviewButton = rootView.findViewById(R.id.my_flashcards_button_classic_review)
         hardWordsButton = rootView.findViewById(R.id.my_flashcards_button_hard_words)
         newWordsButton = rootView.findViewById(R.id.my_flashcards_button_learn_new)
+        settingsButton = rootView.findViewById(R.id.my_flashcards_button_settings)
 
         val db = DataBaseHelper(rootView.context)
         val flashcardList = db.getFlashcardsList(packageId as Long, MyApp.userId)
@@ -217,6 +221,18 @@ class MyFlashcardsFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
+        }
+        settingsButton.setOnClickListener {
+            val settingsFragment = SettingsFragment.newInstance()
+            fragmentManager
+                ?.beginTransaction()
+                ?.setCustomAnimations(
+                    R.anim.enter_right_to_left, R.anim.exit_left_to_right,
+                    R.anim.enter_left_to_right, R.anim.exit_right_to_left
+                )
+                ?.replace(R.id.main_frame_layout, settingsFragment)
+                ?.addToBackStack(SettingsFragment.toString())
+                ?.commit()
         }
     }
 }

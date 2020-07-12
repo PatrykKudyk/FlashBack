@@ -63,4 +63,9 @@
     <string name="toast_too_few_flashcards">There are too few words to review</string>
     <string name="toast_too_few_hard_flashcards">There are too few hard words to review</string>
     <string name="toast_no_words_to_learn">There are no words to learn</string>
+    <string name="settings">Settings</string>
+    <string name="all">All</string>
+    <string name="classic_amount">Flashcards per classic review</string>
+    <string name="hard_amount">Flashcards per hard words review</string>
+    <string name="learning_amount">Flashcards per learning session</string>
 </resources>
