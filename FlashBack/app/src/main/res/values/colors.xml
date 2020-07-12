@@ -8,6 +8,8 @@
     <color name="colorGreen">#87D35C</color>
     <color name="colorBlue">#5CC3D3</color>
 
+    <color name="colorGreenDark">#548439</color>
+
     <color name="colorBackground">#FCF9F7</color>
     <color name="colorMainNormal">#cf9a71</color>
     <color name="colorMainLight">#DBB394</color>

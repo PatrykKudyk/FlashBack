@@ -26,6 +26,17 @@ class FlashcardRecyclerViewAdapter(var flashcardList: ArrayList<MyFlashcard>) :
     override fun onBindViewHolder(holder: FlashcardViewHolder, position: Int) {
         holder.view.flashcard_cell_text_view_english.setText(flashcardList[position].english)
         holder.view.flashcard_cell_text_view_polish.setText(flashcardList[position].polish)
+
+        if (flashcardList[position].isKnown == 1) {
+            if (flashcardList[position].knowledgeLevel > 4) {
+                holder.view.flashcard_cell_image_learned.setImageResource(R.drawable.ic_learned)
+            } else {
+                holder.view.flashcard_cell_image_learned.setImageResource(R.drawable.ic_hard)
+            }
+        } else {
+            holder.view.flashcard_cell_image_learned.setImageResource(R.drawable.ic_not_learned)
+        }
+
         holder.view.flashcard_cell_image_view_delete.setOnClickListener {
             holder.view.flashcard_cell_constraint_main.visibility = View.GONE
             holder.view.flashcard_cell_constraint_delete.visibility = View.VISIBLE
@@ -61,6 +72,7 @@ class FlashcardRecyclerViewAdapter(var flashcardList: ArrayList<MyFlashcard>) :
             holder.view.flashcard_cell_constraint_main.visibility = View.VISIBLE
             holder.view.flashcard_cell_constraint_edit.visibility = View.GONE
         }
+
     }
 
 }
