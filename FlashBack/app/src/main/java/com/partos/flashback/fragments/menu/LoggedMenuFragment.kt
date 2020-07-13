@@ -12,6 +12,7 @@ import android.widget.Button
 import com.partos.flashback.MyApp
 import com.partos.flashback.R
 import com.partos.flashback.db.DataBaseHelper
+import com.partos.flashback.fragments.account.SettingsFragment
 import com.partos.flashback.fragments.flashcard.AssignFlashcardsFragment
 import com.partos.flashback.fragments.packages.AssignPackagesFragment
 import com.partos.flashback.fragments.packages.MyPackagesFragment
@@ -41,6 +42,7 @@ class LoggedMenuFragment : Fragment() {
     private lateinit var newWordsButton: Button
     private lateinit var creditsButton: Button
     private lateinit var logoutButton: Button
+    private lateinit var settingsButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,6 +99,7 @@ class LoggedMenuFragment : Fragment() {
         newWordsButton = rootView.findViewById(R.id.logged_menu_button_new_words)
         creditsButton = rootView.findViewById(R.id.logged_menu_button_credits)
         logoutButton = rootView.findViewById(R.id.logged_menu_button_logout)
+        settingsButton = rootView.findViewById(R.id.logged_menu_button_settings)
 
         checkSettings()
 
@@ -151,6 +154,19 @@ class LoggedMenuFragment : Fragment() {
                     R.anim.enter_left_to_right, R.anim.exit_right_to_left
                 )
                 ?.replace(R.id.main_frame_layout, menuFragment)
+                ?.commit()
+        }
+
+        settingsButton.setOnClickListener {
+            val settingsFragment = SettingsFragment.newInstance()
+            fragmentManager
+                ?.beginTransaction()
+                ?.setCustomAnimations(
+                    R.anim.enter_right_to_left, R.anim.exit_left_to_right,
+                    R.anim.enter_left_to_right, R.anim.exit_right_to_left
+                )
+                ?.replace(R.id.main_frame_layout, settingsFragment)
+                ?.addToBackStack(SettingsFragment.toString())
                 ?.commit()
         }
     }
